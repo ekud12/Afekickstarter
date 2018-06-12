@@ -1,5 +1,6 @@
-import { Component, ViewChild, ElementRef, OnInit, EventEmitter } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import Scrollbar from 'smooth-scrollbar';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,5 +16,4 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     Scrollbar.init(this.tref.nativeElement, { damping: 0.2, thumbMinSize: 20 });
   }
-
 }
