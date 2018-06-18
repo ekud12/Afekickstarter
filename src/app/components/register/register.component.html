@@ -1,3 +1,16 @@
-<p>
-  register works!
-</p>
+<form>
+  <mat-form-field>
+    <input name="username" type="text">
+  </mat-form-field>
+  <mat-form-field>
+    <input name="username" type="text">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select name="username" type="text">
+      <mat-option *ngFor="let permission of _permissions">
+        {{ permission }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button (click)="signup()">הירשם</button>
+</form>
