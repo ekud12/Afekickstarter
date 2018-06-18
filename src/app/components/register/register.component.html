@@ -1,16 +1,26 @@
-<form>
-  <mat-form-field>
-    <input name="username" type="text">
-  </mat-form-field>
-  <mat-form-field>
-    <input name="username" type="text">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-select name="username" type="text">
-      <mat-option *ngFor="let permission of _permissions">
-        {{ permission }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <button mat-raised-button (click)="signup()">הירשם</button>
-</form>
+<div>
+  Register</div>
+<div>
+  {{ _user.name }}
+</div>
+<div>
+  <form fxLayout="column" fxLayoutAlign="space-evenly center center">
+    <mat-form-field class="mat-form-field-custom">
+      <input matInput name="name" type="text" placeholder="Name" [(ngModel)]="_registerRequest.name">
+    </mat-form-field>
+    <mat-form-field class="mat-form-field-custom">
+      <input matInput name="email" type="text" placeholder="Email" [(ngModel)]="_registerRequest.email">
+    </mat-form-field>
+    <mat-form-field class="mat-form-field-custom">
+      <input matInput name="password" type="password" placeholder="Password" [(ngModel)]="_registerRequest.password">
+    </mat-form-field>
+    <mat-form-field class="mat-form-field-custom">
+      <mat-select name="permission" type="text" [(ngModel)]="_registerRequest.role">
+        <mat-option *ngFor="let permission of _permissions" [value]="permission">
+          {{ permission.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="signup()" name="btn">Signup</button>
+  </form>
+</div>

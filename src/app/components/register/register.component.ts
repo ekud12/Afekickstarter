@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Permissions } from '../../models/permissions.model';
+import { Permissions, PermissionsMap } from '../../models/permissions.model';
+import { RegisterRequest, User } from './../../models/user.model';
 import { UserService } from './../../services/user.service';
 
 @Component({
@@ -8,12 +9,22 @@ import { UserService } from './../../services/user.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  _permissions = [Permissions.ADMIN, Permissions.BACKER, Permissions.PROJECT_OWNER];
-  constructor(private userService: UserService) {}
+  _permissions: PermissionsMap[];
+  _registerRequest: RegisterRequest = new RegisterRequest();
+  _user: User;
+  constructor(private userService: UserService) {
+    this._permissions = [
+      { value: Permissions.ADMIN, viewValue: 'Admininstrator' },
+      { value: Permissions.INVESTOR, viewValue: 'Investor' },
+      { value: Permissions.PROJECT_OWNER, viewValue: 'Project Owner' }
+    ];
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.userService.user$.subscribe(user => (this._user = user));
+  }
 
   signup() {
-    // this.userService.signup();
+    this.userService.emailSignUp(this._registerRequest);
   }
 }

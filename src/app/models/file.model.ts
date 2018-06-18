@@ -1,3 +1,5 @@
+import { User } from './user.model';
+
 export class FileUpload {
   key: string;
   name: string;

@@ -1,4 +1,15 @@
-interface User {
+import { Roles } from './permissions.model';
+export interface User {
+  uid: string;
+  name: string;
   email: string;
-  permission: number;
+  roles: Roles;
+}
+
+export class RegisterRequest {
+  constructor() {}
+  email: string;
+  password: string;
+  name: string;
+  role: Roles;
 }
