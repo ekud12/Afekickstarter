@@ -4,7 +4,7 @@ import * as firebase from 'firebase';
 import { FileUpload } from '../models/file.model';
 
 @Injectable()
-export class UploadFileService {
+export class FilesService {
   private basePath = '/uploads';
 
   constructor(private db: AngularFireDatabase) {}
@@ -16,16 +16,13 @@ export class UploadFileService {
     uploadTask.on(
       firebase.storage.TaskEvent.STATE_CHANGED,
       snapshot => {
-        // in progress
         const snap = snapshot as firebase.storage.UploadTaskSnapshot;
         progress.percentage = Math.round((snap.bytesTransferred / snap.totalBytes) * 100);
       },
       error => {
-        // fail
         console.log(error);
       },
       () => {
-        // success
         fileUpload.url = uploadTask.snapshot.downloadURL;
         fileUpload.name = fileUpload.file.name;
         this.saveFileData(fileUpload);

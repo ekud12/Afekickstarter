@@ -1,5 +1,5 @@
 {
-  "name": "sections-test-app",
+  "name": "Afekickstarter",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -27,7 +27,7 @@
     "bulma": "^0.7.0",
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.5.4",
-    "firebase": "^5.0.4",
+    "firebase": "5.0.4",
     "hammerjs": "^2.0.8",
     "jsdoc": "^3.5.5",
     "ngx-slimscroll": "^3.7.0",

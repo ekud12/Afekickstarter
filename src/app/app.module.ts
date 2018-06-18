@@ -8,10 +8,11 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { materialImports } from './material.imports';
 import { rootRoutes } from './routes';
+import { FilesService } from './services/files.service';
 import { UserService } from './services/user.service';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 export const firebaseConfig = environment.FirebaseConfig;
 @NgModule({
@@ -25,7 +26,7 @@ export const firebaseConfig = environment.FirebaseConfig;
     AngularFirestoreModule,
     RouterModule.forRoot(rootRoutes)
   ],
-  providers: [UserService],
+  providers: [UserService, FilesService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
