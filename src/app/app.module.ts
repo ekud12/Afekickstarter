@@ -13,10 +13,14 @@ import { materialImports } from './material.imports';
 import { rootRoutes } from './routes';
 import { FilesService } from './services/files.service';
 import { UserService } from './services/user.service';
+import { ProjectsListComponent } from './components/projects-list/projects-list.component';
+import { EditProjectComponent } from './components/edit-project/edit-project.component';
+import { AddProjectComponent } from './components/add-project/add-project.component';
+import { RegisterComponent } from './components/register/register.component';
 
 export const firebaseConfig = environment.FirebaseConfig;
 @NgModule({
-  declarations: [AppComponent, LoginComponent, PageNotFoundComponent],
+  declarations: [AppComponent, LoginComponent, PageNotFoundComponent, ProjectsListComponent, EditProjectComponent, AddProjectComponent, RegisterComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

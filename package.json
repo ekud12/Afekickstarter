@@ -31,6 +31,7 @@
     "hammerjs": "^2.0.8",
     "jsdoc": "^3.5.5",
     "ngx-slimscroll": "^3.7.0",
+    "promise-polyfill": "8.0.0",
     "rxjs": "^6.0.0-rc.0",
     "smooth-scrollbar": "^8.2.7",
     "web-animations-js": "^2.3.1",
