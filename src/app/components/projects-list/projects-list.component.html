@@ -1,3 +1,7 @@
 <p>
   projects-list works!
 </p>
+<div>
+  logged user: {{ (_user|async)?.name }}
+</div>
+<button mat-raised-button (click)="logout()">logout user</button>

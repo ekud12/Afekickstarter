@@ -27,4 +27,8 @@ export class RegisterComponent implements OnInit {
   signup() {
     this.userService.emailSignUp(this._registerRequest);
   }
+
+  check() {
+    this.userService.canDelete(this._user);
+  }
 }

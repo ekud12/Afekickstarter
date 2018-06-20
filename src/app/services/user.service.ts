@@ -48,7 +48,8 @@ export class UserService {
         admin: true
       }
     };
-    return userRef.set(data, { merge: true });
+    userRef.set(data, { merge: true });
+    return this.router.navigate(['landing']);
   }
 
   canRead(user: User): boolean {
@@ -66,16 +67,18 @@ export class UserService {
     return this.checkAuthorization(user, allowed);
   }
 
-  // determines if user has matching role
   private checkAuthorization(user: User, allowedRoles: string[]): boolean {
     if (!user) {
+      console.log('no user');
       return false;
     }
     for (const role of allowedRoles) {
       if (user.roles[role]) {
+        console.log('authorized');
         return true;
       }
     }
+    console.log('NOT authorized');
     return false;
   }
 }

@@ -15,7 +15,8 @@ export const rootRoutes: Routes = [
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    // canActivate: [UserGuard]
   },
   {
     path: 'landing',
