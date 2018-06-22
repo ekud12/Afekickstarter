@@ -12,7 +12,7 @@ export class RegisterComponent implements OnInit {
   _permissions: PermissionsMap[];
   _registerRequest: RegisterRequest = new RegisterRequest();
   _user: User;
-  constructor(private userService: UserService) {
+  constructor(public userService: UserService) {
     this._permissions = [
       { value: Permissions.ADMIN, viewValue: 'Admininstrator' },
       { value: Permissions.INVESTOR, viewValue: 'Investor' },

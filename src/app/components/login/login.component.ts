@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from './../../models/user.model';
+import { Observable } from 'rxjs';
+import { PermissionsMap } from '../../models/permissions.model';
+import { LoginRequest, User } from './../../models/user.model';
 import { UserService } from './../../services/user.service';
 
 @Component({
@@ -8,11 +10,16 @@ import { UserService } from './../../services/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  user: User;
+  _permissions: PermissionsMap[];
+  _loginRequest: LoginRequest = new LoginRequest();
+  _user: Observable<User>;
   constructor(private auth: UserService) {}
 
   ngOnInit() {
-    this.auth.user$.subscribe(user => (this.user = user));
-    console.log(this.user);
+    this._user = this.auth.user$;
+  }
+
+  login() {
+    this.auth.signIn(this._loginRequest);
   }
 }

@@ -1,8 +1,9 @@
 <div>
-  Register</div>
+  Register
+</div>
 
 <div>
-  <form fxLayout="column" fxLayoutAlign="space-evenly center center">
+  <form fxLayout="column" fxLayoutAlign="space-between center center">
     <mat-form-field class="mat-form-field-custom">
       <input matInput name="name" type="text" placeholder="Name" [(ngModel)]="_registerRequest.name">
     </mat-form-field>
@@ -14,12 +15,15 @@
     </mat-form-field>
     <mat-form-field class="mat-form-field-custom">
       <mat-select name="permission" type="text" [(ngModel)]="_registerRequest.role">
-        <mat-option *ngFor="let permission of _permissions" [value]="permission">
+        <mat-option *ngFor="let permission of _permissions" [value]="permission.value">
           {{ permission.viewValue }}
         </mat-option>
       </mat-select>
     </mat-form-field>
     <button mat-raised-button color="primary" (click)="signup()" name="btn">Signup</button>
   </form>
+  <div>
+    {{ userService.errorsData | async }}
+  </div>
   <button mat-raised-button color="primary" (click)="check()" name="check">check</button>
 </div>

@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -18,7 +20,6 @@ import { materialImports } from './material.imports';
 import { rootRoutes } from './routes';
 import { FilesService } from './services/files.service';
 import { UserService } from './services/user.service';
-import { FormsModule } from '@angular/forms';
 
 export const firebaseConfig = environment.FirebaseConfig;
 @NgModule({
@@ -35,6 +36,7 @@ export const firebaseConfig = environment.FirebaseConfig;
     BrowserModule,
     BrowserAnimationsModule,
     CommonModule,
+    FlexLayoutModule,
     materialImports,
     FormsModule,
     AngularFireModule.initializeApp(firebaseConfig),

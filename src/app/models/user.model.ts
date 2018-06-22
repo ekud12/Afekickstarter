@@ -1,4 +1,4 @@
-import { Roles } from './permissions.model';
+import { Permissions, Roles } from './permissions.model';
 export interface User {
   uid: string;
   name: string;
@@ -8,8 +8,14 @@ export interface User {
 
 export class RegisterRequest {
   constructor() {}
+  email = '';
+  password = '';
+  name: string;
+  role: Permissions;
+}
+
+export class LoginRequest {
+  constructor() {}
   email: string;
   password: string;
-  name: string;
-  role: Roles;
 }
