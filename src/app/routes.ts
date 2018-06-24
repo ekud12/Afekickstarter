@@ -5,7 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ProjectsListComponent } from './components/projects-list/projects-list.component';
 import { RegisterComponent } from './components/register/register.component';
-import { UserGuard } from './services/user.guard';
+import { UserGuard } from './services/user-read.guard';
 
 export const rootRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },

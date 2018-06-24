@@ -11,4 +11,7 @@
     </mat-form-field>
     <button mat-raised-button color="primary" (click)="login()" name="btn">Signup</button>
   </form>
+  <div>
+    {{ userService.errorsData | async }}
+  </div>
 </div>

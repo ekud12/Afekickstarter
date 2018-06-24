@@ -13,13 +13,13 @@ export class LoginComponent implements OnInit {
   _permissions: PermissionsMap[];
   _loginRequest: LoginRequest = new LoginRequest();
   _user: Observable<User>;
-  constructor(private auth: UserService) {}
+  constructor(public userService: UserService) {}
 
   ngOnInit() {
-    this._user = this.auth.user$;
+    this._user = this.userService.user$;
   }
 
   login() {
-    this.auth.signIn(this._loginRequest);
+    this.userService.signIn(this._loginRequest);
   }
 }

@@ -73,12 +73,12 @@ export class UserService {
   }
 
   canRead(user: User): boolean {
-    const allowed = ['admin', 'editor', 'subscriber'];
+    const allowed = ['admin', 'investor', 'projectOwner'];
     return this.checkAuthorization(user, allowed);
   }
 
   canEdit(user: User): boolean {
-    const allowed = ['admin', 'editor'];
+    const allowed = ['admin', 'projectOwner'];
     return this.checkAuthorization(user, allowed);
   }
 

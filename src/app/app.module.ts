@@ -20,6 +20,7 @@ import { materialImports } from './material.imports';
 import { rootRoutes } from './routes';
 import { FilesService } from './services/files.service';
 import { UserService } from './services/user.service';
+import { SingleProjectComponent } from './components/single-project/single-project.component';
 
 export const firebaseConfig = environment.FirebaseConfig;
 @NgModule({
@@ -30,7 +31,8 @@ export const firebaseConfig = environment.FirebaseConfig;
     ProjectsListComponent,
     EditProjectComponent,
     AddProjectComponent,
-    RegisterComponent
+    RegisterComponent,
+    SingleProjectComponent
   ],
   imports: [
     BrowserModule,
