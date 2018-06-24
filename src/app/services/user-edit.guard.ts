@@ -1,24 +1,26 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
+import { ToastService } from './toast.service';
 import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserGuard implements CanActivate {
-  constructor(private auth: UserService, private router: Router) {}
+export class UserEditGuard implements CanActivate {
+  constructor(private auth: UserService, private router: Router, private toaster: ToastService) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.auth.user$.pipe(
       take(1),
-      map(user => (user && this.auth.canRead(user) ? true : false)), // <-- important line
-      tap(canView => {
-        if (!canView) {
-          console.error('Access denied. Must have permission to view content');
+      map(user => (user && this.auth.canEdit(user) ? true : false)), // <-- important line
+      tap(canEdit => {
+        if (!canEdit) {
+          this.toaster.openSnackBar('Access denied. Must have permission to view content');
+          return false;
         } else {
-          this.router.navigate(['landing']);
+          return true;
         }
       })
     );

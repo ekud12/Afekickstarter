@@ -3,8 +3,10 @@ import { AddProjectComponent } from './components/add-project/add-project.compon
 import { EditProjectComponent } from './components/edit-project/edit-project.component';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 import { ProjectsListComponent } from './components/projects-list/projects-list.component';
 import { RegisterComponent } from './components/register/register.component';
+import { UserEditGuard } from './services/user-edit.guard';
 import { UserGuard } from './services/user-read.guard';
 
 export const rootRoutes: Routes = [
@@ -15,7 +17,7 @@ export const rootRoutes: Routes = [
   },
   {
     path: 'register',
-    component: RegisterComponent,
+    component: RegisterComponent
     // canActivate: [UserGuard]
   },
   {
@@ -30,7 +32,12 @@ export const rootRoutes: Routes = [
   {
     path: 'add',
     component: AddProjectComponent,
-    canActivate: [UserGuard]
+    canActivate: [UserEditGuard]
+  },
+  {
+    path: 'details/:uid',
+    component: ProjectDetailsComponent
+    // canActivate: [UserGuard]
   },
 
   { path: '**', component: PageNotFoundComponent }

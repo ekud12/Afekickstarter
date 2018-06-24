@@ -14,13 +14,15 @@ import { AddProjectComponent } from './components/add-project/add-project.compon
 import { EditProjectComponent } from './components/edit-project/edit-project.component';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 import { ProjectsListComponent } from './components/projects-list/projects-list.component';
 import { RegisterComponent } from './components/register/register.component';
+import { SingleProjectCardComponent } from './components/single-project/single-project.component';
 import { materialImports } from './material.imports';
 import { rootRoutes } from './routes';
 import { FilesService } from './services/files.service';
+import { ToastService } from './services/toast.service';
 import { UserService } from './services/user.service';
-import { SingleProjectComponent } from './components/single-project/single-project.component';
 
 export const firebaseConfig = environment.FirebaseConfig;
 @NgModule({
@@ -32,7 +34,8 @@ export const firebaseConfig = environment.FirebaseConfig;
     EditProjectComponent,
     AddProjectComponent,
     RegisterComponent,
-    SingleProjectComponent
+    SingleProjectCardComponent,
+    ProjectDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -42,11 +45,11 @@ export const firebaseConfig = environment.FirebaseConfig;
     materialImports,
     FormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
-    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+    AngularFirestoreModule,
+    AngularFireAuthModule,
     RouterModule.forRoot(rootRoutes)
   ],
-  providers: [UserService, FilesService, AngularFireAuth],
+  providers: [UserService, FilesService, AngularFireAuth, ToastService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -16,6 +16,6 @@ export class RegisterRequest {
 
 export class LoginRequest {
   constructor() {}
-  email: string;
-  password: string;
+  email = '';
+  password = '';
 }

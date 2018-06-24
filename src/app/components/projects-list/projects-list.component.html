@@ -4,4 +4,9 @@
 <div>
   logged user: {{ (_user|async)?.name }}
 </div>
+<button mat-raised-button (click)="addp()"> add project</button>
 <button mat-raised-button (click)="logout()">logout user</button>
+<button mat-raised-button (click)="goToAddProject()">Add new Project Form</button>
+<mat-card *ngFor="let proj of _projects">
+  <app-single-project [project]="proj"></app-single-project>
+</mat-card>
