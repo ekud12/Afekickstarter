@@ -7,7 +7,7 @@ import { UserService } from './user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UserGuard implements CanActivate {
+export class UserReadGuard implements CanActivate {
   constructor(private auth: UserService, private router: Router) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {

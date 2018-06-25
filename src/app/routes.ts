@@ -7,7 +7,7 @@ import { ProjectDetailsComponent } from './components/project-details/project-de
 import { ProjectsListComponent } from './components/projects-list/projects-list.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserEditGuard } from './services/user-edit.guard';
-import { UserGuard } from './services/user-read.guard';
+import { UserReadGuard } from './services/user-read.guard';
 
 export const rootRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -17,8 +17,8 @@ export const rootRoutes: Routes = [
   },
   {
     path: 'register',
-    component: RegisterComponent
-    // canActivate: [UserGuard]
+    component: RegisterComponent,
+    // canActivate: [UserReadGuard]
   },
   {
     path: 'landing',
@@ -27,7 +27,7 @@ export const rootRoutes: Routes = [
   {
     path: 'edit',
     component: EditProjectComponent,
-    canActivate: [UserGuard]
+    // canActivate: [UserGuard]
   },
   {
     path: 'add',

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { User } from '../../models/user.model';
 import { Project } from './../../models/project.model';
 import { ProjectsService } from './../../services/projects.service';
@@ -11,14 +12,15 @@ import { UserService } from './../../services/user.service';
   templateUrl: './projects-list.component.html',
   styleUrls: ['./projects-list.component.css']
 })
-export class ProjectsListComponent implements OnInit {
+export class ProjectsListComponent implements OnInit, OnDestroy {
   _user: Observable<User>;
   _projects: Project[];
+  private onDestroy$ = new Subject<void>();
   constructor(private userService: UserService, private projectService: ProjectsService, private router: Router) {}
 
   ngOnInit() {
     this._user = this.userService.user$;
-    this.projectService.projects$.subscribe(projects => (this._projects = projects));
+    this.projectService.projects$.pipe(takeUntil(this.onDestroy$)).subscribe(projects => (this._projects = projects));
   }
 
   logout() {
@@ -29,5 +31,10 @@ export class ProjectsListComponent implements OnInit {
   }
   goToAddProject() {
     this.router.navigate(['add']);
+  }
+
+  ngOnDestroy() {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
   }
 }

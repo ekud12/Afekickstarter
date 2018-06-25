@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Permissions, PermissionsMap } from '../../models/permissions.model';
 import { RegisterRequest, User } from './../../models/user.model';
 import { UserService } from './../../services/user.service';
@@ -8,10 +10,12 @@ import { UserService } from './../../services/user.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   _permissions: PermissionsMap[];
   _registerRequest: RegisterRequest = new RegisterRequest();
   _user: User;
+  private onDestroy$ = new Subject<void>();
+
   constructor(public userService: UserService) {
     this._permissions = [
       { value: Permissions.ADMIN, viewValue: 'Admininstrator' },
@@ -21,7 +25,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.user$.subscribe(user => (this._user = user));
+    this.userService.user$.pipe(takeUntil(this.onDestroy$)).subscribe(user => (this._user = user));
   }
 
   signup() {
@@ -30,5 +34,10 @@ export class RegisterComponent implements OnInit {
 
   check() {
     this.userService.canDelete(this._user);
+  }
+
+  ngOnDestroy() {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
   }
 }

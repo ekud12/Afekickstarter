@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -47,9 +48,10 @@ export const firebaseConfig = environment.FirebaseConfig;
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
     RouterModule.forRoot(rootRoutes)
   ],
-  providers: [UserService, FilesService, AngularFireAuth, ToastService],
+  providers: [UserService, FilesService, AngularFireAuth, AngularFireDatabase, ToastService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
