@@ -1,8 +1,11 @@
-<p>
-  project-details works!
-</p>
 <div *ngIf="project">
   <h1>{{project.uid}}</h1>
-  <img [src]="project.pic1">
+  <div *ngFor="let imgSrc of project.pics">
+    <img [src]="imgSrc">
+  </div>
+
 </div>
 
+<div *ngIf="!project">
+  <mat-spinner></mat-spinner>
+</div>

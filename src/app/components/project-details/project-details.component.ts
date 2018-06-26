@@ -19,4 +19,8 @@ export class ProjectDetailsComponent implements OnInit {
       });
     });
   }
+
+  deleteImage() {
+    this.projectService.deleteImage(0);
+  }
 }

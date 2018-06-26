@@ -9,6 +9,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorage, AngularFireStorageModule } from 'angularfire2/storage';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { AddProjectComponent } from './components/add-project/add-project.component';
@@ -49,9 +50,10 @@ export const firebaseConfig = environment.FirebaseConfig;
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    AngularFireStorageModule,
     RouterModule.forRoot(rootRoutes)
   ],
-  providers: [UserService, FilesService, AngularFireAuth, AngularFireDatabase, ToastService],
+  providers: [UserService, FilesService, AngularFireAuth, AngularFireDatabase, AngularFireStorage, ToastService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

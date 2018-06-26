@@ -1,5 +1,3 @@
-import { User } from './user.model';
-
 export class Project {
   uid?: string;
   name?: string;
@@ -10,9 +8,7 @@ export class Project {
   startDate?: Date;
   endDate?: Date;
   thumbnail?: string;
-  pic1: string;
-  pic2?: string;
-  pic3?: string;
+  pics: string[];
   videoLink?: string;
   owner?: string;
 }

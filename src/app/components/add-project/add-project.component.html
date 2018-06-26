@@ -6,15 +6,19 @@
     <input matInput placeholder="Name" />
   </mat-form-field>
 
+  <div>
+    <input type="file" id="pic1" (change)="updateFile($event,0)">
+  </div>
+  <div>
+    <input type="file" id="pic2" (change)="updateFile($event,1)">
+  </div>
+  <div>
+    <input type="file" id="pic3" (change)="updateFile($event,2)">
+  </div>
+  <!-- {{(uploadProgress | async)?.toFixed(0)}}% -->
+  <div>images upload Successfully: {{count}}</div>
+  <button mat-raised-button (click)="uploadFile()">
+    Upload
+  </button>
+
 </form>
-<div *ngIf="currentFileUpload" class="progress">
-  <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
-    aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
-    {{progress.percentage}}%</div>
-</div>
-
-<label class="btn btn-default">
-  <input type="file" (change)="selectFile($event)">
-</label>
-
-<button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">Upload</button>

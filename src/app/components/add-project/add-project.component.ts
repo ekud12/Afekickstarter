@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from 'angularfire2/storage';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { FileUpload } from '../../models/file.model';
 import { FilesService } from './../../services/files.service';
 
@@ -11,22 +14,52 @@ export class AddProjectComponent implements OnInit {
   selectedFiles: FileList;
   currentFileUpload: FileUpload;
   progress: { percentage: number } = { percentage: 0 };
+  firstImageUploaded = false;
+  secondImageUploaded = false;
+  thirdImageUploaded = false;
+  uploadProgress: Observable<number>;
+  downloadURL: string;
+  files = new Array<File>(3);
+  count: number;
 
-  constructor(private uploadService: FilesService) {}
+  constructor(private uploadService: FilesService, private afstorage: AngularFireStorage) {
+    this.uploadProgress = this.uploadService.uploadProgress;
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.count = 0;
+  }
 
   selectFile(event) {
     this.selectedFiles = event.target.files;
   }
 
-  upload() {
-    const file = this.selectedFiles.item(0);
-    this.selectedFiles = undefined;
+  updateFile(event, picnum) {
+    this.files[picnum] = event.target.files[0];
+  }
 
-    this.currentFileUpload = new FileUpload(file);
-    this.currentFileUpload.projectID = 'firstProject';
-    this.currentFileUpload.imgNum = 1;
-    this.uploadService.pushFileToStorage(this.currentFileUpload, this.progress);
+  uploadFile() {
+    this.files.map((item, index) => {
+      this.currentFileUpload = new FileUpload(item);
+      const id = Math.random()
+        .toString(36)
+        .substring(2);
+      const fileRef = this.afstorage.ref(id);
+      const task = this.afstorage.ref(id).put(item);
+      this.uploadProgress = task.percentageChanges();
+      task
+        .snapshotChanges()
+        .pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe(url => {
+              this.currentFileUpload.projectID = 'firstProject';
+              this.currentFileUpload.url = url;
+              this.uploadService.saveFileData(this.currentFileUpload, index);
+              this.count++;
+            });
+          })
+        )
+        .subscribe();
+    });
   }
 }

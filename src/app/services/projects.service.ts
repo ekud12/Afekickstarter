@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Project } from '../models/project.model';
 import { User } from './../models/user.model';
+import { FilesService } from './files.service';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -14,7 +15,12 @@ export class ProjectsService {
   projects$: Observable<Project[]>;
   projectsCollection: AngularFirestoreCollection<Project>;
   user$: Observable<User>;
-  constructor(private afs: AngularFirestore, private router: Router, private userService: UserService) {
+  constructor(
+    private afs: AngularFirestore,
+    private router: Router,
+    private userService: UserService,
+    private fileService: FilesService
+  ) {
     this.user$ = this.userService.user$;
     this.projectsCollection = this.afs.collection<Project>('projects');
     this.projects$ = this.projectsCollection.valueChanges();
@@ -31,9 +37,7 @@ export class ProjectsService {
       totMoneyNeeded: 0,
       startDate: new Date(),
       endDate: new Date(),
-      pic1: 'asd',
-      pic2: 'asd',
-      pic3: 'asd',
+      pics: ['', '', ''],
       videoLink: 'video link',
       thumbnail: 'imagethumb',
       owner: null
@@ -53,4 +57,8 @@ export class ProjectsService {
   updateProject() {}
 
   closeProject() {}
+
+  deleteImage(index: number) {
+    this.fileService.deleteImage(0);
+  }
 }
