@@ -38,6 +38,8 @@ export class AddProjectComponent implements OnInit {
     this.files[picnum] = event.target.files[0];
   }
 
+  deleteFile() {}
+
   uploadFile() {
     this.files.map((item, index) => {
       this.currentFileUpload = new FileUpload(item);
@@ -45,6 +47,7 @@ export class AddProjectComponent implements OnInit {
         .toString(36)
         .substring(2);
       const fileRef = this.afstorage.ref(id);
+      this.currentFileUpload.key = id;
       const task = this.afstorage.ref(id).put(item);
       this.uploadProgress = task.percentageChanges();
       task

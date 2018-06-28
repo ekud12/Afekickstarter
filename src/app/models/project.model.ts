@@ -8,7 +8,12 @@ export class Project {
   startDate?: Date;
   endDate?: Date;
   thumbnail?: string;
-  pics: string[];
+  pics: Pic[];
   videoLink?: string;
   owner?: string;
+}
+
+export class Pic {
+  url: string;
+  key: string;
 }

@@ -37,7 +37,7 @@ export class ProjectsService {
       totMoneyNeeded: 0,
       startDate: new Date(),
       endDate: new Date(),
-      pics: ['', '', ''],
+      pics: [{ url: '', key: '' }, { url: '', key: '' }, { url: '', key: '' }],
       videoLink: 'video link',
       thumbnail: 'imagethumb',
       owner: null
@@ -59,6 +59,6 @@ export class ProjectsService {
   closeProject() {}
 
   deleteImage(index: number) {
-    this.fileService.deleteImage(0);
+    // this.fileService.deleteImage(0);
   }
 }
