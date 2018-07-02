@@ -3,9 +3,15 @@
 </p>
 <form fxLayout="column" fxLayoutAlign="space-between center center">
   <mat-form-field>
-    <input matInput placeholder="Name" />
+    <input matInput placeholder="Name" [(ngModel)]="request.name" name="name" />
   </mat-form-field>
 
+  <mat-form-field>
+    <input matInput placeholder="videoLink" [(ngModel)]="request.videoLink" name="video" />
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput placeholder="info" [(ngModel)]="request.info" name="info"></textarea>
+  </mat-form-field>
   <div>
     <input type="file" id="pic1" (change)="updateFile($event,0)">
   </div>
@@ -22,6 +28,9 @@
   </button>
   <button mat-raised-button (click)="deleteFile()">
     Delete file
+  </button>
+  <button mat-raised-button (click)="addProject()">
+    Add Project
   </button>
 
 </form>

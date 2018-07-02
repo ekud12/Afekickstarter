@@ -26,25 +26,34 @@ export class ProjectsService {
     this.projects$ = this.projectsCollection.valueChanges();
   }
 
-  createProject() {
-    const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/firstProject`);
-    const projectToADD: Project = {
-      uid: 'firstProject',
-      name: 'best project',
-      info: 'asdas',
-      totMoneyRaised: 0,
-      totInvestors: 0,
-      totMoneyNeeded: 0,
-      startDate: new Date(),
-      endDate: new Date(),
-      pics: [{ url: '', key: '' }, { url: '', key: '' }, { url: '', key: '' }],
-      videoLink: 'video link',
-      thumbnail: 'imagethumb',
-      owner: null
-    };
-    this.user$.pipe(take(1)).subscribe(user => {
-      projectToADD.owner = user.uid;
-      projectRef.set(projectToADD, { merge: true });
+  createProject(newProject: Project): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/${newProject.uid}`);
+      const projectToADD: Project = {
+        uid: newProject.uid,
+        name: newProject.name,
+        info: newProject.info,
+        totMoneyRaised: 0,
+        totInvestors: 0,
+        totMoneyNeeded: 0,
+        startDate: new Date(),
+        endDate: new Date(),
+        pics: [{ url: '', key: '' }, { url: '', key: '' }, { url: '', key: '' }],
+        videoLink: newProject.videoLink,
+        thumbnail: newProject.thumbnail,
+        owner: null
+      };
+      this.user$.pipe(take(1)).subscribe(user => {
+        projectToADD.owner = user.uid;
+        projectRef
+          .set(projectToADD, { merge: true })
+          .then(() => {
+            resolve(projectToADD.uid);
+          })
+          .catch(() => {
+            reject();
+          });
+      });
     });
   }
 

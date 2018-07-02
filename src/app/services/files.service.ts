@@ -14,6 +14,7 @@ export class FilesService {
   constructor(private afs: AngularFirestore, private afstorage: AngularFireStorage) {}
 
   saveFileData(fileUpload: FileUpload, index: number): void {
+    console.log(fileUpload);
     const projectRef: AngularFirestoreDocument<Project> = this.afs.doc(`projects/${fileUpload.projectID}`);
     projectRef.ref.get().then(doc => {
       const pics = doc.data().pics;

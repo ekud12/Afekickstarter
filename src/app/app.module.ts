@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
@@ -25,6 +26,7 @@ import { rootRoutes } from './routes';
 import { FilesService } from './services/files.service';
 import { ToastService } from './services/toast.service';
 import { UserService } from './services/user.service';
+import { YoutubePlayerModule } from 'ngx-youtube-player';
 
 export const firebaseConfig = environment.FirebaseConfig;
 @NgModule({
@@ -41,7 +43,9 @@ export const firebaseConfig = environment.FirebaseConfig;
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
+    YoutubePlayerModule,
     CommonModule,
     FlexLayoutModule,
     materialImports,
