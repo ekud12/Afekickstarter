@@ -1,12 +1,11 @@
 <p>
-  projects-list works!
-</p>
-<div>
+  Welcome to Afekickstarter!!!</p>
+<div *ngIf="(_user|async)" fxLayout="row" fxLayoutAlign="start center">
   logged user: {{ (_user|async)?.name }}
+  <button mat-raised-button color="primary" (click)="logout()">logout user</button>
+  <button mat-raised-button color="primary" routerLink="/add">Add new Project Form</button>
 </div>
-<button mat-raised-button (click)="addp()"> add project</button>
-<button mat-raised-button (click)="logout()">logout user</button>
-<button mat-raised-button (click)="goToAddProject()">Add new Project Form</button>
+<button mat-raised-button routerLink="/login" *ngIf="!(_user|async)">Login</button>
 <mat-card *ngFor="let proj of _projects">
   <app-single-project [project]="proj"></app-single-project>
 </mat-card>

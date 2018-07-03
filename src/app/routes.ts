@@ -27,7 +27,7 @@ export const rootRoutes: Routes = [
   {
     path: 'edit',
     component: EditProjectComponent,
-    // canActivate: [UserGuard]
+    canActivate: [UserEditGuard]
   },
   {
     path: 'add',

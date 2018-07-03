@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   check() {
-    this.userService.canDelete(this._user);
+    this.userService.isAdmin(this._user);
   }
 
   ngOnDestroy() {

@@ -18,6 +18,7 @@ export class UserEditGuard implements CanActivate {
       tap(canEdit => {
         if (!canEdit) {
           this.toaster.openSnackBar('Access denied. Must have permission to view content');
+          this.router.navigate(['login']);
           return false;
         } else {
           return true;

@@ -1,11 +1,23 @@
-<div *ngIf="project">
-  <h1>{{project.uid}}</h1>
-  <div *ngFor="let imgSrc of project.pics">
-    <img [src]="imgSrc">
+<div *ngIf="currentProject">
+  <h1>{{currentProject.name}}</h1>
+  <div *ngFor="let imgSrc of currentProject.pics">
+    <img [src]="imgSrc.url">
   </div>
 
+  <iframe width="420" height="315" [src]="getVideoUrl()">
+  </iframe>
+
+  <div>
+    <div>
+      Campaign Started at: {{ this.currentProject.startDate | date:'dd-MM-yyyy'}}
+    </div>
+    <div> Campaign will End at: {{ this.currentProject.endDate | date:'dd-MM-yyyy' }} </div>
+    <div> total investors: {{ this.currentProject.totInvestors}} </div>
+    <div>total money needed: {{ this.currentProject.totMoneyNeeded }} </div>
+    <div>total money raised so far: {{this.currentProject.totMoneyRaised}} </div>
+  </div>
 </div>
 
-<div *ngIf="!project">
+<div *ngIf="!currentProject">
   <mat-spinner></mat-spinner>
 </div>

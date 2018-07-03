@@ -21,6 +21,8 @@ export class ProjectsService {
     private userService: UserService,
     private fileService: FilesService
   ) {
+    this.afs.firestore.settings({ timestampsInSnapshots: true });
+
     this.user$ = this.userService.user$;
     this.projectsCollection = this.afs.collection<Project>('projects');
     this.projects$ = this.projectsCollection.valueChanges();
@@ -36,8 +38,8 @@ export class ProjectsService {
         totMoneyRaised: 0,
         totInvestors: 0,
         totMoneyNeeded: 0,
-        startDate: new Date(),
-        endDate: new Date(),
+        startDate: new Date().getMilliseconds(),
+        endDate: new Date().getMilliseconds(),
         pics: [{ url: '', key: '' }, { url: '', key: '' }, { url: '', key: '' }],
         videoLink: newProject.videoLink,
         thumbnail: newProject.thumbnail,

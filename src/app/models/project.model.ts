@@ -5,8 +5,8 @@ export class Project {
   totMoneyNeeded?: number;
   totMoneyRaised?: number;
   totInvestors?: number;
-  startDate?: Date;
-  endDate?: Date;
+  startDate?: number;
+  endDate?: number;
   thumbnail?: string;
   pics: Pic[];
   videoLink?: string;

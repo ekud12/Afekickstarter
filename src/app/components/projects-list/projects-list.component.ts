@@ -26,9 +26,7 @@ export class ProjectsListComponent implements OnInit, OnDestroy {
   logout() {
     this.userService.signOut();
   }
-  addp() {
-    // this.projectService.createProject();
-  }
+
   goToAddProject() {
     this.router.navigate(['add']);
   }
