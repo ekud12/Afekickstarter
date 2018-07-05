@@ -6,6 +6,9 @@
   <button mat-raised-button color="primary" routerLink="/add">Add new Project Form</button>
 </div>
 <button mat-raised-button routerLink="/login" *ngIf="!(_user|async)">Login</button>
-<mat-card *ngFor="let proj of _projects">
-  <app-single-project [project]="proj"></app-single-project>
-</mat-card>
+<div fxLayout="row" fxLayoutAlign="center center">
+  <mat-card *ngFor="let proj of _projects">
+    <app-single-project [project]="proj"></app-single-project>
+  </mat-card>
+
+</div>

@@ -18,10 +18,6 @@ export class AddProjectComponent implements OnInit {
   user: User;
   selectedFiles: FileList;
   currentFileUpload: FileUpload;
-  progress: { percentage: number } = { percentage: 0 };
-  firstImageUploaded = false;
-  secondImageUploaded = false;
-  thirdImageUploaded = false;
   uploadProgress: Observable<number>;
   downloadURL: string;
   files = new Array<File>(3);
@@ -55,8 +51,8 @@ export class AddProjectComponent implements OnInit {
     this.request.totInvestors = 0;
     this.request.totMoneyNeeded = 10000;
     this.request.totInvestors = 0;
-    this.request.startDate = new Date();
-    this.request.endDate = new Date();
+    this.request.startDate = new Date().getMilliseconds();
+    this.request.endDate = new Date().getMilliseconds();
     this.request.uid = Math.random()
       .toString(36)
       .substring(2);
@@ -69,26 +65,25 @@ export class AddProjectComponent implements OnInit {
 
   deleteFile() {}
 
-  uploadFile(key: string) {
-    this.files.map((item, index) => {
-      this.currentFileUpload = new FileUpload(item);
+  async uploadFile(key: string) {
+    this.files.forEach( async (item, index) => {
+      const file = new FileUpload(item);
       const id = Math.random()
         .toString(36)
         .substring(2);
       const fileRef = this.afstorage.ref(id);
-      this.currentFileUpload.key = id;
-      this.currentFileUpload.projectID = key;
+      file.key = id;
+      file.projectID = key;
       const task = this.afstorage.ref(id).put(item);
-      this.uploadProgress = task.percentageChanges();
       task
         .snapshotChanges()
         .pipe(
-          finalize(() => {
-            fileRef.getDownloadURL().subscribe(url => {
-              this.currentFileUpload.url = url;
-              this.uploadService.saveFileData(this.currentFileUpload, index);
+          finalize( async() => {
+            fileRef.getDownloadURL().subscribe(async url => {
+              file.url = url;
+              await this.uploadService.saveFileData(file, index);
               this.count++;
-              if (this.count === 3) {
+              if (this.count === this.files.length) {
                 this.submitLocked = false;
               }
             });

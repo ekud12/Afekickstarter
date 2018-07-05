@@ -1,17 +1,24 @@
-<div>
-  Login</div>
-
-<div>
-  <form fxLayout="column" fxLayoutAlign="space-evenly center center">
-    <mat-form-field class="mat-form-field-custom">
-      <input matInput name="email" type="text" placeholder="Email" [(ngModel)]="_loginRequest.email">
-    </mat-form-field>
-    <mat-form-field class="mat-form-field-custom">
-      <input matInput name="password" type="password" placeholder="Password" [(ngModel)]="_loginRequest.password">
-    </mat-form-field>
-    <button mat-raised-button color="primary" (click)="login()" name="btn">Signup</button>
-  </form>
+<div fxLayout="column" fxLayoutAlign="space-evenly center center">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h1>
+      Afekickstarter.
+    </h1>
+    <h2>
+      Login to kickstart your dream.
+    </h2>
+  </div>
   <div>
-    {{ userService.errorsData | async }}
+    <form fxLayout="column" fxLayoutAlign="space-evenly center center" fxLayoutGap="20px">
+      <mat-form-field class="mat-form-field-custom">
+        <input matInput name="email" type="text" placeholder="Email" [(ngModel)]="_loginRequest.email">
+      </mat-form-field>
+      <mat-form-field class="mat-form-field-custom">
+        <input matInput name="password" type="password" placeholder="Password" [(ngModel)]="_loginRequest.password">
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="login()" name="btn">Login</button>
+    </form>
+    <mat-card class="error-card" *ngIf="(userService.errorsData | async)">
+      {{ userService.errorsData | async }}
+    </mat-card>
   </div>
 </div>
