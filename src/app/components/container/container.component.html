@@ -1,30 +1,32 @@
 <mat-toolbar class="mat-elevation-z5 navbar" fxLayout="row" fxLayoutAlign="space-between center center" color="accent">
-  <div routerLink="/home/projects" class="actionable">
+  <div routerLink="/home/projects" class="actionable" fxLayout="row" fxLayoutAlign="space-between center center">
+    <img src="../../../assets/logo.png" class="logo" />
     <h1>AFEKickstarter</h1>
   </div>
-  <div *ngIf="(_user|async)" fxLayout="row" fxLayoutAlign="space-between center center">
-    <div name="projectOwnerActions" *ngIf="(_user|async)?.roles.projectOwner">
-      <button mat-icon-button routerLink="/home/add" *ngIf="(_user|async)?.roles.projectOwner">
+  <div *ngIf=" (_user|async) " fxLayout="row " fxLayoutAlign="start center">
+    <div name="projectOwnerActions " *ngIf="(_user|async)?.roles.projectOwner" class="section">
+      <button matTooltip="Add a new Project!" mat-icon-button routerLink="/home/add" *ngIf="(_user|async)?.roles.projectOwner ">
         <mat-icon>library_add</mat-icon>
       </button>
-    </div>
-  </div>
-  <div *ngIf="(_user|async)" fxLayout="row" fxLayoutAlign="start center">
-    <span *ngIf="userProjectsCount !== 0" class="total-projects">
+
+    </div>|
+    <div *ngIf="userProjectsCount !==0 " class="section">
       Active Projects: {{ userProjectsCount }} |
-    </span>
-    {{ (_user|async)?.name }} |
-    <button mat-icon-button (click)="logout()">
-      <mat-icon>
+    </div>
+    <div class="section">
+      {{ (_user|async)?.name }} |
+    </div>
+    <button mat-icon-button (click)="logout()" class="section">
+      <mat-icon matTooltip="logout...">
         exit_to_app
       </mat-icon>
     </button>
   </div>
-  <div *ngIf="!(_user|async)">
-    <button mat-raised-button routerLink="/login" *ngIf="!(_user|async)">Login</button>
+  <div *ngIf="!(_user|async) ">
+    <button mat-raised-button routerLink="/login " *ngIf="!(_user|async) ">Login</button>
   </div>
 </mat-toolbar>
 
-<div fxLayout="column" fxLayoutAlign="center center">
+<div fxLayout="column " fxLayoutAlign="center center ">
   <router-outlet></router-outlet>
 </div>

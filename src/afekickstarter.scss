@@ -1,0 +1,9 @@
+@import '~@angular/material/theming';
+
+$config: mat-typography-config();
+$custom-typography: mat-typography-config(
+  $font-family: 'Work Sans'
+);
+
+@include mat-core($custom-typography);
+
