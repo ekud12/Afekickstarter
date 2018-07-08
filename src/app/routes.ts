@@ -18,7 +18,6 @@ export const rootRoutes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
-    // canActivate: [UserReadGuard]
   },
   {
     path: 'landing',
@@ -37,7 +36,6 @@ export const rootRoutes: Routes = [
   {
     path: 'details/:uid',
     component: ProjectDetailsComponent
-    // canActivate: [UserGuard]
   },
 
   { path: '**', component: PageNotFoundComponent }

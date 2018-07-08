@@ -29,6 +29,7 @@ export class ProjectsService {
   }
 
   createProject(newProject: Project): Promise<any> {
+    console.log(newProject.pics);
     return new Promise<any>((resolve, reject) => {
       const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/${newProject.uid}`);
       const projectToADD: Project = {
@@ -38,15 +39,16 @@ export class ProjectsService {
         totMoneyRaised: 0,
         totInvestors: 0,
         totMoneyNeeded: 0,
-        startDate: new Date().getMilliseconds(),
+        startDate: Date.now(),
         endDate: new Date().getMilliseconds(),
-        pics: [{ url: '', key: '' }, { url: '', key: '' }, { url: '', key: '' }],
+        pics: JSON.parse(JSON.stringify(newProject.pics)),
         videoLink: newProject.videoLink,
         thumbnail: newProject.thumbnail,
         owner: null
       };
       this.user$.pipe(take(1)).subscribe(user => {
         projectToADD.owner = user.uid;
+        console.log(projectToADD);
         projectRef
           .set(projectToADD, { merge: true })
           .then(() => {

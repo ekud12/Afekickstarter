@@ -14,6 +14,7 @@ export class Project {
 }
 
 export class Pic {
+  constructor() {}
   url: string;
   key: string;
 }

@@ -12,6 +12,11 @@
   <mat-form-field>
     <textarea matInput placeholder="info" [(ngModel)]="request.info" name="info"></textarea>
   </mat-form-field>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Choose an end date for campaign" [(ngModel)]="request.endDate" name="endDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
   <div>
     <input type="file" id="pic1" (change)="updateFile($event,0)">
   </div>
@@ -21,11 +26,7 @@
   <div>
     <input type="file" id="pic3" (change)="updateFile($event,2)">
   </div>
-  <!-- {{(uploadProgress | async)?.toFixed(0)}}% -->
   <div>images upload Successfully: {{count}}</div>
-  <button mat-raised-button color="primary" (click)="uploadFile()">
-    Upload
-  </button>
   <button mat-raised-button color="primary" (click)="deleteFile()">
     Delete file
   </button>

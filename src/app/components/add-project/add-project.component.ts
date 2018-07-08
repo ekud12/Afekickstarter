@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
 import { FileUpload } from '../../models/file.model';
-import { Pic, Project } from '../../models/project.model';
+import { Project } from '../../models/project.model';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 import { FilesService } from './../../services/files.service';
@@ -56,40 +55,19 @@ export class AddProjectComponent implements OnInit {
     this.request.uid = Math.random()
       .toString(36)
       .substring(2);
-    this.request.pics = new Array<Pic>(3);
     this.request.thumbnail = '';
-    this.projectService.createProject(this.request).then(p_id => {
-      this.uploadFile(p_id);
+    this.uploadService.uploadFile(this.request.uid, this.files).then(pics => {
+      this.request.pics = pics;
+      this.projectService
+        .createProject(this.request)
+        .then(res => {
+          console.log(res);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     });
   }
 
   deleteFile() {}
-
-  async uploadFile(key: string) {
-    this.files.forEach( async (item, index) => {
-      const file = new FileUpload(item);
-      const id = Math.random()
-        .toString(36)
-        .substring(2);
-      const fileRef = this.afstorage.ref(id);
-      file.key = id;
-      file.projectID = key;
-      const task = this.afstorage.ref(id).put(item);
-      task
-        .snapshotChanges()
-        .pipe(
-          finalize( async() => {
-            fileRef.getDownloadURL().subscribe(async url => {
-              file.url = url;
-              await this.uploadService.saveFileData(file, index);
-              this.count++;
-              if (this.count === this.files.length) {
-                this.submitLocked = false;
-              }
-            });
-          })
-        )
-        .subscribe();
-    });
-  }
 }
