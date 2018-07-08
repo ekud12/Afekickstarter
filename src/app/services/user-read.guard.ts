@@ -18,7 +18,7 @@ export class UserInvestGuard implements CanActivate {
         if (!canView) {
           console.error('Access denied. Must have permission to view content');
         } else {
-          this.router.navigate(['landing']);
+          this.router.navigate(['home']);
         }
       })
     );

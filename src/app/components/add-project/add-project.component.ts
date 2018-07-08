@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireStorage } from 'angularfire2/storage';
 import { Observable } from 'rxjs';
 import { FileUpload } from '../../models/file.model';
 import { Project } from '../../models/project.model';
@@ -7,6 +6,7 @@ import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 import { FilesService } from './../../services/files.service';
 import { ProjectsService } from './../../services/projects.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-project',
@@ -25,7 +25,7 @@ export class AddProjectComponent implements OnInit {
   request = new Project();
   constructor(
     private uploadService: FilesService,
-    private afstorage: AngularFireStorage,
+    private router: Router,
     private userService: UserService,
     private projectService: ProjectsService
   ) {}
@@ -61,7 +61,7 @@ export class AddProjectComponent implements OnInit {
       this.projectService
         .createProject(this.request)
         .then(res => {
-          console.log(res);
+          this.router.navigate(['/home/projects']);
         })
         .catch(error => {
           console.log(error);

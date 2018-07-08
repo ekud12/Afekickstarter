@@ -8,13 +8,12 @@ import { User } from './../models/user.model';
 import { FilesService } from './files.service';
 import { UserService } from './user.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ProjectsService {
   projects$: Observable<Project[]>;
   projectsCollection: AngularFirestoreCollection<Project>;
   user$: Observable<User>;
+
   constructor(
     private afs: AngularFirestore,
     private router: Router,
@@ -22,14 +21,14 @@ export class ProjectsService {
     private fileService: FilesService
   ) {
     this.afs.firestore.settings({ timestampsInSnapshots: true });
-
     this.user$ = this.userService.user$;
+  }
+  getProjects() {
     this.projectsCollection = this.afs.collection<Project>('projects');
-    this.projects$ = this.projectsCollection.valueChanges();
+    return (this.projects$ = this.projectsCollection.valueChanges());
   }
 
   createProject(newProject: Project): Promise<any> {
-    console.log(newProject.pics);
     return new Promise<any>((resolve, reject) => {
       const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/${newProject.uid}`);
       const projectToADD: Project = {
@@ -63,6 +62,10 @@ export class ProjectsService {
 
   getProject(uid: string) {
     return this.afs.doc<Project>(`projects/${uid}`).valueChanges();
+  }
+
+  getAllProjects(): Observable<Project[]> {
+    return this.projects$;
   }
 
   deleteProject() {}

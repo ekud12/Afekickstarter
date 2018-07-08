@@ -11,9 +11,12 @@ import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorage, AngularFireStorageModule } from 'angularfire2/storage';
+import { YoutubePlayerModule } from 'ngx-youtube-player';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { AddProjectComponent } from './components/add-project/add-project.component';
+import { ContainerComponent } from './components/container/container.component';
+import { DonateComponent } from './components/donate/donate.component';
 import { EditProjectComponent } from './components/edit-project/edit-project.component';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -26,8 +29,7 @@ import { rootRoutes } from './routes';
 import { FilesService } from './services/files.service';
 import { ToastService } from './services/toast.service';
 import { UserService } from './services/user.service';
-import { YoutubePlayerModule } from 'ngx-youtube-player';
-import { DonateComponent } from './components/donate/donate.component';
+import { ProjectsService } from './services/projects.service';
 
 export const firebaseConfig = environment.FirebaseConfig;
 @NgModule({
@@ -41,7 +43,8 @@ export const firebaseConfig = environment.FirebaseConfig;
     RegisterComponent,
     SingleProjectCardComponent,
     ProjectDetailsComponent,
-    DonateComponent
+    DonateComponent,
+    ContainerComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,16 @@ export const firebaseConfig = environment.FirebaseConfig;
     AngularFireStorageModule,
     RouterModule.forRoot(rootRoutes)
   ],
-  providers: [UserService, FilesService, AngularFireAuth, AngularFireDatabase, AngularFireStorage, ToastService, DatePipe],
+  providers: [
+    UserService,
+    ProjectsService,
+    FilesService,
+    AngularFireAuth,
+    AngularFireDatabase,
+    AngularFireStorage,
+    ToastService,
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

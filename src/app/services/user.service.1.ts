@@ -50,7 +50,7 @@ export class UserService implements OnDestroy {
       .signInWithEmailAndPassword(req.email, req.password)
       .then(value => {
         console.log(value);
-        this.router.navigate(['landing']);
+        this.router.navigate(['home']);
       })
       .catch(error => this.errorsData.next(error.message));
   }
@@ -69,7 +69,7 @@ export class UserService implements OnDestroy {
       }
     };
     userRef.set(data, { merge: true });
-    return this.router.navigate(['landing']);
+    return this.router.navigate(['home']);
   }
 
   canInvest(user: User): boolean {

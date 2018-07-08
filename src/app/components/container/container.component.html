@@ -1,0 +1,28 @@
+<mat-toolbar class="mat-elevation-z5 navbar" fxLayout="row" fxLayoutAlign="space-between center center" color="accent">
+  <div routerLink="/home/projects" class="actionable">
+    <h1>AFEKickstarter</h1>
+  </div>
+  <div *ngIf="(_user|async)" fxLayout="row" fxLayoutAlign="space-between center center">
+    <div name="projectOwnerActions" *ngIf="(_user|async)?.roles.projectOwner">
+      <button mat-icon-button routerLink="/home/add" *ngIf="(_user|async)?.roles.projectOwner">
+        <mat-icon>library_add</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="(_user|async)" fxLayout="row" fxLayoutAlign="start center">
+    {{ (_user|async)?.name }} |
+    <span *ngIf="userProjectsCount !== 0">
+      Total Projects You have: {{ userProjectsCount }} |
+    </span>
+    <button mat-icon-button (click)="logout()">
+      <mat-icon>
+        exit_to_app
+      </mat-icon>
+    </button>
+  </div>
+  <div *ngIf="!(_user|async)">
+    <button mat-raised-button routerLink="/login" *ngIf="!(_user|async)">Login</button>
+  </div>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

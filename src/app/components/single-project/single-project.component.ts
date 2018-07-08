@@ -14,6 +14,6 @@ export class SingleProjectCardComponent implements OnInit {
   ngOnInit() {}
 
   projectDetails() {
-    this.router.navigate(['details', this.project.uid]);
+    this.router.navigate(['/home/details', this.project.uid]);
   }
 }
