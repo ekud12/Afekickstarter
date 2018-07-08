@@ -3,7 +3,7 @@
 <div *ngIf="(_user|async)" fxLayout="row" fxLayoutAlign="start center">
   logged user: {{ (_user|async)?.name }}
   <button mat-raised-button color="primary" (click)="logout()">logout user</button>
-  <button mat-raised-button color="primary" routerLink="/add">Add new Project Form</button>
+  <button mat-raised-button color="primary" routerLink="/add" *ngIf="(_user|async)?.roles.projectOwner">Add a New Project!</button>
 </div>
 <button mat-raised-button routerLink="/login" *ngIf="!(_user|async)">Login</button>
 <div fxLayout="row" fxLayoutAlign="center center">

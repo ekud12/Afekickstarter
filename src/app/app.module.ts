@@ -27,6 +27,7 @@ import { FilesService } from './services/files.service';
 import { ToastService } from './services/toast.service';
 import { UserService } from './services/user.service';
 import { YoutubePlayerModule } from 'ngx-youtube-player';
+import { DonateComponent } from './components/donate/donate.component';
 
 export const firebaseConfig = environment.FirebaseConfig;
 @NgModule({
@@ -39,7 +40,8 @@ export const firebaseConfig = environment.FirebaseConfig;
     AddProjectComponent,
     RegisterComponent,
     SingleProjectCardComponent,
-    ProjectDetailsComponent
+    ProjectDetailsComponent,
+    DonateComponent
   ],
   imports: [
     BrowserModule,

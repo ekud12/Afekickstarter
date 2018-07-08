@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { Project } from '../../models/project.model';
 import { FilesService } from '../../services/files.service';
 import { ProjectsService } from '../../services/projects.service';
+import { User } from '../../models/user.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-project-details',
@@ -13,6 +15,7 @@ import { ProjectsService } from '../../services/projects.service';
 })
 export class ProjectDetailsComponent implements OnInit {
   project: Project;
+  user: Observable<User>;
   _allProject$: Observable<Project[]>;
   player: YT.Player;
   currentProject: Project;
@@ -20,6 +23,7 @@ export class ProjectDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private projectsService: ProjectsService,
+    private userService: UserService,
     private filesService: FilesService,
     private sanitizer: DomSanitizer
   ) {}
@@ -37,6 +41,7 @@ export class ProjectDetailsComponent implements OnInit {
 
   ngOnInit() {
     this._allProject$ = this.projectsService.projects$;
+    this.user = this.userService.user$;
     this.route.params.subscribe(params => {
       this.projectsService.getProject(params['uid']).subscribe(data => {
         this.currentProject = data;

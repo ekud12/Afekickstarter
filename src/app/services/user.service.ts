@@ -72,8 +72,8 @@ export class UserService implements OnDestroy {
     return this.router.navigate(['landing']);
   }
 
-  canRead(user: User): boolean {
-    const allowed = ['admin', 'investor', 'projectOwner'];
+  canInvest(user: User): boolean {
+    const allowed = ['investor'];
     return this.checkAuthorization(user, allowed);
   }
 

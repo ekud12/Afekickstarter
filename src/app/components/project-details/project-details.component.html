@@ -1,5 +1,5 @@
 <div *ngIf="currentProject" fxLayout="column" fxLayoutAlign="space-around center center">
-  <button mat-raised-button color="primary" routerLink="/edit">
+  <button mat-raised-button color="primary" routerLink="/edit" *ngIf="(user|async)?.roles.projectOwner">
     Edit this Project.
   </button>
   <h1>{{currentProject.name}}</h1>
@@ -19,6 +19,10 @@
     <div>total money needed: {{ this.currentProject.totMoneyNeeded }} </div>
     <div>total money raised so far: {{this.currentProject.totMoneyRaised}} </div>
   </div>
+  <button mat-raised-button color="primary" routerLink="/donate" *ngIf="(user|async)?.roles.investor">
+    Donate to this project now!
+  </button>
+
 </div>
 
 <div *ngIf="!currentProject">

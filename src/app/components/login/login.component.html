@@ -15,7 +15,9 @@
       <mat-form-field class="mat-form-field-custom">
         <input matInput name="password" type="password" placeholder="Password" [(ngModel)]="_loginRequest.password">
       </mat-form-field>
-      <button mat-raised-button color="primary" (click)="login()" name="btn">Login</button>
+      <button mat-raised-button color="primary" (click)="login()" name="loginBtn">Login</button>
+      <button mat-raised-button color="primary" routerLink="/register" name="registerBtn">No User? Register.</button>
+
     </form>
     <mat-card class="error-card" *ngIf="(userService.errorsData | async)">
       {{ userService.errorsData | async }}
