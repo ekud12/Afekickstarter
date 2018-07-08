@@ -1,17 +1,20 @@
 .header-title {
-  font-weight: bold;
+  font-weight: bolder;
   font-size: 20px;
 }
 
-.header{
+.header {
   color: rgb(34, 34, 34);
   justify-content: center;
   width: 100%;
   border-bottom: 5px dotted rgb(41, 41, 41);
 }
 
-.preview-container{
+.preview-container {
   height: 420px;
   width: 280px;
   margin: 15px 15px;
+  border-top: 5px solid orange;
+  border-bottom: 5px solid orange;
+  border-radius: 5px;
 }

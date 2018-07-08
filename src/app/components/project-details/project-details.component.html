@@ -1,45 +1,59 @@
 <div *ngIf="currentProject" fxLayout="column" fxLayoutAlign="space-around center center" class="inner-container">
-  <div class="inner-container-header">
-    Projects
+  <div class="inner-container-header" fxLayout="row" fxLayoutAlign="space-between start stretch">
+    <div fxLayout="row" fxLayoutAlign="space-between center center" style="padding: 10px;">
+      <div class="header-item">
+        // The need-to-know
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center center">
+      <div class="header-item" *ngIf="(user|async)?.roles.investor">
+        <button mat-raised-button color="warn" routerLink="/donate">
+          <mat-icon>attach_money</mat-icon>Donate
+        </button>
+      </div>
+      <div class="header-item" *ngIf="(user|async)?.roles.projectOwner">
+        <button mat-raised-button color="warn" routerLink="/edit">
+          <mat-icon>edit</mat-icon>Edit Project.
+        </button>
+      </div>
+
+    </div>
   </div>
+
   <h1>{{currentProject.name}}</h1>
+  <div class="info">
+    {{ currentProject.info}}
+  </div>
   <div style="display:block;" [style.width]="width">
     <slideshow #slideshow [imageUrls]="urls" [height]="height" [minHeight]="minHeight" [arrowSize]="arrowSize" [showArrows]="showArrows"
       [disableSwiping]="disableSwiping" [autoPlay]="autoPlay" [stopAutoPlayOnSlide]="stopAutoPlayOnSlide" [debug]="debug" [backgroundSize]="backgroundSize"
       [backgroundPosition]="backgroundPosition" [backgroundRepeat]="backgroundRepeat" [showDots]="showDots" [dotColor]="dotColor"
       [showCaptions]="showCaptions" [captionColor]="captionColor" [captionBackground]="captionBackground" [lazyLoad]="lazyLoad">
     </slideshow>
+
   </div>
 
-  <div>
-    Watch a Live Preview:
+
+  <div class="inner-container-header">
+    <div class="header-item">
+      // The "Numbers"
+    </div>
   </div>
-  <iframe width="600" height="400" [src]="getVideoUrl()">
+  <mat-grid-list cols="4" rowHeight="70px" class="tiles">
+    <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color" class="tile">
+      {{tile.text}}
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <div class="inner-container-header">
+    <div class="header-item">
+      // Some Eye-candy
+    </div>
+  </div>
+  <iframe width="750px" height="400" [src]="getVideoUrl()">
   </iframe>
 
-  <div fxLayout="column" fxLayoutAlign="space-around center center">
-    <mat-grid-list cols="2" rowHeight="2:1">
-      <mat-grid-tile> Campaign Started at: {{ this.currentProject.startDate | date:'dd-MM-yyyy'}}</mat-grid-tile>
-      <mat-grid-tile> Campaign will End at: {{ this.currentProject.endDate | date:'dd-MM-yyyy' }}</mat-grid-tile>
-      <mat-grid-tile>total investors: {{ this.currentProject.totInvestors}} </mat-grid-tile>
-      <mat-grid-tile>total money needed: {{ this.currentProject.totMoneyNeeded }}</mat-grid-tile>
-    </mat-grid-list>
-    <div>
-      Campaign Started at: {{ this.currentProject.startDate | date:'dd-MM-yyyy'}}
-    </div>
-    <div> Campaign will End at: {{ this.currentProject.endDate | date:'dd-MM-yyyy' }} </div>
-    <div> total investors: {{ this.currentProject.totInvestors}} </div>
-    <div>total money needed: {{ this.currentProject.totMoneyNeeded }} </div>
-    <div>total money raised so far: {{this.currentProject.totMoneyRaised}} </div>
-  </div>
-  <button mat-raised-button color="accent" routerLink="/donate" *ngIf="(user|async)?.roles.investor">
-    Donate to this project now!
-  </button>
-  <button mat-raised-button color="accent" routerLink="/edit" *ngIf="(user|async)?.roles.projectOwner">
-    Edit this Project.
-  </button>
 </div>
-
-<div *ngIf="!currentProject" fxLayout="column" fxLayoutAlign="space-around center center" class="inner-container">
+<div *ngIf="!currentProject" fxLayout="column" fxLayoutAlign="space-around center center" class="inner-container spinner">
   <mat-spinner></mat-spinner>
 </div>

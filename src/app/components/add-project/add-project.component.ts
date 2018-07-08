@@ -23,6 +23,7 @@ export class AddProjectComponent implements OnInit {
   counter$: Observable<number>;
   submitLocked = true;
   request = new Project();
+  status = 'waiting';
   constructor(
     private filesService: FilesService,
     private router: Router,
@@ -47,23 +48,25 @@ export class AddProjectComponent implements OnInit {
   }
 
   addProject() {
+    this.status = 'creating';
     this.request.totInvestors = 0;
     this.request.totMoneyNeeded = 10000;
     this.request.totInvestors = 0;
-    this.request.startDate = new Date().getMilliseconds();
-    this.request.endDate = new Date().getMilliseconds();
+    this.request.startDate = Date.now();
+    this.request.endDate = this.request.endDate.valueOf();
     this.request.uid = Math.random()
       .toString(36)
       .substring(2);
     this.filesService.uploadFile(this.request.uid, this.files).then(pics => {
-      console.log(pics);
       this.request.thumbnail = pics[3];
       this.request.pics = pics;
-      console.log(this.request);
       this.projectService
         .createProject(this.request)
         .then(res => {
-          this.router.navigate(['/home/projects']);
+          this.status = 'done';
+          setTimeout(() => {
+            this.router.navigate(['/home/projects']);
+          }, 3000);
         })
         .catch(error => {
           console.log(error);

@@ -1,7 +1,7 @@
 <div [hidden]="hide">
   <mat-card fxLayout="column" fxLayoutAlign="space-between center center" class="mat-elevation-z8 preview-container">
     <mat-card-header class="header" [hidden]="hide">
-      <mat-card-title class="header-title"> \\ {{project.name}}</mat-card-title>
+      <mat-card-title class="header-title"> -  {{project.name}}  -</mat-card-title>
     </mat-card-header>
     <img mat-card-image [src]="project.thumbnail.url" (load)="markAsLoaded()" [hidden]="hide" />
     <mat-card-actions fxLayout="row" fxLayoutAlign="stretch stretch">

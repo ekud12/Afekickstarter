@@ -6,55 +6,65 @@
       </div>
     </div>
   </div>
-  <form fxLayout="column" fxLayoutAlign="space-between center center" novalidate>
-    <h2>
-      Lets kick things off with entering the below details:
-    </h2>
-    <div fxLayout="row" fxLayoutAlign="space-between center center">
-      <span class="desc"> Enter the desired name for the project: </span>
-      <mat-form-field>
-        <input matInput placeholder="Name" [(ngModel)]="request.name" name="name" required/>
-      </mat-form-field>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="space-between center center">
-      <span class="desc"> Enter a youtube Link for project demo: </span>
-      <mat-form-field>
-        <input matInput placeholder="videoLink" [(ngModel)]="request.videoLink" name="video" required />
-      </mat-form-field>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="space-between center center">
-      <span class="desc"> Enter some information about the project and why you think its that good: </span>
-      <mat-form-field>
-        <textarea matInput placeholder="info" [(ngModel)]="request.info" name="info" required></textarea>
-      </mat-form-field>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="space-between center center">
-      <span class="desc"> Choose an end Date for the project's campaign: </span>
-      <mat-form-field>
-        <input required matInput [matDatepicker]="picker" placeholder="end date" [(ngModel)]="request.endDate" name="endDate">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </div>
-    <div>
-      <input type="file" id="pic1" (change)="updateFile($event,0)">
-    </div>
-    <div>
-      <input type="file" id="pic2" (change)="updateFile($event,1)">
-    </div>
-    <div>
-      <input type="file" id="pic3" (change)="updateFile($event,2)">
-    </div>
+  <div [ngSwitch]="status">
 
-    <div>
-      Please choose a thumbnail picture to stand out from the crowd:
-      <input type="file" id="thumbnail" (change)="updateFile($event,3)" required>
+    <form *ngSwitchCase="'waiting'" fxLayout="column" fxLayoutAlign="space-between center center" novalidate>
+      <h2>
+        Lets kick things off with entering the below details:
+      </h2>
+      <div fxLayout="row" fxLayoutAlign="space-between center center">
+        <span class="desc"> Enter the desired name for the project: </span>
+        <mat-form-field>
+          <input matInput placeholder="Name" [(ngModel)]="request.name" name="name" required/>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center center">
+        <span class="desc"> Enter a youtube Link for project demo: </span>
+        <mat-form-field>
+          <input matInput placeholder="videoLink" [(ngModel)]="request.videoLink" name="video" required />
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center center">
+        <span class="desc"> Enter some information about the project and why you think its that good: </span>
+        <mat-form-field>
+          <textarea matInput placeholder="info" [(ngModel)]="request.info" name="info" required></textarea>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center center">
+        <span class="desc"> Choose an end Date for the project's campaign: </span>
+        <mat-form-field>
+          <input required matInput [matDatepicker]="picker" placeholder="end date" [(ngModel)]="request.endDate" name="endDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div>
+        <input type="file" id="pic1" (change)="updateFile($event,0)" class="inputfile">
+      </div>
+      <div>
+        <input type="file" id="pic2" (change)="updateFile($event,1)">
+      </div>
+      <div>
+        <input type="file" id="pic3" (change)="updateFile($event,2)">
+      </div>
+
+      <div>
+        Please choose a thumbnail picture to stand out from the crowd:
+        <input type="file" id="thumbnail" (change)="updateFile($event,3)" required>
+      </div>
+
+      <div>images upload Successfully: {{ (counter$ | async )}}</div>
+      <button mat-raised-button color="accent" (click)="addProject()">
+        Add Project
+      </button>
+
+    </form>
+    <div *ngSwitchCase="'creating'">
+      Please wait while we setup your project...
+      <mat-spinner></mat-spinner>
     </div>
-
-    <div>images upload Successfully: {{ (counter$ | async )}}</div>
-    <button mat-raised-button color="accent" (click)="addProject()">
-      Add Project
-    </button>
-
-  </form>
+    <div *ngSwitchCase="'done'">
+      Done!
+    </div>
+  </div>
 </div>

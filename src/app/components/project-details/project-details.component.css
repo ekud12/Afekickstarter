@@ -1,3 +1,18 @@
-mat-grid-tile {
+.mat-grid-tile {
   background: lightblue;
+}
+
+.info {
+  padding: 30px 20px;
+  line-break: strict;
+  border-bottom: 1px solid rgba(41, 41, 41, 0.199);
+}
+
+.tile {
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.tiles {
+  min-width: 75vw;
 }

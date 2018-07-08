@@ -26,6 +26,39 @@
 
 .logo {
   width: 30px;
+  -webkit-animation: rotation 10s infinite;
+}
+
+@-webkit-keyframes rotation {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  /* Finish changes by here */
+  20% {
+    -webkit-transform: rotate(359deg);
+  }
+
+  /* Between 20% and 100%, nothing changes */
+  100% {
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+@-webkit-keyframes move {
+  0% {
+    -webkit-transform: tranlate(0deg);
+  }
+
+  /* Finish changes by here */
+  20% {
+    -webkit-transform: rotate(359deg);
+  }
+
+  /* Between 20% and 100%, nothing changes */
+  100% {
+    -webkit-transform: rotate(359deg);
+  }
 }
 
 .section {
@@ -38,6 +71,6 @@
   padding-top: 0px;
   z-index: -50;
 }
-.router{
+.router {
   padding: 20px 20px;
 }

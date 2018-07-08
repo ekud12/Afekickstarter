@@ -43,6 +43,7 @@ export class ProjectDetailsComponent implements OnInit {
   lazyLoad = false;
   width = '75vw';
 
+  tiles: any[] = [];
   constructor(
     private route: ActivatedRoute,
     private projectsService: ProjectsService,
@@ -73,6 +74,13 @@ export class ProjectDetailsComponent implements OnInit {
             this.urls.push(pic.url);
           }
         });
+        this.tiles = [
+          { text: `Money raised so Far { ${this.currentProject.totMoneyRaised} }`, cols: 3, rows: 1, color: '#B33771' },
+          { text: `# of Investors {  ${this.currentProject.totInvestors} }`, cols: 1, rows: 1, color: '#FD7272' },
+          { text: `Deadline { ${this.currentProject.endDate} }`, cols: 2, rows: 1, color: '#58B19F' },
+          { text: `It all started on { ${this.currentProject.startDate} }`, cols: 2, rows: 1, color: '#B33771' },
+          { text: `Money Needed { ${this.currentProject.totMoneyNeeded} }`, cols: 4, rows: 1, color: '#2C3A47' }
+        ];
       });
     });
   }
