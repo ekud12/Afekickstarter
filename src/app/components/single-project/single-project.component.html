@@ -1,10 +1,14 @@
-<mat-card fxLayout="column" fxLayoutAlign="center center" class="mat-elevation-z7">
-  <mat-card-header class="header">
-    <mat-card-title class="header-title">{{project.name}}</mat-card-title>
-  </mat-card-header>
-  <img mat-card-image [src]="project.thumbnail.url" />
-  <mat-card-actions fxLayout="row" fxLayoutAlign="stretch stretch">
+<div [hidden]="hide">
+  <mat-card fxLayout="column" fxLayoutAlign="center center" class="mat-elevation-z8 preview-container">
+    <mat-card-header class="header" [hidden]="hide">
+      <mat-card-title class="header-title">{{project.name}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image [src]="project.thumbnail.url" (load)="markAsLoaded()" [hidden]="hide" />
+    <mat-card-actions fxLayout="row" fxLayoutAlign="stretch stretch">
+      <button mat-raised-button color="primary" (click)="projectDetails()">Learn more about this Project!</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
 
-    <button mat-raised-button color="primary" (click)="projectDetails()">Go To project's Page!</button>
-  </mat-card-actions>
-</mat-card>
+
+<div *ngIf="hide === true" class="card"></div>

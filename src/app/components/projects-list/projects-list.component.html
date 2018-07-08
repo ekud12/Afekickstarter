@@ -1,11 +1,5 @@
-<div fxLayout="row" fxLayoutAlign="center center" *ngIf="_projects">
+<div fxLayout="row" fxLayoutAlign="center center">
   <div *ngFor="let proj of _projects">
-    <app-single-project [project]="proj"></app-single-project>
+    <app-single-project  [project]="proj"></app-single-project>
   </div>
-</div>
-
-<div fxLayout="row" fxLayoutAlign="center center" *ngIf="!_projects">
-  <mat-card *ngFor="let i of [1,2,3]">
-    <div class="card"></div>
-  </mat-card>
 </div>

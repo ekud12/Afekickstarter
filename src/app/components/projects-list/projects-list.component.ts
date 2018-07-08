@@ -12,6 +12,8 @@ import { ProjectsService } from './../../services/projects.service';
 export class ProjectsListComponent implements OnInit, OnDestroy {
   _projects: Project[];
   projects$: Observable<Project[]>;
+  totalPreviewsRendered = 0;
+  show = false;
   private onDestroy$ = new Subject<void>();
   constructor(private projectService: ProjectsService, private router: Router) {}
 
@@ -28,6 +30,13 @@ export class ProjectsListComponent implements OnInit, OnDestroy {
     );
   }
 
+  checkIfRendered() {
+    console.log(this.totalPreviewsRendered);
+    this.totalPreviewsRendered++;
+    if (this.totalPreviewsRendered === this._projects.length) {
+      this.show = true;
+    }
+  }
   ngOnDestroy() {
     this.onDestroy$.next();
     this.onDestroy$.complete();

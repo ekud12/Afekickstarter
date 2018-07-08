@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Project } from './../../models/project.model';
 
@@ -9,10 +9,15 @@ import { Project } from './../../models/project.model';
 })
 export class SingleProjectCardComponent implements OnInit {
   @Input() project: Project;
+  hide = true;
+  @Output() loaded: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(private router: Router) {}
 
   ngOnInit() {}
 
+  markAsLoaded() {
+    this.hide = false;
+  }
   projectDetails() {
     this.router.navigate(['/home/details', this.project.uid]);
   }

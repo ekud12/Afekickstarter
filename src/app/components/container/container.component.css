@@ -12,14 +12,15 @@
 
 .actionable {
   cursor: pointer;
+  outline: none;
 }
 
 .navbar {
   margin-bottom: 2em;
+  position: relative;
 }
 
-.total-projects{
+.total-projects {
   font-weight: bold;
-  font-size: 16px;
   color: white;
 }

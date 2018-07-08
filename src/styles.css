@@ -9,6 +9,12 @@ body {
   /* background-image: url('assets/bg.png'); */
 }
 
+h1,
+a,
+img {
+  outline: none;
+}
+
 .mat-form-field-custom {
   border: 1px solid rgb(150, 150, 255);
   border-radius: 5px;
@@ -35,7 +41,7 @@ body {
  */
 :root {
   --card-padding: 24px;
-  --card-height: 339px;
+  --card-height: 420px;
   --card-skeleton: linear-gradient(lightgrey var(--card-height), transparent 0);
   --avatar-size: 12px;
   --avatar-position: var(--card-padding) var(--card-padding);
@@ -44,14 +50,14 @@ body {
   --title-width: 235px;
   --title-position: var(--card-padding) 20px;
   --title-skeleton: linear-gradient(white var(--title-height), transparent 0);
-  --desc-line-height: 180px;
+  --desc-line-height: 280px;
   --desc-line-skeleton: linear-gradient(white var(--desc-line-height), transparent 0);
   --desc-line-1-width: 280px;
   --desc-line-1-position: 0px 80px;
   --desc-line-2-width: 0px;
   --desc-line-2-position: var(--card-padding) 0px;
   --footer-height: 40px;
-  --footer-position: 0 ;
+  --footer-position: 0;
   --footer-skeleton: linear-gradient(white var(--footer-height), transparent 0);
   --blur-width: 200px;
   --blur-size: var(--blur-width) calc(var(--card-height) - var(--footer-height));

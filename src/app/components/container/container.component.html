@@ -11,7 +11,7 @@
   </div>
   <div *ngIf="(_user|async)" fxLayout="row" fxLayoutAlign="start center">
     <span *ngIf="userProjectsCount !== 0" class="total-projects">
-      Total Projects You have: {{ userProjectsCount }} |
+      Active Projects: {{ userProjectsCount }} |
     </span>
     {{ (_user|async)?.name }} |
     <button mat-icon-button (click)="logout()">

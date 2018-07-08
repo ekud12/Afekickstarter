@@ -20,9 +20,12 @@ export class ContainerComponent implements OnInit {
   ngOnInit() {
     this._user = this.userService.user$;
     this._user.subscribe(user => {
-      this.projectService.projects$.pipe(filter(projects => projects !== null && projects !== undefined)).subscribe(values => {
-        this.userProjectsCount = values.filter(item => item.owner === user.uid).length;
-      });
+      this.projectService
+        .getProjects()
+        .pipe(filter(projects => projects !== null && projects !== undefined))
+        .subscribe(values => {
+          this.userProjectsCount = values.filter(item => item.owner === user.uid).length;
+        });
     });
   }
 
