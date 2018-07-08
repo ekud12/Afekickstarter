@@ -15,15 +15,20 @@
         <input matInput placeholder="videoLink" [(ngModel)]="request.videoLink" name="video" required />
       </mat-form-field>
     </div>
-    <mat-form-field>
-      <textarea matInput placeholder="info" [(ngModel)]="request.info" name="info" required></textarea>
-    </mat-form-field>
-    <mat-form-field>
-      <input required matInput [matDatepicker]="picker" placeholder="Choose an end date for campaign" [(ngModel)]="request.endDate"
-        name="endDate">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="space-between center center">
+      <span class="desc"> Enter some information about the project and why you think its that good: </span>
+      <mat-form-field>
+        <textarea matInput placeholder="info" [(ngModel)]="request.info" name="info" required></textarea>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center center">
+      <span class="desc"> Choose an end Date for the project's campaign: </span>
+      <mat-form-field>
+        <input required matInput [matDatepicker]="picker" placeholder="end date" [(ngModel)]="request.endDate" name="endDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
     <div>
       <input type="file" id="pic1" (change)="updateFile($event,0)">
     </div>
