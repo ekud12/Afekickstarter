@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 import { ProjectsService } from './../../services/projects.service';
@@ -19,7 +20,7 @@ export class ContainerComponent implements OnInit {
   ngOnInit() {
     this._user = this.userService.user$;
     this._user.subscribe(user => {
-      this.projectService.projects$.subscribe(values => {
+      this.projectService.projects$.pipe(filter(projects => projects !== null && projects !== undefined)).subscribe(values => {
         this.userProjectsCount = values.filter(item => item.owner === user.uid).length;
       });
     });

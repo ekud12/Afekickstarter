@@ -1,0 +1,8 @@
+.container {
+  width: 90%;
+  border: 2px solid rgb(230, 0, 38);
+}
+
+.desc {
+  margin-right: 20px;
+}

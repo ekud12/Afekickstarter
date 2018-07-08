@@ -35,23 +35,23 @@ body {
  */
 :root {
   --card-padding: 24px;
-  --card-height: 340px;
+  --card-height: 339px;
   --card-skeleton: linear-gradient(lightgrey var(--card-height), transparent 0);
-  --avatar-size: 32px;
+  --avatar-size: 12px;
   --avatar-position: var(--card-padding) var(--card-padding);
   --avatar-skeleton: radial-gradient(circle 16px at center, white 99%, transparent 0);
   --title-height: 32px;
-  --title-width: 200px;
-  --title-position: var(--card-padding) 180px;
+  --title-width: 235px;
+  --title-position: var(--card-padding) 20px;
   --title-skeleton: linear-gradient(white var(--title-height), transparent 0);
-  --desc-line-height: 16px;
+  --desc-line-height: 180px;
   --desc-line-skeleton: linear-gradient(white var(--desc-line-height), transparent 0);
-  --desc-line-1-width: 230px;
-  --desc-line-1-position: var(--card-padding) 242px;
-  --desc-line-2-width: 180px;
-  --desc-line-2-position: var(--card-padding) 265px;
+  --desc-line-1-width: 280px;
+  --desc-line-1-position: 0px 80px;
+  --desc-line-2-width: 0px;
+  --desc-line-2-position: var(--card-padding) 0px;
   --footer-height: 40px;
-  --footer-position: 0 calc(var(--card-height) - var(--footer-height));
+  --footer-position: 0 ;
   --footer-skeleton: linear-gradient(white var(--footer-height), transparent 0);
   --blur-width: 200px;
   --blur-size: var(--blur-width) calc(var(--card-height) - var(--footer-height));
@@ -60,6 +60,7 @@ body {
 .card {
   width: 280px;
   height: var(--card-height);
+  margin: 0px 20px;
 }
 .card:empty::after {
   content: '';

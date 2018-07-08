@@ -1,2 +1,10 @@
-<h1>{{project.name}}</h1>
-<button mat-raised-button color="primary" (click)="projectDetails()">Go To project's Page!</button>
+<mat-card fxLayout="column" fxLayoutAlign="center center" class="mat-elevation-z7">
+  <mat-card-header class="header">
+    <mat-card-title class="header-title">{{project.name}}</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image [src]="project.thumbnail.url" />
+  <mat-card-actions fxLayout="row" fxLayoutAlign="stretch stretch">
+
+    <button mat-raised-button color="primary" (click)="projectDetails()">Go To project's Page!</button>
+  </mat-card-actions>
+</mat-card>

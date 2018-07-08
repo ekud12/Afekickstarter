@@ -10,10 +10,10 @@
     </div>
   </div>
   <div *ngIf="(_user|async)" fxLayout="row" fxLayoutAlign="start center">
-    {{ (_user|async)?.name }} |
-    <span *ngIf="userProjectsCount !== 0">
+    <span *ngIf="userProjectsCount !== 0" class="total-projects">
       Total Projects You have: {{ userProjectsCount }} |
     </span>
+    {{ (_user|async)?.name }} |
     <button mat-icon-button (click)="logout()">
       <mat-icon>
         exit_to_app
@@ -25,4 +25,6 @@
   </div>
 </mat-toolbar>
 
-<router-outlet></router-outlet>
+<div fxLayout="column" fxLayoutAlign="center center">
+  <router-outlet></router-outlet>
+</div>

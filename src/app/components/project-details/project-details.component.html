@@ -1,13 +1,20 @@
 <div *ngIf="currentProject" fxLayout="column" fxLayoutAlign="space-around center center">
-  <button mat-raised-button color="primary" routerLink="/edit" *ngIf="(user|async)?.roles.projectOwner">
-    Edit this Project.
-  </button>
   <h1>{{currentProject.name}}</h1>
-  <div *ngFor="let imgSrc of currentProject.pics">
-    <img [src]="imgSrc.url">
+
+  <div style="display:block;" [style.width]="width">
+    <slideshow #slideshow [imageUrls]="urls" [height]="height" [minHeight]="minHeight" [arrowSize]="arrowSize" [showArrows]="showArrows"
+      [disableSwiping]="disableSwiping" [autoPlay]="autoPlay" [stopAutoPlayOnSlide]="stopAutoPlayOnSlide" [debug]="debug" [backgroundSize]="backgroundSize"
+      [backgroundPosition]="backgroundPosition" [backgroundRepeat]="backgroundRepeat" [showDots]="showDots" [dotColor]="dotColor"
+      [showCaptions]="showCaptions" [captionColor]="captionColor" [captionBackground]="captionBackground" [lazyLoad]="lazyLoad">
+    </slideshow>
   </div>
 
-  <iframe width="420" height="315" [src]="getVideoUrl()">
+
+
+  <div>
+    Watch a Live Preview:
+  </div>
+  <iframe width="600" height="400" [src]="getVideoUrl()">
   </iframe>
 
   <div fxLayout="column" fxLayoutAlign="space-around center center">
@@ -22,9 +29,11 @@
   <button mat-raised-button color="primary" routerLink="/donate" *ngIf="(user|async)?.roles.investor">
     Donate to this project now!
   </button>
-
+  <button mat-raised-button color="primary" routerLink="/edit" *ngIf="(user|async)?.roles.projectOwner">
+    Edit this Project.
+  </button>
 </div>
 
-<div *ngIf="!currentProject">
+<div *ngIf="!currentProject" fxLayout="column" fxLayoutAlign="space-around center center">
   <mat-spinner></mat-spinner>
 </div>

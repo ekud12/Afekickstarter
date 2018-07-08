@@ -25,11 +25,11 @@ export class EditProjectComponent implements OnInit {
     });
   }
 
-  getVideoUrl(videoId: string) {
-    let url = this.urlCache.get(videoId);
+  getVideoUrl() {
+    let url = this.urlCache.get(this.ytLink);
     if (!url) {
       url = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + this.ytLink + '?enablejsapi=1');
-      this.urlCache.set(videoId, url);
+      this.urlCache.set(this.ytLink, url);
     }
     return url;
   }

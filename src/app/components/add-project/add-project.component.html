@@ -1,37 +1,48 @@
-<p>
-  add-project works!
-</p>
-<form fxLayout="column" fxLayoutAlign="space-between center center">
-  <mat-form-field>
-    <input matInput placeholder="Name" [(ngModel)]="request.name" name="name" />
-  </mat-form-field>
+<mat-card class="mat-elevation-z9 container">
+  <form fxLayout="column" fxLayoutAlign="space-between center center" novalidate>
+    <h2>
+      Add a new Project and Afekickstart your startup!
+    </h2>
+    <div fxLayout="row" fxLayoutAlign="space-between center center">
+      <span class="desc"> Enter the desired name for the project: </span>
+      <mat-form-field>
+        <input matInput placeholder="Name" [(ngModel)]="request.name" name="name" required/>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center center">
+      <span class="desc"> Enter a youtube Link for project demo: </span>
+      <mat-form-field>
+        <input matInput placeholder="videoLink" [(ngModel)]="request.videoLink" name="video" required />
+      </mat-form-field>
+    </div>
+    <mat-form-field>
+      <textarea matInput placeholder="info" [(ngModel)]="request.info" name="info" required></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <input required matInput [matDatepicker]="picker" placeholder="Choose an end date for campaign" [(ngModel)]="request.endDate"
+        name="endDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <div>
+      <input type="file" id="pic1" (change)="updateFile($event,0)">
+    </div>
+    <div>
+      <input type="file" id="pic2" (change)="updateFile($event,1)">
+    </div>
+    <div>
+      <input type="file" id="pic3" (change)="updateFile($event,2)">
+    </div>
 
-  <mat-form-field>
-    <input matInput placeholder="videoLink" [(ngModel)]="request.videoLink" name="video" />
-  </mat-form-field>
-  <mat-form-field>
-    <textarea matInput placeholder="info" [(ngModel)]="request.info" name="info"></textarea>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput [matDatepicker]="picker" placeholder="Choose an end date for campaign" [(ngModel)]="request.endDate" name="endDate">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-  <div>
-    <input type="file" id="pic1" (change)="updateFile($event,0)">
-  </div>
-  <div>
-    <input type="file" id="pic2" (change)="updateFile($event,1)">
-  </div>
-  <div>
-    <input type="file" id="pic3" (change)="updateFile($event,2)">
-  </div>
-  <div>images upload Successfully: {{count}}</div>
-  <button mat-raised-button color="primary" (click)="deleteFile()">
-    Delete file
-  </button>
-  <button mat-raised-button color="primary" (click)="addProject()">
-    Add Project
-  </button>
+    <div>
+      Please choose a thumbnail picture to stand out from the crowd:
+      <input type="file" id="thumbnail" (change)="updateFile($event,3)" required>
+    </div>
 
-</form>
+    <div>images upload Successfully: {{ (counter$ | async )}}</div>
+    <button mat-raised-button color="primary" (click)="addProject()">
+      Add Project
+    </button>
+
+  </form>
+</mat-card>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FileUpload } from '../../models/file.model';
 import { Project } from '../../models/project.model';
@@ -6,7 +7,6 @@ import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 import { FilesService } from './../../services/files.service';
 import { ProjectsService } from './../../services/projects.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-project',
@@ -19,19 +19,19 @@ export class AddProjectComponent implements OnInit {
   currentFileUpload: FileUpload;
   uploadProgress: Observable<number>;
   downloadURL: string;
-  files = new Array<File>(3);
-  count: number;
+  files = new Array<File>(4);
+  counter$: Observable<number>;
   submitLocked = true;
   request = new Project();
   constructor(
-    private uploadService: FilesService,
+    private filesService: FilesService,
     private router: Router,
     private userService: UserService,
     private projectService: ProjectsService
   ) {}
 
   ngOnInit() {
-    this.count = 0;
+    this.counter$ = this.filesService.counter$;
     this.userService.user$.subscribe(val => {
       this.user = val;
       this.request.owner = this.user.uid;
@@ -55,9 +55,11 @@ export class AddProjectComponent implements OnInit {
     this.request.uid = Math.random()
       .toString(36)
       .substring(2);
-    this.request.thumbnail = '';
-    this.uploadService.uploadFile(this.request.uid, this.files).then(pics => {
+    this.filesService.uploadFile(this.request.uid, this.files).then(pics => {
+      console.log(pics);
+      this.request.thumbnail = pics[3];
       this.request.pics = pics;
+      console.log(this.request);
       this.projectService
         .createProject(this.request)
         .then(res => {

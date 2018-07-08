@@ -11,6 +11,7 @@ import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorage, AngularFireStorageModule } from 'angularfire2/storage';
+import { SlideshowModule } from 'ng-simple-slideshow';
 import { YoutubePlayerModule } from 'ngx-youtube-player';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -27,9 +28,9 @@ import { SingleProjectCardComponent } from './components/single-project/single-p
 import { materialImports } from './material.imports';
 import { rootRoutes } from './routes';
 import { FilesService } from './services/files.service';
+import { ProjectsService } from './services/projects.service';
 import { ToastService } from './services/toast.service';
 import { UserService } from './services/user.service';
-import { ProjectsService } from './services/projects.service';
 
 export const firebaseConfig = environment.FirebaseConfig;
 @NgModule({
@@ -55,6 +56,7 @@ export const firebaseConfig = environment.FirebaseConfig;
     FlexLayoutModule,
     materialImports,
     FormsModule,
+    SlideshowModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,

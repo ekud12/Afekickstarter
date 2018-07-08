@@ -42,7 +42,7 @@ export class ProjectsService {
         endDate: new Date().getMilliseconds(),
         pics: JSON.parse(JSON.stringify(newProject.pics)),
         videoLink: newProject.videoLink,
-        thumbnail: newProject.thumbnail,
+        thumbnail: JSON.parse(JSON.stringify(newProject.thumbnail)),
         owner: null
       };
       this.user$.pipe(take(1)).subscribe(user => {

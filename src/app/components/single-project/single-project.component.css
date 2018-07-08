@@ -1,0 +1,11 @@
+.header-title {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.header{
+  color: rgb(34, 34, 34);
+  justify-content: center;
+  width: 100%;
+  border-bottom: 5px dotted rgb(41, 41, 41);
+}
