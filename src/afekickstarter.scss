@@ -7,3 +7,16 @@ $custom-typography: mat-typography-config(
 
 @include mat-core($custom-typography);
 
+$afekickstarter-primary: mat-palette($mat-brown, 900);
+$afekickstarter-accent: mat-palette($mat-orange, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$afekickstarter-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$afekickstarter-theme: mat-light-theme($afekickstarter-primary, $afekickstarter-accent, $afekickstarter-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($afekickstarter-theme);

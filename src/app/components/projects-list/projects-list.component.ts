@@ -1,13 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
+import { staggerList } from '../../animations';
 import { Project } from './../../models/project.model';
 import { ProjectsService } from './../../services/projects.service';
 
 @Component({
   selector: 'app-projects-list',
   templateUrl: './projects-list.component.html',
-  styleUrls: ['./projects-list.component.css']
+  styleUrls: ['./projects-list.component.css'],
+  animations: [staggerList]
 })
 export class ProjectsListComponent implements OnInit, OnDestroy {
   _projects: Project[];

@@ -1,5 +1,30 @@
-<div fxLayout="row" fxLayoutAlign="center center">
-  <div *ngFor="let proj of _projects">
-    <app-single-project  [project]="proj"></app-single-project>
+<div fxLayout="column" fxLayoutAlign="center center" class="inner-container">
+  <div class="inner-container-header">
+    <div fxLayout="row" fxLayoutAlign="space-between center center" style="padding: 10px;">
+      <div class="header-item">
+        // Projects
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-evenly center center" class="header-item">
+        <div style="font-size: 16px;padding:0px 8px;">
+          [ Live Projects: {{ (this.projects$|async)?.length}} ]
+        </div>
+        <div style="font-size: 16px;padding:0px 8px">
+          [ kicked so far: ]
+        </div>
+        <div style="font-size: 16px;padding:0px 8px">
+          [ Total Money Raised: 23421123 $ ]
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div [@listAnimation]="_projects ? _projects.length: 0" [fxLayout]="'row wrap'">
+    <div *ngFor=" let proj of _projects " [hidden]="!_projects " class="col ">
+      <app-single-project [project]="proj "></app-single-project>
+    </div>
+  </div>
+
+  <div *ngIf="!_projects " class="spinner ">
+    <mat-spinner></mat-spinner>
   </div>
 </div>

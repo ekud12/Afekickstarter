@@ -16,7 +16,6 @@
 }
 
 .navbar {
-  margin-bottom: 2em;
   position: relative;
 }
 
@@ -31,4 +30,14 @@
 
 .section {
   margin: 0px 7px;
+}
+
+.extra {
+  position: absolute;
+  height: 200px;
+  padding-top: 0px;
+  z-index: -50;
+}
+.router{
+  padding: 20px 20px;
 }

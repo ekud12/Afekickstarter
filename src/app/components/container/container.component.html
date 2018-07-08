@@ -1,4 +1,4 @@
-<mat-toolbar class="mat-elevation-z5 navbar" fxLayout="row" fxLayoutAlign="space-between center center" color="accent">
+<mat-toolbar class="mat-elevation-z5 navbar" fxLayout="row" fxLayoutAlign="space-between center center" color="primary">
   <div routerLink="/home/projects" class="actionable" fxLayout="row" fxLayoutAlign="space-between center center">
     <img src="../../../assets/logo.png" class="logo" />
     <h1>AFEKickstarter</h1>
@@ -8,9 +8,8 @@
       <button matTooltip="Add a new Project!" mat-icon-button routerLink="/home/add" *ngIf="(_user|async)?.roles.projectOwner ">
         <mat-icon>library_add</mat-icon>
       </button>
-
     </div>|
-    <div *ngIf="userProjectsCount !==0 " class="section">
+    <div *ngIf="userProjectsCount !==0" class="section">
       Active Projects: {{ userProjectsCount }} |
     </div>
     <div class="section">
@@ -22,11 +21,16 @@
       </mat-icon>
     </button>
   </div>
-  <div *ngIf="!(_user|async) ">
-    <button mat-raised-button routerLink="/login " *ngIf="!(_user|async) ">Login</button>
+  <div *ngIf="!loading && !userService.isLogged(_user|async)">
+    <button mat-raised-button routerLink="/login" *ngIf="!(_user|async) ">Login</button>
+  </div>
+  <div *ngIf="loading">
+    <mat-spinner color="accent" [diameter]="22"></mat-spinner>
   </div>
 </mat-toolbar>
+<mat-toolbar color="accent" class="extra">
+</mat-toolbar>
 
-<div fxLayout="column " fxLayoutAlign="center center ">
+<div fxLayout="column" fxLayoutAlign="center center" class="router">
   <router-outlet></router-outlet>
 </div>

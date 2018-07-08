@@ -14,7 +14,35 @@ a,
 img {
   outline: none;
 }
+.inner-container {
+  padding: 30px 0px;
+  padding-top: 0px;
+  border-radius: 5px;
+  margin-top: 40px;
+  width: 75vw;
+  height: auto;
+  background-color: rgb(224, 224, 183);
+}
 
+.inner-container-header {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 30px;
+  color: white;
+  background-color: rgb(29, 29, 29);
+  border-bottom: 4px dotted rgb(238, 238, 238);
+  margin-bottom: 15px;
+}
+.header-item {
+  padding: 0px 40px;
+}
+
+.spinner {
+  padding: 20px;
+}
 .mat-form-field-custom {
   border: 1px solid rgb(150, 150, 255);
   border-radius: 5px;

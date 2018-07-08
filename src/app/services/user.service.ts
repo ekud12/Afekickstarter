@@ -72,6 +72,14 @@ export class UserService implements OnDestroy {
     return this.router.navigate(['home']);
   }
 
+  isLogged(user: User): boolean {
+    if (user === null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   canInvest(user: User): boolean {
     const allowed = ['investor'];
     return this.checkAuthorization(user, allowed);

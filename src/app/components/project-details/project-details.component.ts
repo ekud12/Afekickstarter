@@ -41,7 +41,7 @@ export class ProjectDetailsComponent implements OnInit {
   captionColor = '#FFF';
   captionBackground = 'rgba(0, 0, 0, .35)';
   lazyLoad = false;
-  width = '100vw';
+  width = '75vw';
 
   constructor(
     private route: ActivatedRoute,

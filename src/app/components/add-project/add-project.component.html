@@ -1,7 +1,14 @@
-<mat-card class="mat-elevation-z9 container">
+<div class="mat-elevation-z9 inner-container">
+  <div class="inner-container-header">
+    <div fxLayout="row" fxLayoutAlign="space-between center center" style="padding: 10px;">
+      <div class="header-item">
+        // Add a new Project
+      </div>
+    </div>
+  </div>
   <form fxLayout="column" fxLayoutAlign="space-between center center" novalidate>
     <h2>
-      Add a new Project and Afekickstart your startup!
+      Lets kick things off with entering the below details:
     </h2>
     <div fxLayout="row" fxLayoutAlign="space-between center center">
       <span class="desc"> Enter the desired name for the project: </span>
@@ -45,9 +52,9 @@
     </div>
 
     <div>images upload Successfully: {{ (counter$ | async )}}</div>
-    <button mat-raised-button color="primary" (click)="addProject()">
+    <button mat-raised-button color="accent" (click)="addProject()">
       Add Project
     </button>
 
   </form>
-</mat-card>
+</div>

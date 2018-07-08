@@ -20,10 +20,10 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="signup()" name="btn">Signup</button>
+    <button mat-raised-button color="accent" (click)="signup()" name="btn">Signup</button>
   </form>
   <div>
     {{ userService.errorsData | async }}
   </div>
-  <button mat-raised-button color="primary" (click)="check()" name="check">check</button>
+  <button mat-raised-button color="accent" (click)="check()" name="check">check</button>
 </div>
