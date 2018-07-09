@@ -9,10 +9,10 @@
           [ Live Projects: {{ (this.projects$|async)?.length}} ]
         </div>
         <div style="font-size: 16px;padding:0px 8px">
-          [ kicked so far: ]
+          [ kicked so far: {{ projectsCompletedQuery}}]
         </div>
         <div style="font-size: 16px;padding:0px 8px">
-          [ Total Money Raised: 23,421,123 $ ]
+          [ Total Money Raised: {{projectsAmountFundedQuery}}$ ]
         </div>
       </div>
     </div>

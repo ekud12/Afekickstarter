@@ -19,6 +19,7 @@ import { AppComponent } from './app.component';
 import { AddProjectComponent } from './components/add-project/add-project.component';
 import { ContainerComponent } from './components/container/container.component';
 import { DonateComponent } from './components/donate/donate.component';
+import { DonationBoxComponent } from './components/donation-box/donation-box.component';
 import { EditProjectComponent } from './components/edit-project/edit-project.component';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -46,7 +47,8 @@ export const firebaseConfig = environment.FirebaseConfig;
     SingleProjectCardComponent,
     ProjectDetailsComponent,
     DonateComponent,
-    ContainerComponent
+    ContainerComponent,
+    DonationBoxComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +68,7 @@ export const firebaseConfig = environment.FirebaseConfig;
     AngularFireStorageModule,
     RouterModule.forRoot(rootRoutes)
   ],
+  entryComponents: [DonationBoxComponent],
   providers: [
     UserService,
     ProjectsService,

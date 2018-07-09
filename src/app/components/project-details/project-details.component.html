@@ -1,18 +1,18 @@
 <div *ngIf="currentProject" fxLayout="column" fxLayoutAlign="space-around center center" class="inner-container">
-  <div class="inner-container-header-detailed" fxLayout="column" fxLayoutAlign="space-between start stretch"
-  [style.backgroundImage]="'url('+ currentProject.pics[0].url +')'" [style.backgroundSize]="'cover'">
+  <div class="inner-container-header-detailed" fxLayout="column" fxLayoutAlign="space-between start stretch" [style.backgroundImage]="'url('+ currentProject.pics[0].url +')'"
+    [style.backgroundSize]="'cover'">
     <div fxLayout="row" fxLayoutAlign="space-between center center" style="padding: 10px;">
       <div class="header-item" [style.backgroundColor]="'black'">
         // Detailed Prospect
       </div>
     </div>
-    <div class="header-item" >
+    <div class="header-item">
       <h1>{{currentProject.name}}</h1>
     </div>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-evenly center center">
-    <div class="header-item" *ngIf="(user|async)?.roles.investor">
-      <button mat-raised-button color="warn" routerLink="/home/donate" style="border:2px solid white;">
+    <div class="header-item" *ngIf="userCanDonate">
+      <button mat-raised-button color="warn" (click)="openDonationBox()" style="border:2px solid white;">
         <mat-icon>attach_money</mat-icon>Donate Project
       </button>
     </div>
@@ -24,10 +24,10 @@
   </div>
 
   <div class="inner-container-header details-section">
-      <div class="header-item">
-        // The "Gist"
-      </div>
+    <div class="header-item">
+      // The "Gist"
     </div>
+  </div>
   <div class="info">
     {{ currentProject.info}}
   </div>
@@ -40,14 +40,14 @@
   </div>
   <mat-grid-list cols="4" rowHeight="140px" class="tiles">
     <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color" class="tile">
-     <div fxLayout="column" fxLayoutAlign="space-around center center">
-       <div>
+      <div fxLayout="column" fxLayoutAlign="space-around center center">
+        <div>
           {{tile.text}}
-       </div>
-       <div>
+        </div>
+        <div>
           {{tile.data }}
-       </div>
-     </div>
+        </div>
+      </div>
 
     </mat-grid-tile>
   </mat-grid-list>
@@ -66,10 +66,10 @@
     </slideshow>
   </div>
 
-  
+
   <div class="video-placeholder">
-      <iframe width="750px" height="400" [src]="getVideoUrl()">
-        </iframe>
+    <iframe width="750px" height="400" [src]="getVideoUrl()">
+    </iframe>
   </div>
 
 

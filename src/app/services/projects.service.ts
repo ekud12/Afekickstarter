@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Project } from '../models/project.model';
 import { User } from './../models/user.model';
@@ -9,7 +9,7 @@ import { FilesService } from './files.service';
 import { UserService } from './user.service';
 
 @Injectable()
-export class ProjectsService {
+export class ProjectsService implements OnInit {
   projects$: Observable<Project[]>;
   projectsCollection: AngularFirestoreCollection<Project>;
   user$: Observable<User>;
@@ -22,6 +22,9 @@ export class ProjectsService {
   ) {
     this.afs.firestore.settings({ timestampsInSnapshots: true });
     this.user$ = this.userService.user$;
+  }
+
+  ngOnInit() {
   }
   getProjects() {
     this.projectsCollection = this.afs.collection<Project>('projects');
@@ -77,6 +80,29 @@ export class ProjectsService {
   updateProject() {}
 
   closeProject() {}
+
+  updateDonation(amount: number, project: Project): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/${project.uid}`);
+      project.totMoneyRaised = project.totInvestors + amount;
+      project.totInvestors++;
+      this.user$.pipe(take(1)).subscribe(user => {
+        project.investors.push({
+          investorId: user.uid,
+          amount: amount,
+          date: Date.now()
+        });
+        projectRef
+          .set(project, { merge: true })
+          .then(() => {
+            resolve(true);
+          })
+          .catch(() => {
+            reject(false);
+          });
+      });
+    });
+  }
 
   deleteImage(index: number) {
     // this.fileService.deleteImage(0);

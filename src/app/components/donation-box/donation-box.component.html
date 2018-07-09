@@ -1,0 +1,24 @@
+<div fxLayout="column" fxLayoutAlign="space-around center stretch" class="dialog">
+  <h2 mat-dialog-title>Donation Box for: {{project.name}}!</h2>
+  <mat-dialog-content [ngSwitch]="stage">
+    <div *ngSwitchCase="'waiting'" fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
+      <mat-form-field appearance="outline" color="primary">
+        <mat-label class="placeholder">Donation Amount (in $)</mat-label>
+        <input pattern="\d*" type="number" matInput placeholder="videoLink" [(ngModel)]="donationAmount" name="da" required />
+      </mat-form-field>
+      <button mat-raised-button (click)="donate()" color="primary">Donate!</button>
+      <button mat-raised-button [mat-dialog-close]="false" color="warn">Cancel</button>
+    </div>
+    <div *ngSwitchCase="'donating'" class="padded">
+      <mat-spinner></mat-spinner>
+    </div>
+    <div *ngSwitchCase="'done'" fxLayout="column" fxLayoutAlign="space-evenly center stretch">
+      <h2 class="padded">
+        Thank you for Donating!
+      </h2>
+      <button mat-raised-button [mat-dialog-close]="false" color="warn">Close</button>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+  </mat-dialog-actions>
+</div>

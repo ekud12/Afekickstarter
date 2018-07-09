@@ -26,5 +26,5 @@ export class Pic {
 export class Investor {
   investorId: string;
   amount: number;
-  date: Date;
+  date: number;
 }

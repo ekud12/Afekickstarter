@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { Project } from '../../models/project.model';
 import { User } from '../../models/user.model';
 import { FilesService } from '../../services/files.service';
 import { ProjectsService } from '../../services/projects.service';
 import { UserService } from '../../services/user.service';
+import { DonationBoxComponent } from './../donation-box/donation-box.component';
 
 @Component({
   selector: 'app-project-details',
@@ -19,6 +22,7 @@ export class ProjectDetailsComponent implements OnInit {
   _allProject$: Observable<Project[]>;
   player: YT.Player;
   currentProject: Project;
+  userCanDonate = false;
   urlCache = new Map<string, SafeResourceUrl>();
 
   // Carousel Options
@@ -49,7 +53,8 @@ export class ProjectDetailsComponent implements OnInit {
     private projectsService: ProjectsService,
     private userService: UserService,
     private filesService: FilesService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    public dialog: MatDialog
   ) {}
 
   getVideoUrl(videoId: string) {
@@ -66,6 +71,9 @@ export class ProjectDetailsComponent implements OnInit {
   ngOnInit() {
     this._allProject$ = this.projectsService.projects$;
     this.user = this.userService.user$;
+    this.user.pipe(filter(user => user !== null)).subscribe(user => {
+      this.userCanDonate = this.userService.canInvest(user) && (this.currentProject.owner !== user.uid);
+    });
     this.route.params.subscribe(params => {
       this.projectsService.getProject(params['uid']).subscribe(data => {
         this.currentProject = data;
@@ -75,7 +83,7 @@ export class ProjectDetailsComponent implements OnInit {
           }
         });
         this.tiles = [
-          { text: `Money Needed `, data: `{ ${this.currentProject.totMoneyNeeded} }`, cols: 2, rows: 1, color: '#ffda79' },
+          { text: `Money Needed `, data: `{ ${this.currentProject.totMoneyNeeded}$}`, cols: 2, rows: 1, color: '#ffda79' },
           { text: `# of Investors `, data: `{  ${this.currentProject.totInvestors} }`, cols: 2, rows: 1, color: '#cc8e35' },
           {
             text: `Campaign started on `,
@@ -91,7 +99,7 @@ export class ProjectDetailsComponent implements OnInit {
             rows: 1,
             color: '#ffda79'
           },
-          { text: `Money raised so Far`, data: ` { ${this.currentProject.totMoneyRaised} }`, cols: 4, rows: 1, color: '#ccae62' }
+          { text: `Money raised so Far`, data: ` { ${this.currentProject.totMoneyRaised}$ }`, cols: 4, rows: 1, color: '#ccae62' }
         ];
       });
     });
@@ -99,5 +107,18 @@ export class ProjectDetailsComponent implements OnInit {
 
   deleteImage() {
     this.projectsService.deleteImage(0);
+  }
+
+  openDonationBox() {
+    const dialogRef = this.dialog.open(DonationBoxComponent, {
+      data: this.currentProject,
+      height: '300px',
+      width: '500px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+      } else {
+      }
+    });
   }
 }
