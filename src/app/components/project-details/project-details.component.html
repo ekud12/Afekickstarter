@@ -1,57 +1,77 @@
 <div *ngIf="currentProject" fxLayout="column" fxLayoutAlign="space-around center center" class="inner-container">
-  <div class="inner-container-header" fxLayout="row" fxLayoutAlign="space-between start stretch">
+  <div class="inner-container-header-detailed" fxLayout="column" fxLayoutAlign="space-between start stretch"
+  [style.backgroundImage]="'url('+ currentProject.pics[0].url +')'" [style.backgroundSize]="'cover'">
     <div fxLayout="row" fxLayoutAlign="space-between center center" style="padding: 10px;">
-      <div class="header-item">
-        // The need-to-know
+      <div class="header-item" [style.backgroundColor]="'black'">
+        // Detailed Prospect
       </div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="space-evenly center center">
-      <div class="header-item" *ngIf="(user|async)?.roles.investor">
-        <button mat-raised-button color="warn" routerLink="/home/donate">
-          <mat-icon>attach_money</mat-icon>Donate
-        </button>
-      </div>
-      <div class="header-item" *ngIf="(user|async)?.roles.projectOwner">
-        <button mat-raised-button color="warn" routerLink="/home/edit">
-          <mat-icon>edit</mat-icon>Edit Project
-        </button>
-      </div>
-
+    <div class="header-item" >
+      <h1>{{currentProject.name}}</h1>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-evenly center center">
+    <div class="header-item" *ngIf="(user|async)?.roles.investor">
+      <button mat-raised-button color="warn" routerLink="/home/donate" style="border:2px solid white;">
+        <mat-icon>attach_money</mat-icon>Donate Project
+      </button>
+    </div>
+    <div class="header-item" *ngIf="(user|async)?.roles.projectOwner">
+      <button mat-raised-button color="warn" routerLink="/home/edit" style="border:2px solid white;">
+        <mat-icon>edit</mat-icon>Edit Project
+      </button>
     </div>
   </div>
 
-  <h1>{{currentProject.name}}</h1>
+  <div class="inner-container-header details-section">
+      <div class="header-item">
+        // The "Gist"
+      </div>
+    </div>
   <div class="info">
     {{ currentProject.info}}
   </div>
+
+
+  <div class="inner-container-header details-section">
+    <div class="header-item">
+      // The "Numbers"
+    </div>
+  </div>
+  <mat-grid-list cols="4" rowHeight="140px" class="tiles">
+    <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color" class="tile">
+     <div fxLayout="column" fxLayoutAlign="space-around center center">
+       <div>
+          {{tile.text}}
+       </div>
+       <div>
+          {{tile.data }}
+       </div>
+     </div>
+
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <div class="inner-container-header details-section">
+    <div class="header-item">
+      // Some Eye-candy
+    </div>
+  </div>
+
   <div style="display:block;" [style.width]="width">
     <slideshow #slideshow [imageUrls]="urls" [height]="height" [minHeight]="minHeight" [arrowSize]="arrowSize" [showArrows]="showArrows"
       [disableSwiping]="disableSwiping" [autoPlay]="autoPlay" [stopAutoPlayOnSlide]="stopAutoPlayOnSlide" [debug]="debug" [backgroundSize]="backgroundSize"
       [backgroundPosition]="backgroundPosition" [backgroundRepeat]="backgroundRepeat" [showDots]="showDots" [dotColor]="dotColor"
       [showCaptions]="showCaptions" [captionColor]="captionColor" [captionBackground]="captionBackground" [lazyLoad]="lazyLoad">
     </slideshow>
-
   </div>
 
-
-  <div class="inner-container-header">
-    <div class="header-item">
-      // The "Numbers"
-    </div>
+  
+  <div class="video-placeholder">
+      <iframe width="750px" height="400" [src]="getVideoUrl()">
+        </iframe>
   </div>
-  <mat-grid-list cols="4" rowHeight="70px" class="tiles">
-    <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color" class="tile">
-      {{tile.text}}
-    </mat-grid-tile>
-  </mat-grid-list>
 
-  <div class="inner-container-header">
-    <div class="header-item">
-      // Some Eye-candy
-    </div>
-  </div>
-  <iframe width="750px" height="400" [src]="getVideoUrl()">
-  </iframe>
 
 </div>
 <div *ngIf="!currentProject" fxLayout="column" fxLayoutAlign="space-around center center" class="inner-container spinner">

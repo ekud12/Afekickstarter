@@ -37,13 +37,17 @@ export class ProjectsService {
         info: newProject.info,
         totMoneyRaised: 0,
         totInvestors: 0,
-        totMoneyNeeded: 0,
+        totMoneyNeeded: newProject.totMoneyNeeded,
         startDate: newProject.startDate,
         endDate: newProject.endDate,
         pics: JSON.parse(JSON.stringify(newProject.pics)),
         videoLink: newProject.videoLink,
         thumbnail: JSON.parse(JSON.stringify(newProject.thumbnail)),
-        owner: null
+        owner: null,
+        investors: [],
+        views: 0,
+        completed: false,
+        expired: false
       };
       this.user$.pipe(take(1)).subscribe(user => {
         createdProject.owner = user.uid;

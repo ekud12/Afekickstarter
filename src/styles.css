@@ -38,7 +38,7 @@ img {
   color: white;
   background-color: rgb(29, 29, 29);
   border-bottom: 4px dotted rgb(238, 238, 238);
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
 }
 .header-item {
   padding: 0px 40px;

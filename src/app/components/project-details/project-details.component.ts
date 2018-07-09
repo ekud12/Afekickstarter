@@ -70,16 +70,28 @@ export class ProjectDetailsComponent implements OnInit {
       this.projectsService.getProject(params['uid']).subscribe(data => {
         this.currentProject = data;
         this.currentProject.pics.map((pic, index) => {
-          if (index < 3) {
+          if (index < 3 && pic.url !== '' && pic.url !== null) {
             this.urls.push(pic.url);
           }
         });
         this.tiles = [
-          { text: `Money raised so Far { ${this.currentProject.totMoneyRaised} }`, cols: 3, rows: 1, color: '#2f3542' },
-          { text: `# of Investors {  ${this.currentProject.totInvestors} }`, cols: 1, rows: 1, color: '#a4b0be' },
-          { text: `Deadline { ${this.currentProject.endDate} }`, cols: 2, rows: 1, color: '#a4b0be' },
-          { text: `It all started on { ${this.currentProject.startDate} }`, cols: 2, rows: 1, color: '#2f3542' },
-          { text: `Money Needed { ${this.currentProject.totMoneyNeeded} }`, cols: 4, rows: 1, color: '#a4b0be' }
+          { text: `Money Needed `, data: `{ ${this.currentProject.totMoneyNeeded} }`, cols: 2, rows: 1, color: '#ffda79' },
+          { text: `# of Investors `, data: `{  ${this.currentProject.totInvestors} }`, cols: 2, rows: 1, color: '#cc8e35' },
+          {
+            text: `Campaign started on `,
+            data: `{ ${new Date(this.currentProject.startDate).toUTCString()} }`,
+            cols: 2,
+            rows: 1,
+            color: '#cc8e35'
+          },
+          {
+            text: `Deadline `,
+            data: `{ ${new Date(this.currentProject.endDate).toUTCString()} }`,
+            cols: 2,
+            rows: 1,
+            color: '#ffda79'
+          },
+          { text: `Money raised so Far`, data: ` { ${this.currentProject.totMoneyRaised} }`, cols: 4, rows: 1, color: '#ccae62' }
         ];
       });
     });

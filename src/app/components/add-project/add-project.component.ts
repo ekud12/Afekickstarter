@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FileUpload } from '../../models/file.model';
@@ -11,9 +11,11 @@ import { ProjectsService } from './../../services/projects.service';
 @Component({
   selector: 'app-add-project',
   templateUrl: './add-project.component.html',
-  styleUrls: ['./add-project.component.css']
+  styleUrls: ['./add-project.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AddProjectComponent implements OnInit {
+  @ViewChild('addProjForm') myForm;
   user: User;
   selectedFiles: FileList;
   currentFileUpload: FileUpload;
@@ -37,6 +39,7 @@ export class AddProjectComponent implements OnInit {
       this.user = val;
       this.request.owner = this.user.uid;
     });
+    console.log(this.files[0]);
   }
 
   selectFile(event) {
@@ -49,9 +52,6 @@ export class AddProjectComponent implements OnInit {
 
   addProject() {
     this.status = 'creating';
-    this.request.totInvestors = 0;
-    this.request.totMoneyNeeded = 10000;
-    this.request.totInvestors = 0;
     this.request.startDate = Date.now();
     this.request.endDate = this.request.endDate.valueOf();
     this.request.uid = Math.random()

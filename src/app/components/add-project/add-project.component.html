@@ -8,63 +8,82 @@
   </div>
   <div [ngSwitch]="status">
 
-    <form *ngSwitchCase="'waiting'" fxLayout="column" fxLayoutAlign="space-between center center" novalidate>
+    <form #addProjForm="ngForm" *ngSwitchCase="'waiting'" fxLayout="column" fxLayoutAlign="space-between center center" novalidate>
       <h2>
         Lets kick things off with entering the below details:
       </h2>
-      <div fxLayout="row" fxLayoutAlign="space-between center center">
-        <span class="desc"> Enter the desired name for the project: </span>
-        <mat-form-field>
-          <input matInput placeholder="Name" [(ngModel)]="request.name" name="name" required/>
+      <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
+        <mat-form-field appearance="outline" color="primary">
+          <mat-label class="placeholder">Project's Name</mat-label>
+          <input matInput [(ngModel)]="request.name" name="name" required/>
         </mat-form-field>
       </div>
-      <div fxLayout="row" fxLayoutAlign="space-between center center">
-        <span class="desc"> Enter a youtube Link for project demo: </span>
-        <mat-form-field>
+      <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
+        <mat-form-field appearance="outline" color="primary">
+          <mat-label class="placeholder">Youtube's Video ID</mat-label>
           <input matInput placeholder="videoLink" [(ngModel)]="request.videoLink" name="video" required />
         </mat-form-field>
       </div>
-      <div fxLayout="row" fxLayoutAlign="space-between center center">
-        <span class="desc"> Enter some information about the project and why you think its that good: </span>
-        <mat-form-field>
-          <textarea matInput placeholder="info" [(ngModel)]="request.info" name="info" required></textarea>
+      <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
+        <mat-form-field appearance="outline" color="primary">
+          <mat-label class="placeholder">Project's Information</mat-label>
+          <textarea matInput minRows="10" placeholder="info" minLength="300" matAutosizeMinRows="30" [(ngModel)]="request.info" name="info"
+            required></textarea>
         </mat-form-field>
       </div>
-      <div fxLayout="row" fxLayoutAlign="space-between center center">
-        <span class="desc"> Choose an end Date for the project's campaign: </span>
-        <mat-form-field>
+      <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
+        <mat-form-field appearance="outline" color="primary">
+          <mat-label class="placeholder">Funding Needed ($)</mat-label>
+          <input matInput placeholder="money needed" [(ngModel)]="request.totMoneyNeeded" name="totMoneyNeeded" required />
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
+        <mat-form-field appearance="outline" color="primary">
+          <mat-label class="placeholder">Funding Deadline</mat-label>
           <input required matInput [matDatepicker]="picker" placeholder="end date" [(ngModel)]="request.endDate" name="endDate">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
-      <div>
-        <input type="file" id="pic1" (change)="updateFile($event,0)" class="inputfile">
+      <div style="width: 400px;" fxLayout="row" fxLayoutAlign="space-between center center">
+        <div class="upload-btn-wrapper">
+          <button class="btn"> Poster Picture</button>
+          <input type="file" id="thumbnail" (change)="updateFile($event,0)" required>
+        </div>
       </div>
-      <div>
-        <input type="file" id="pic2" (change)="updateFile($event,1)">
+      <div style="width: 400px;" fxLayout="row" fxLayoutAlign="space-between center center">
+        <div class="upload-btn-wrapper">
+          <button class="btn"> Choose one picture at least</button>
+          <input type="file" id="thumbnail" (change)="updateFile($event,1)" required>
+        </div>
       </div>
-      <div>
-        <input type="file" id="pic3" (change)="updateFile($event,2)">
+      <div style="width: 400px;" fxLayout="row" fxLayoutAlign="space-between center center">
+        <div class="upload-btn-wrapper">
+          <button class="btn">Another Optional Picture</button>
+          <input type="file" id="thumbnail" (change)="updateFile($event,2)" required>
+        </div>
       </div>
-
-      <div>
-        Please choose a thumbnail picture to stand out from the crowd:
-        <input type="file" id="thumbnail" (change)="updateFile($event,3)" required>
+      <div style="width: 400px;" fxLayout="row" fxLayoutAlign="space-between center center">
+        <div class="upload-btn-wrapper">
+          <button class="btn">Thumbnail (Choose one that will stand out!)</button>
+          <input type="file" id="thumbnail" (change)="updateFile($event,3)" required>
+        </div>
       </div>
-
-      <div>images upload Successfully: {{ (counter$ | async )}}</div>
-      <button mat-raised-button color="accent" (click)="addProject()">
-        Add Project
-      </button>
+      <div class="create-btn">
+        <button mat-raised-button color="primary" (click)="addProject()" [disabled]="!addProjForm.form.valid || files[0] === undefined|| files[1] === undefined || files[3] === undefined">
+          Create Project!
+        </button>
+      </div>
 
     </form>
-    <div *ngSwitchCase="'creating'">
+
+    <div *ngSwitchCase="'creating'" class="working" fxLayout="column" fxLayoutAlign="space-around center center">
       Please wait while we setup your project...
       <mat-spinner></mat-spinner>
     </div>
-    <div *ngSwitchCase="'done'">
+    <div *ngSwitchCase="'done'" class="working" fxLayout="column" fxLayoutAlign="space-around center center">
       Done!
+      <span style="font-size: 15px">You are being redirected...</span>
     </div>
   </div>
 </div>

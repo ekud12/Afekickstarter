@@ -7,24 +7,58 @@
   margin-right: 20px;
 }
 
-.inputfile {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
+.working {
+  font-size: 40px;
+  font-weight: bolder;
+  margin: 40px;
+}
+
+/* Border */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgb(68, 68, 68);
+}
+/* Font color */
+input.mat-input-element {
+  color: rgb(68, 68, 68);
+}
+.placeholder {
+  color: rgb(68, 68, 68);
+}
+
+.create-btn {
+  margin: 30px 0px;
+}
+
+.upload-btn-wrapper {
+  cursor: pointer;
+  position: relative;
   overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}
-
-.inputfile + label {
-  font-size: 1.25em;
-  font-weight: 700;
-  color: white;
-  background-color: black;
   display: inline-block;
+  margin: 8px 0px;
 }
 
-.inputfile:focus + label,
-.inputfile + label:hover {
-  background-color: red;
+.btn {
+  cursor: pointer;
+
+  border: 3px dotted rgb(44, 44, 44);
+  color: rgb(56, 56, 56);
+  background-color: rgba(255, 255, 255, 0.438);
+  padding: 8px 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bolder;
+  width: 400px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.upload-btn-wrapper input[type='file'] {
+  cursor: pointer;
+
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
 }
