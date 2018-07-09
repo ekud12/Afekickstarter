@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Permissions } from './../models/permissions.model';
 import { LoginRequest, RegisterRequest, User } from './../models/user.model';
+import { ToastService } from './toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,12 @@ export class UserService implements OnDestroy {
   user$: Observable<User>;
   errorsData: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) {
+  constructor(
+    private afAuth: AngularFireAuth,
+    private afs: AngularFirestore,
+    private router: Router,
+    private toaster: ToastService
+  ) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
@@ -37,7 +43,10 @@ export class UserService implements OnDestroy {
       .then(user => {
         return this.updateUserData(user.user, request);
       })
-      .catch(error => this.errorsData.next(error.message));
+      .catch(error => {
+        this.errorsData.next(error.message);
+        this.toaster.openSnackBar(error.message);
+      });
   }
 
   signOut() {
@@ -52,7 +61,10 @@ export class UserService implements OnDestroy {
         console.log(value);
         this.router.navigate(['home']);
       })
-      .catch(error => this.errorsData.next(error.message));
+      .catch(error => {
+        this.errorsData.next(error.message);
+        this.toaster.openSnackBar(error.message);
+      });
   }
 
   private updateUserData(user, customData: RegisterRequest) {
@@ -81,7 +93,7 @@ export class UserService implements OnDestroy {
   }
 
   canInvest(user: User): boolean {
-    const allowed = ['investor'];
+    const allowed = ['investor', 'projectOwner'];
     return this.checkAuthorization(user, allowed);
   }
 

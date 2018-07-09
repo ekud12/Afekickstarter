@@ -63,6 +63,8 @@
 
 .section {
   margin: 0px 7px;
+  padding-left: 7px;
+  border-left: 5px dotted white;
 }
 
 .extra {
@@ -73,4 +75,8 @@
 }
 .router {
   padding: 20px 20px;
+}
+
+.nav-btn{
+margin: 0px 5px;
 }

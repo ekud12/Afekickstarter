@@ -1,4 +1,4 @@
-<div [hidden]="hide">
+<div [hidden]="hide && !project">
   <mat-card fxLayout="column" fxLayoutAlign="space-between center center" class="mat-elevation-z8 preview-container">
     <mat-card-header class="header" [hidden]="hide">
       <mat-card-title class="header-title"> -  {{project.name}}  -</mat-card-title>

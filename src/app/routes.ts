@@ -9,7 +9,7 @@ import { ProjectDetailsComponent } from './components/project-details/project-de
 import { ProjectsListComponent } from './components/projects-list/projects-list.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserEditGuard } from './services/user-edit.guard';
-import { UserInvestGuard } from './services/user-read.guard';
+import { UserInvestGuard } from './services/user-invest.guard';
 
 export const rootRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -53,7 +53,8 @@ export const rootRoutes: Routes = [
         path: 'donate',
         component: DonateComponent,
         canActivate: [UserInvestGuard]
-      }
+      },
+      { path: '**', component: PageNotFoundComponent }
     ]
   },
   { path: '**', component: PageNotFoundComponent }

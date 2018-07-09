@@ -31,7 +31,7 @@ export class ProjectsService {
   createProject(newProject: Project): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/${newProject.uid}`);
-      const projectToADD: Project = {
+      const createdProject: Project = {
         uid: newProject.uid,
         name: newProject.name,
         info: newProject.info,
@@ -46,12 +46,12 @@ export class ProjectsService {
         owner: null
       };
       this.user$.pipe(take(1)).subscribe(user => {
-        projectToADD.owner = user.uid;
-        console.log(projectToADD);
+        createdProject.owner = user.uid;
+        console.log(createdProject);
         projectRef
-          .set(projectToADD, { merge: true })
+          .set(createdProject, { merge: true })
           .then(() => {
-            resolve(projectToADD.uid);
+            resolve(createdProject.uid);
           })
           .catch(() => {
             reject();

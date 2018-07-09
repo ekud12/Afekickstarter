@@ -4,12 +4,14 @@ import { Observable, Subject } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
+import { fadeAnimation } from './../../animations/animations';
 import { ProjectsService } from './../../services/projects.service';
 
 @Component({
   selector: 'app-container',
   templateUrl: './container.component.html',
-  styleUrls: ['./container.component.css']
+  styleUrls: ['./container.component.css'],
+  animations: [fadeAnimation]
 })
 export class ContainerComponent implements OnInit {
   _user: Observable<User>;

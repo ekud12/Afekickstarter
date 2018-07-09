@@ -41,7 +41,7 @@ export class ProjectDetailsComponent implements OnInit {
   captionColor = '#FFF';
   captionBackground = 'rgba(0, 0, 0, .35)';
   lazyLoad = false;
-  width = '75vw';
+  width = '70vw';
 
   tiles: any[] = [];
   constructor(
@@ -75,11 +75,11 @@ export class ProjectDetailsComponent implements OnInit {
           }
         });
         this.tiles = [
-          { text: `Money raised so Far { ${this.currentProject.totMoneyRaised} }`, cols: 3, rows: 1, color: '#B33771' },
-          { text: `# of Investors {  ${this.currentProject.totInvestors} }`, cols: 1, rows: 1, color: '#FD7272' },
-          { text: `Deadline { ${this.currentProject.endDate} }`, cols: 2, rows: 1, color: '#58B19F' },
-          { text: `It all started on { ${this.currentProject.startDate} }`, cols: 2, rows: 1, color: '#B33771' },
-          { text: `Money Needed { ${this.currentProject.totMoneyNeeded} }`, cols: 4, rows: 1, color: '#2C3A47' }
+          { text: `Money raised so Far { ${this.currentProject.totMoneyRaised} }`, cols: 3, rows: 1, color: '#2f3542' },
+          { text: `# of Investors {  ${this.currentProject.totInvestors} }`, cols: 1, rows: 1, color: '#a4b0be' },
+          { text: `Deadline { ${this.currentProject.endDate} }`, cols: 2, rows: 1, color: '#a4b0be' },
+          { text: `It all started on { ${this.currentProject.startDate} }`, cols: 2, rows: 1, color: '#2f3542' },
+          { text: `Money Needed { ${this.currentProject.totMoneyNeeded} }`, cols: 4, rows: 1, color: '#a4b0be' }
         ];
       });
     });

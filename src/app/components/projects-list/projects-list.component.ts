@@ -23,7 +23,6 @@ export class ProjectsListComponent implements OnInit, OnDestroy {
     this.projects$ = this.projectService.getProjects();
     this.projects$.subscribe(
       projects => {
-        console.log(projects);
         this._projects = projects;
       },
       error => {

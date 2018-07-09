@@ -1,14 +1,17 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Permissions, PermissionsMap } from '../../models/permissions.model';
+import { fadeAnimation } from './../../animations/animations';
 import { RegisterRequest, User } from './../../models/user.model';
 import { UserService } from './../../services/user.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  animations: [fadeAnimation]
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   _permissions: PermissionsMap[];

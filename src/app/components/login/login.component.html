@@ -1,26 +1,28 @@
-<div fxLayout="column" fxLayoutAlign="space-evenly center center">
-  <div fxLayout="column" fxLayoutAlign="center center">
-    <h1>
-      Afekickstarter.
-    </h1>
-    <h2>
-      Login to kickstart your dream.
-    </h2>
-  </div>
-  <div>
-    <form fxLayout="column" fxLayoutAlign="space-evenly center center" fxLayoutGap="20px">
-      <mat-form-field class="mat-form-field-custom">
-        <input matInput name="email" type="text" placeholder="Email" [(ngModel)]="_loginRequest.email">
-      </mat-form-field>
-      <mat-form-field class="mat-form-field-custom">
-        <input matInput name="password" type="password" placeholder="Password" [(ngModel)]="_loginRequest.password">
-      </mat-form-field>
-      <button mat-raised-button color="accent" (click)="login()" name="loginBtn">Login</button>
-      <button mat-raised-button color="accent" routerLink="/register" name="registerBtn">No User? Register.</button>
-
-    </form>
-    <mat-card class="error-card" *ngIf="(userService.errorsData | async)">
-      {{ userService.errorsData | async }}
-    </mat-card>
+<div fxLayout="column" fxLayoutAlign="space-between center center" [@itemFade]>
+  <div fxLayout="column" fxLayoutAlign="space-evenly center center" class="container">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <img src="../../../assets/logo.png" class="logo" routerLink="/home"/>
+      <h1>
+        AFEKickstarter.
+      </h1>
+    </div>
+    <div>
+      <form fxLayout="column" fxLayoutAlign="space-evenly stretch center " fxLayoutGap="20px">
+        <mat-form-field appearance="outline" color="warn">
+          <mat-label class="placeholder">Email</mat-label>
+          <input matInput name="email" type="text" placeholder="" [(ngModel)]="_loginRequest.email">
+          <mat-icon matSuffix>account_circle</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline" color="warn">
+          <mat-label class="placeholder"> Password</mat-label>
+          <input matInput name="password" type="password" placeholder="Password" [(ngModel)]="_loginRequest.password">
+          <mat-icon matSuffix>lock</mat-icon>
+        </mat-form-field>
+        <button mat-raised-button color="warn" (click)="login()" name="loginBtn">Login</button>
+        <button mat-raised-button color="warn" routerLink="/register" name="registerBtn">No User? Register.</button>
+      </form>
+    </div>
+    <div>
+    </div>
   </div>
 </div>

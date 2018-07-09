@@ -7,13 +7,13 @@
     </div>
     <div fxLayout="row" fxLayoutAlign="space-evenly center center">
       <div class="header-item" *ngIf="(user|async)?.roles.investor">
-        <button mat-raised-button color="warn" routerLink="/donate">
+        <button mat-raised-button color="warn" routerLink="/home/donate">
           <mat-icon>attach_money</mat-icon>Donate
         </button>
       </div>
       <div class="header-item" *ngIf="(user|async)?.roles.projectOwner">
-        <button mat-raised-button color="warn" routerLink="/edit">
-          <mat-icon>edit</mat-icon>Edit Project.
+        <button mat-raised-button color="warn" routerLink="/home/edit">
+          <mat-icon>edit</mat-icon>Edit Project
         </button>
       </div>
 

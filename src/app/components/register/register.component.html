@@ -1,29 +1,40 @@
-<div>
-  Register
-</div>
+<div fxLayout="column" fxLayoutAlign="space-between center center" [@itemFade]>
+  <div fxLayout="column" fxLayoutAlign="space-evenly center center" class="container">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <img src="../../../assets/logo.png" class="logo" routerLink="/home/projects" />
+      <h1>
+        AFEKickstarter.
+      </h1>
+    </div>
+    <div>
+      <form fxLayout="column" fxLayoutAlign="space-around stretch center" fxLayoutGap="5px">
+        <mat-form-field appearance="outline" color="warn">
+          <mat-label class="placeholder">Your Name</mat-label>
+          <input matInput name="name" type="text" [(ngModel)]="_registerRequest.name">
+          <mat-icon matSuffix>account_circle</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline" color="warn">
+          <mat-label class="placeholder"> Email</mat-label>
+          <input matInput name="email" type="text" [(ngModel)]="_registerRequest.email">
+          <mat-icon matSuffix>alternate_email</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline" color="warn">
+          <mat-label class="placeholder"> Password</mat-label>
+          <input matInput name="password" type="password" [(ngModel)]="_registerRequest.password">
+          <mat-icon matSuffix>lock</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline" color="warn">
+          <mat-label class="placeholder">Account Type</mat-label>
+          <mat-select name="permission" type="text" [(ngModel)]="_registerRequest.role">
+            <mat-option *ngFor="let permission of _permissions" [value]="permission.value">
+              {{ permission.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-<div>
-  <form fxLayout="column" fxLayoutAlign="space-between center center">
-    <mat-form-field class="mat-form-field-custom">
-      <input matInput name="name" type="text" placeholder="Name" [(ngModel)]="_registerRequest.name">
-    </mat-form-field>
-    <mat-form-field class="mat-form-field-custom">
-      <input matInput name="email" type="text" placeholder="Email" [(ngModel)]="_registerRequest.email">
-    </mat-form-field>
-    <mat-form-field class="mat-form-field-custom">
-      <input matInput name="password" type="password" placeholder="Password" [(ngModel)]="_registerRequest.password">
-    </mat-form-field>
-    <mat-form-field class="mat-form-field-custom">
-      <mat-select name="permission" type="text" [(ngModel)]="_registerRequest.role">
-        <mat-option *ngFor="let permission of _permissions" [value]="permission.value">
-          {{ permission.viewValue }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <button mat-raised-button color="accent" (click)="signup()" name="btn">Signup</button>
-  </form>
-  <div>
-    {{ userService.errorsData | async }}
+        <button mat-raised-button color="warn" (click)="signup()" name="loginBtn">Signup</button>
+      </form>
+    </div>
+
   </div>
-  <button mat-raised-button color="accent" (click)="check()" name="check">check</button>
 </div>

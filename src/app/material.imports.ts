@@ -8,6 +8,7 @@ import {
   MatChipsModule,
   MatDatepickerModule,
   MatDialogModule,
+  MatDividerModule,
   MatExpansionModule,
   MatGridListModule,
   MatIconModule,
@@ -26,11 +27,11 @@ import {
   MatSlideToggleModule,
   MatSnackBarModule,
   MatSortModule,
+  MatStepperModule,
   MatTableModule,
   MatTabsModule,
   MatToolbarModule,
-  MatTooltipModule,
-  MatStepperModule
+  MatTooltipModule
 } from '@angular/material';
 
 export const materialImports = [
@@ -40,6 +41,7 @@ export const materialImports = [
   MatButtonToggleModule,
   MatCardModule,
   MatCheckboxModule,
+  MatDividerModule,
   MatChipsModule,
   MatStepperModule,
   MatDatepickerModule,

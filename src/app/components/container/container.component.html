@@ -1,19 +1,22 @@
 <mat-toolbar class="mat-elevation-z5 navbar" fxLayout="row" fxLayoutAlign="space-between center center" color="primary">
   <div routerLink="/home/projects" class="actionable" fxLayout="row" fxLayoutAlign="space-between center center">
     <img src="../../../assets/logo.png" class="logo" />
-    <h1>AFEKickstarter.<span style="color:rgb(255, 0, 55);">xyz</span></h1>
+    <h1>AFEKickstarter.
+      <span style="color:rgb(255, 0, 55);">xyz</span>
+    </h1>
   </div>
   <div *ngIf=" (_user|async) " fxLayout="row " fxLayoutAlign="start center">
-    <div name="projectOwnerActions " *ngIf="(_user|async)?.roles.projectOwner" class="section">
+    <div name="projectOwnerActions " *ngIf="(_user|async)?.roles.projectOwner" class="section" style="border-left:none;">
       <button matTooltip="Add a new Project!" mat-icon-button routerLink="/home/add" *ngIf="(_user|async)?.roles.projectOwner ">
         <mat-icon>library_add</mat-icon>
       </button>
-    </div>|
-    <div *ngIf="userProjectsCount !==0" class="section">
-      Active Projects: {{ userProjectsCount }} |
     </div>
-    <div class="section">
-      {{ (_user|async)?.name }} |
+    <div *ngIf="userProjectsCount !==0" class="section">
+      # My Projects: {{ userProjectsCount }}
+    </div>
+    <div class="section" fxLayout="row" fxLayoutAlign="space-between center center">
+      <mat-icon>account_box</mat-icon>
+      {{ (_user|async)?.name }}
     </div>
     <button mat-icon-button (click)="logout()" class="section">
       <mat-icon matTooltip="logout...">
@@ -21,8 +24,9 @@
       </mat-icon>
     </button>
   </div>
-  <div *ngIf="!loading && !userService.isLogged(_user|async)">
-    <button mat-raised-button routerLink="/login" *ngIf="!(_user|async) ">Login</button>
+  <div *ngIf="!loading && !userService.isLogged(_user|async)" class="actionable">
+    <button mat-raised-button routerLink="/login" *ngIf="!(_user|async) " class="nav-btn">Login</button>
+    <button mat-raised-button routerLink="/register" *ngIf="!(_user|async) " class="nav-btn">Register</button>
   </div>
   <div *ngIf="loading">
     <mat-spinner color="accent" [diameter]="22"></mat-spinner>
@@ -31,6 +35,6 @@
 <mat-toolbar color="accent" class="extra">
 </mat-toolbar>
 
-<div fxLayout="column" fxLayoutAlign="center center" class="router">
+<div fxLayout="column" fxLayoutAlign="center center" class="router" [@itemFade]>
   <router-outlet></router-outlet>
 </div>
