@@ -38,6 +38,7 @@ export class UserService implements OnDestroy {
     this.usersCollection = this.afs.collection<User>('users');
     return (this.users$ = this.usersCollection.valueChanges());
   }
+
   getErrors() {
     return of(this.errorsData);
   }

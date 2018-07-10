@@ -1,12 +1,12 @@
-.container {
-  width:500px;
+.container-panel-item {
+  width: 500px;
 }
 
-.trash-btn{
+.trash-btn {
   font-size: 100px;
 }
 
-.paramater-info{
-font-weight: bold;
-margin-right: 7px;
+.paramater-info {
+  font-weight: bold;
+  margin-right: 7px;
 }
