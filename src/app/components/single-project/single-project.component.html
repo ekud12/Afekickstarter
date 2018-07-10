@@ -2,14 +2,14 @@
   <mat-card fxLayout="column" fxLayoutAlign="space-between center center" class="mat-elevation-z8"
   [ngClass]="{'preview-container' :!project.completed ,'preview-container-completed': project.completed && !project.expired,
   'preview-container-expired': project.expired}">
-    <mat-card-header class="header" [hidden]="hide" fxFlex="15">
+    <mat-card-header class="header" [hidden]="hide" fxFlex="10">
       <mat-card-title class="header-title"> - {{project.name}} -</mat-card-title>
     </mat-card-header>
-    <img mat-card-image [src]="project.thumbnail.url" (load)="markAsLoaded()" [hidden]="hide" fxFlex="45" />
-    <div fxFlex>
+    <img mat-card-image [src]="project.thumbnail.url" (load)="markAsLoaded()" [hidden]="hide" fxFlex="50" />
+    <div fxFlex="10">
       {{ project.oneLiner}}
     </div>
-    <mat-card-actions fxLayout="column" fxLayoutAlign="stretch stretch" fxFlex="40" fxLayoutGap="10px">
+    <mat-card-actions fxLayout="column" fxLayoutAlign="stretch stretch" fxFlex="30" fxLayoutGap="10px">
 
 
       <div fxFlex>

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DonateComponent } from './donate.component';
+import { AdminPanelUserComponent } from './admin-panel-user.component';
 
-describe('DonateComponent', () => {
-  let component: DonateComponent;
-  let fixture: ComponentFixture<DonateComponent>;
+describe('AdminPanelUserComponent', () => {
+  let component: AdminPanelUserComponent;
+  let fixture: ComponentFixture<AdminPanelUserComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DonateComponent ]
+      declarations: [ AdminPanelUserComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DonateComponent);
+    fixture = TestBed.createComponent(AdminPanelUserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

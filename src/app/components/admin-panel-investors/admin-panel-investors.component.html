@@ -1,0 +1,29 @@
+<mat-card fxLayout="column" *ngIf="project.investors.length > 0" fxLayoutAlign="space-evenly stretch stretch" class="container">
+  <div fxLayout="row" fxLayoutAlign="space-around center center" class="title">
+    Project:
+    <span class="project-info">
+      {{project.name}}
+    </span>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 investor-table">
+    <ng-container matColumnDef="investorId">
+      <th mat-header-cell *matHeaderCellDef> Investor ID</th>
+      <td mat-cell *matCellDef="let element"> {{element.investorId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef> Amount Donated </th>
+      <td mat-cell *matCellDef="let element"> {{element.amount}}$ </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Date Donated </th>
+      <td mat-cell *matCellDef="let element"> {{element.date | date:'dd/MM/yyyy hh:MM:ss'}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</mat-card>

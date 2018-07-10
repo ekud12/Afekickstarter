@@ -1,0 +1,22 @@
+<div fxLayout="column" fxLayoutAlign="space-around center center" class="inner-container">
+  <div class="inner-container-header" fxLayout="column" fxLayoutAlign="space-between start stretch">
+    <div fxLayout="row" fxLayoutAlign="space-between center center" style="padding: 10px;">
+      <div class="header-item" [style.backgroundColor]="'black'">
+        // Admin Panel Settings - Users Overview
+      </div>
+    </div>
+  </div>
+  <h1>Users</h1>
+  <div *ngFor="let user of (users$|async)" class="user-item">
+    <app-admin-panel-user [user]="user"></app-admin-panel-user>
+  </div>
+
+  <h1>Projects's Investors</h1>
+  <div *ngFor="let proj of (projects$|async)" class="user-item">
+    <app-admin-panel-investors [project]="proj"></app-admin-panel-investors>
+  </div>
+
+  <div *ngIf="!(users$|async)" fxLayout="column" fxLayoutAlign="space-around center center" class="inner-container spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

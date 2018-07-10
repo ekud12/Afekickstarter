@@ -1,15 +1,15 @@
 import { Routes } from '@angular/router';
 import { AddProjectComponent } from './components/add-project/add-project.component';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { ContainerComponent } from './components/container/container.component';
-import { DonateComponent } from './components/donate/donate.component';
 import { EditProjectComponent } from './components/edit-project/edit-project.component';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 import { ProjectsListComponent } from './components/projects-list/projects-list.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AdminGuard } from './services/admin.guard';
 import { UserEditGuard } from './services/user-edit.guard';
-import { UserInvestGuard } from './services/user-invest.guard';
 
 export const rootRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -50,9 +50,9 @@ export const rootRoutes: Routes = [
         canActivate: [UserEditGuard]
       },
       {
-        path: 'donate',
-        component: DonateComponent,
-        canActivate: [UserInvestGuard]
+        path: 'admin',
+        component: AdminPanelComponent,
+        canActivate: [AdminGuard]
       },
       { path: '**', component: PageNotFoundComponent }
     ]

@@ -39,7 +39,7 @@ export class ProjectsListComponent implements OnInit, OnDestroy {
           this._projects = projects;
           this._projects.map(project => {
             this.projectsAmountFundedQuery += project.totMoneyRaised;
-            this.projectsCompletedQuery += project.completed ? 1 : 0;
+            this.projectsCompletedQuery += project.completed && !project.expired ? 1 : 0;
           });
           this._projectsToshow = projects.filter(
             project => !project.completed

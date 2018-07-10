@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Permissions } from './../models/permissions.model';
@@ -13,6 +13,8 @@ import { ToastService } from './toast.service';
 })
 export class UserService implements OnDestroy {
   user$: Observable<User>;
+  users$: Observable<User[]>;
+  usersCollection: AngularFirestoreCollection<User>;
   errorsData: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor(
@@ -32,8 +34,48 @@ export class UserService implements OnDestroy {
     );
   }
 
+  getAllUsers() {
+    this.usersCollection = this.afs.collection<User>('users');
+    return (this.users$ = this.usersCollection.valueChanges());
+  }
   getErrors() {
     return of(this.errorsData);
+  }
+
+  deleteUser(user: User) {
+    // return new Promise<any>((resolve, reject) => {
+    //   const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/${newProject.uid}`);
+    //   const createdProject: Project = {
+    //     uid: newProject.uid,
+    //     name: newProject.name,
+    //     info: newProject.info,
+    //     totMoneyRaised: 0,
+    //     totInvestors: 0,
+    //     oneLiner: newProject.oneLiner,
+    //     totMoneyNeeded: newProject.totMoneyNeeded,
+    //     startDate: newProject.startDate,
+    //     endDate: newProject.endDate,
+    //     pics: JSON.parse(JSON.stringify(newProject.pics)),
+    //     videoLink: newProject.videoLink,
+    //     thumbnail: JSON.parse(JSON.stringify(newProject.thumbnail)),
+    //     owner: null,
+    //     investors: [],
+    //     views: 0,
+    //     completed: false,
+    //     expired: false
+    //   };
+    //   this.user$.pipe(take(1)).subscribe(user => {
+    //     createdProject.owner = user.uid;
+    //     projectRef
+    //       .set(createdProject, { merge: true })
+    //       .then(() => {
+    //         resolve(createdProject.uid);
+    //       })
+    //       .catch(() => {
+    //         reject();
+    //       });
+    //   });
+    // });
   }
 
   emailSignUp(request: RegisterRequest) {
@@ -95,7 +137,7 @@ export class UserService implements OnDestroy {
   }
 
   canEdit(user: User): boolean {
-    const allowed = ['admin', 'projectOwner'];
+    const allowed = ['projectOwner'];
     return this.checkAuthorization(user, allowed);
   }
 

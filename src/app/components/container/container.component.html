@@ -11,6 +11,11 @@
         <mat-icon>library_add</mat-icon>
       </button>
     </div>
+    <div name="adminActions " *ngIf="(_user|async)?.roles.admin" class="section" style="border-left:none;">
+        <button matTooltip="Admin Panel overview" mat-icon-button routerLink="/home/admin" *ngIf="(_user|async)?.roles.admin ">
+          <mat-icon>settings</mat-icon>
+        </button>
+      </div>
     <div *ngIf="userProjectsCount !==0" class="section">
       # My Projects: {{ userProjectsCount }}
     </div>

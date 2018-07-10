@@ -19,7 +19,6 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { AddProjectComponent } from './components/add-project/add-project.component';
 import { ContainerComponent } from './components/container/container.component';
-import { DonateComponent } from './components/donate/donate.component';
 import { DonationBoxComponent } from './components/donation-box/donation-box.component';
 import { EditProjectComponent } from './components/edit-project/edit-project.component';
 import { LoginComponent } from './components/login/login.component';
@@ -34,6 +33,9 @@ import { FilesService } from './services/files.service';
 import { ProjectsService } from './services/projects.service';
 import { ToastService } from './services/toast.service';
 import { UserService } from './services/user.service';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { AdminPanelUserComponent } from './components/admin-panel-user/admin-panel-user.component';
+import { AdminPanelInvestorsComponent } from './components/admin-panel-investors/admin-panel-investors.component';
 
 export const firebaseConfig = environment.FirebaseConfig;
 @NgModule({
@@ -47,9 +49,11 @@ export const firebaseConfig = environment.FirebaseConfig;
     RegisterComponent,
     SingleProjectCardComponent,
     ProjectDetailsComponent,
-    DonateComponent,
     ContainerComponent,
-    DonationBoxComponent
+    DonationBoxComponent,
+    AdminPanelComponent,
+    AdminPanelUserComponent,
+    AdminPanelInvestorsComponent
   ],
   imports: [
     BrowserModule,

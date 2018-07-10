@@ -1,0 +1,30 @@
+<mat-card fxLayout="row" fxLayoutAlign="space-evenly stretch stretch" class="container">
+  <button mat-raised-button color="warn">
+    <mat-icon> delete_forever</mat-icon>
+  </button>
+  <div>
+    <div fxLayout="column" fxLayoutAlign="space-evenly start center">
+      <div>
+        <span class="paramater-info">
+          Name:
+        </span>
+        {{user.name}}
+      </div>
+      <div>
+        <span class="paramater-info">
+          Email: </span>{{user.email}}
+      </div>
+      <div>
+        <span class="paramater-info">
+          UID:</span>{{user.uid}}
+      </div>
+      <div>
+        <span class="paramater-info">
+          Permission: </span>{{type}}
+      </div>
+    </div>
+
+  </div>
+
+
+</mat-card>

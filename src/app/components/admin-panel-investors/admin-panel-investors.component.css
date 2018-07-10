@@ -1,0 +1,30 @@
+.container {
+  width:700px;
+}
+
+.trash-btn{
+  font-size: 100px;
+}
+
+.title{
+  padding: 0px 10px;
+}
+.paramater-info{
+font-weight: bold;
+margin-right: 7px;
+}
+.project-info{
+  font-weight: bold;
+  font-size: 25px;
+  color: brown;
+  }
+
+table{
+  border: 1px solid rgb(78, 78, 78);
+  width: 100%;
+}
+
+th{
+  font-size: 20px;
+  font-weight: bold;
+}
