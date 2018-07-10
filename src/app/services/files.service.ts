@@ -22,7 +22,6 @@ export class FilesService {
 
   uploadFile(key: string, files: Array<File>): Promise<any> {
     this.count = 0;
-    console.log(files);
     files.map((item, index) => {
       this.tasks.push(
         new Promise((resolve, reject) => {

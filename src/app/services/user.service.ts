@@ -37,7 +37,6 @@ export class UserService implements OnDestroy {
   }
 
   emailSignUp(request: RegisterRequest) {
-    console.log(request);
     return this.afAuth.auth
       .createUserWithEmailAndPassword(request.email, request.password)
       .then(user => {
@@ -58,7 +57,6 @@ export class UserService implements OnDestroy {
     return this.afAuth.auth
       .signInWithEmailAndPassword(req.email, req.password)
       .then(value => {
-        console.log(value);
         this.router.navigate(['home']);
       })
       .catch(error => {
@@ -69,7 +67,6 @@ export class UserService implements OnDestroy {
 
   private updateUserData(user, customData: RegisterRequest) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-    console.log(customData);
     const data: User = {
       uid: user.uid,
       name: customData.name,

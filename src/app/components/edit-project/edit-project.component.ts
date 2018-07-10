@@ -36,7 +36,6 @@ export class EditProjectComponent implements OnInit {
 
   savePlayer(player) {
     this.player = player;
-    console.log('player instance', player);
   }
   deleteFile() {
     this.filesService.deleteImage(this.currentProject);

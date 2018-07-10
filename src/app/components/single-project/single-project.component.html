@@ -1,5 +1,7 @@
 <div [hidden]="hide">
-  <mat-card fxLayout="column" fxLayoutAlign="space-between center center" class="mat-elevation-z8" [ngClass]="!project.completed ? 'preview-container':'preview-container-completed'">
+  <mat-card fxLayout="column" fxLayoutAlign="space-between center center" class="mat-elevation-z8"
+  [ngClass]="{'preview-container' :!project.completed ,'preview-container-completed': project.completed && !project.expired,
+  'preview-container-expired': project.expired}">
     <mat-card-header class="header" [hidden]="hide" fxFlex="15">
       <mat-card-title class="header-title"> - {{project.name}} -</mat-card-title>
     </mat-card-header>
@@ -12,7 +14,7 @@
 
       <div fxFlex>
         <button mat-raised-button color="primary" (click)="projectDetails()">
-          {{ project.completed? 'Read about this project': 'Learn more about this Project!'}}
+          {{ project.completed? 'Read about this project': 'Learn how you can help!'}}
         </button>
       </div>
 
@@ -22,7 +24,7 @@
             {{daysLeft}}
           </div>
           <div>
-            Days left
+            <mat-icon>hourglass_full</mat-icon>
           </div>
         </div>
         <div class="preview-info" [style.backgroundColor]="'#F2784B'" fxFlex fxLayout="column" fxLayoutAlign="space-evenly center center">
@@ -30,7 +32,7 @@
             {{percentageCompleted}}%
           </div>
           <div>
-            raised
+            <mat-icon>attach_money</mat-icon>
           </div>
         </div>
         <div class="preview-info" [style.backgroundColor]="'#F89406'" fxFlex fxLayout="column" fxLayoutAlign="space-evenly center center">
@@ -38,7 +40,7 @@
             {{this.project.totInvestors}}
           </div>
           <div>
-            invested
+           <mat-icon>accessibility_new</mat-icon>
           </div>
         </div>
         <div class="preview-info" [style.backgroundColor]="'#F4B350'" fxFlex fxLayout="column" fxLayoutAlign="space-evenly center center">
@@ -46,12 +48,15 @@
             {{this.project.views}}
           </div>
           <div>
-            views
+          <mat-icon>remove_red_eye</mat-icon>
           </div>
         </div>
       </div>
-      <div fxFlex *ngIf="project.completed">
+      <div fxFlex *ngIf="project.completed && !project.expired">
         Project Funded Successfully.
+      </div>
+      <div fxFlex *ngIf="project.completed && project.expired">
+        Project Ended without funding.
       </div>
     </mat-card-actions>
   </mat-card>

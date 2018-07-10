@@ -27,6 +27,8 @@ export class AddProjectComponent implements OnInit {
   request = new Project();
   status = 'waiting';
   minDate = new Date(Date.now());
+  time: string;
+  date: Date;
 
   constructor(
     private filesService: FilesService,
@@ -41,7 +43,6 @@ export class AddProjectComponent implements OnInit {
       this.user = val;
       this.request.owner = this.user.uid;
     });
-    console.log(this.files[0]);
   }
 
   selectFile(event) {
@@ -52,10 +53,28 @@ export class AddProjectComponent implements OnInit {
     this.files[picnum] = event.target.files[0];
   }
 
+  updateTime() {
+    const strings = this.time.split(' ');
+    let hours, min;
+    let time2 = strings[0];
+    const type = strings[1];
+    if (time2.length === 4) {
+      time2 = `0${time2}`;
+    }
+    const specifics = time2.split(':');
+    hours = specifics[0];
+    min = specifics[1];
+    if (type === 'PM') {
+      hours = (+hours + 12).toString();
+    }
+    this.date.setHours(+hours, +min);
+  }
+
   addProject() {
+    this.updateTime();
     this.status = 'creating';
     this.request.startDate = Date.now();
-    this.request.endDate = this.request.endDate.valueOf();
+    this.request.endDate = this.date.valueOf();
     this.request.uid = Math.random()
       .toString(36)
       .substring(2);

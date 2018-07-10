@@ -62,7 +62,6 @@ export class ProjectsService implements OnInit {
       };
       this.user$.pipe(take(1)).subscribe(user => {
         createdProject.owner = user.uid;
-        console.log(createdProject);
         projectRef
           .set(createdProject, { merge: true })
           .then(() => {
@@ -122,7 +121,6 @@ export class ProjectsService implements OnInit {
   }
 
   markProjectAsExpired(project: Project): Promise<any> {
-    console.log('checking');
     return new Promise<any>((resolve, reject) => {
       const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/${project.uid}`);
       project.expired = true;

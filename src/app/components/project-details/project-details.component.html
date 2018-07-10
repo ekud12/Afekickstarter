@@ -3,7 +3,8 @@
     [style.backgroundSize]="'cover'">
     <div fxLayout="row" fxLayoutAlign="space-between center center" style="padding: 10px;">
       <div class="header-item" [style.backgroundColor]="'black'">
-        // Detailed Prospect {{ currentProject.completed ? '(Funded Successfully)' : ''}}
+        // Detailed Prospect {{ currentProject.completed && !currentProject.expired ? '(Funded Successfully)' : ''}} {{ currentProject.completed
+        && currentProject.expired ? '(Ended Without funding)' : ''}}
       </div>
     </div>
     <div class="header-item">
@@ -74,6 +75,6 @@
 
 
 </div>
-<div *ngIf="!currentProject" fxLayout="column" fxLayoutAlign="space-around center center" class="inner-container spinner">
+<div *ngIf="!currentProject " fxLayout="column" fxLayoutAlign="space-around center center" class="inner-container spinner">
   <mat-spinner></mat-spinner>
 </div>

@@ -26,8 +26,8 @@
       </div>
       <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
         <mat-form-field appearance="outline" color="primary">
-          <mat-label class="placeholder">Oneliner for preview</mat-label>
-          <input matInput [(ngModel)]="request.oneLiner" name="oneliner" required />
+          <mat-label class="placeholder">Oneliner for preview (30 chars)</mat-label>
+          <input matInput [(ngModel)]="request.oneLiner" name="oneliner" maxlength="30" required />
         </mat-form-field>
       </div>
       <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
@@ -44,33 +44,40 @@
       </div>
       <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
         <mat-form-field appearance="outline" color="primary">
-          <mat-label class="placeholder">Deadline</mat-label>
-          <input required matInput [min]="minDate" [matDatepicker]="picker" [(ngModel)]="request.endDate" name="endDate">
+          <mat-label class="placeholder">Deadline Date</mat-label>
+          <input required matInput [min]="minDate" [matDatepicker]="picker" [(ngModel)]="date" name="endDate">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker startView="month"></mat-datepicker>
         </mat-form-field>
       </div>
+      <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
+        <mat-form-field appearance="outline" color="primary">
+          <mat-label class="placeholder">Deadline timepicker</mat-label>
+          <input matInput [ngxTimepicker]="timepicker" [format]="12" required [(ngModel)]="time" name="time">
+          <ngx-material-timepicker #timepicker></ngx-material-timepicker>
+        </mat-form-field>
+      </div>
       <div style="width: 400px;" fxLayout="row" fxLayoutAlign="space-between center center">
         <div class="upload-btn-wrapper">
-          <button [ngClass]="files[0] ? 'btnGood': 'btn'"> {{ files[0] ? files[0].name: 'Poster pic'}}</button>
+          <button [ngClass]="files[0] ? 'btnGood': 'btn'"> {{ files[0] ? files[0].name: 'Poster pic (HQ)'}}</button>
           <input type="file" id="thumbnail" (change)="updateFile($event,0)" required>
         </div>
       </div>
       <div style="width: 400px;" fxLayout="row" fxLayoutAlign="space-between center center">
         <div class="upload-btn-wrapper">
-          <button [ngClass]="files[1] ? 'btnGood': 'btn'"> {{ files[1] ? files[1].name: 'Choose one picture at least'}}</button>
+          <button [ngClass]="files[1] ? 'btnGood': 'btn'"> {{ files[1] ? files[1].name: 'Choose one picture at least (HQ)'}}</button>
           <input type="file" id="thumbnail" (change)="updateFile($event,1)" required>
         </div>
       </div>
       <div style="width: 400px;" fxLayout="row" fxLayoutAlign="space-between center center">
         <div class="upload-btn-wrapper">
-          <button [ngClass]="files[2] ? 'btnGood': 'btn'">{{ files[2] ? files[2].name: 'Another Optional Picture'}}</button>
+          <button [ngClass]="files[2] ? 'btnGood': 'btn'">{{ files[2] ? files[2].name: 'Another Optional Picture (HQ)'}}</button>
           <input type="file" id="thumbnail" (change)="updateFile($event,2)" required>
         </div>
       </div>
       <div style="width: 400px;" fxLayout="row" fxLayoutAlign="space-between center center">
         <div class="upload-btn-wrapper">
-          <button [ngClass]="files[3] ? 'btnGood': 'btn'">{{ files[3] ? files[3].name: 'Thumbnail (Choose one that will stand out!)'}}</button>
+          <button [ngClass]="files[3] ? 'btnGood': 'btn'">{{ files[3] ? files[3].name: 'Thumbnail (Choose one that will stand out!) (HQ)'}}</button>
           <input type="file" id="thumbnail" (change)="updateFile($event,3)" required>
         </div>
       </div>

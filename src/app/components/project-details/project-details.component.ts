@@ -84,42 +84,45 @@ export class ProjectDetailsComponent implements OnInit, AfterViewInit {
           this.projectsService.updateProjectViews(data);
           this.updatedView = true;
         }
-        this.currentProject.pics.map((pic, index) => {
-          if (index < 3 && pic.url !== '' && pic.url !== null) {
-            this.urls.push(pic.url);
-          }
-        });
-        this.tiles = [
-          {
-            text: `Money Needed `,
-            data: `{ ${this.numberWithCommas(this.currentProject.totMoneyNeeded)}$}`,
-            cols: 2,
-            rows: 1,
-            color: '#ffda79'
-          },
-          { text: `# of Investors `, data: `{  ${this.currentProject.totInvestors} }`, cols: 2, rows: 1, color: '#cc8e35' },
-          {
-            text: `Campaign started on `,
-            data: `{ ${new Date(this.currentProject.startDate).toUTCString()} }`,
-            cols: 2,
-            rows: 1,
-            color: '#cc8e35'
-          },
-          {
-            text: `Deadline `,
-            data: `{ ${new Date(this.currentProject.endDate).toUTCString()} }`,
-            cols: 2,
-            rows: 1,
-            color: '#ffda79'
-          },
-          {
-            text: `Money raised so Far`,
-            data: ` { ${this.numberWithCommas(this.currentProject.totMoneyRaised)}$ }`,
-            cols: 4,
-            rows: 1,
-            color: '#ccae62'
-          }
-        ];
+        if (this.currentProject.pics !== null && this.currentProject.pics !== undefined) {
+          this.currentProject.pics.map((pic, index) => {
+            if (index < 3 && pic.url !== '' && pic.url !== null) {
+              this.urls.push(pic.url);
+            }
+          });
+
+          this.tiles = [
+            {
+              text: `Money Needed `,
+              data: `{ ${this.numberWithCommas(this.currentProject.totMoneyNeeded)}$}`,
+              cols: 2,
+              rows: 1,
+              color: '#ffda79'
+            },
+            { text: `# of Investors `, data: `{  ${this.currentProject.totInvestors} }`, cols: 2, rows: 1, color: '#cc8e35' },
+            {
+              text: `Campaign started on `,
+              data: `{ ${new Date(this.currentProject.startDate).toUTCString()} }`,
+              cols: 2,
+              rows: 1,
+              color: '#cc8e35'
+            },
+            {
+              text: `Deadline `,
+              data: `{ ${new Date(this.currentProject.endDate).toUTCString()} }`,
+              cols: 2,
+              rows: 1,
+              color: '#ffda79'
+            },
+            {
+              text: `Money raised so Far`,
+              data: ` { ${this.numberWithCommas(this.currentProject.totMoneyRaised)}$ }`,
+              cols: 4,
+              rows: 1,
+              color: '#ccae62'
+            }
+          ];
+        }
       });
     });
   }

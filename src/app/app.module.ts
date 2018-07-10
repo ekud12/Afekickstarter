@@ -13,6 +13,7 @@ import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/dat
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorage, AngularFireStorageModule } from 'angularfire2/storage';
 import { SlideshowModule } from 'ng-simple-slideshow';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { YoutubePlayerModule } from 'ngx-youtube-player';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -61,6 +62,7 @@ export const firebaseConfig = environment.FirebaseConfig;
     FormsModule,
     SlideshowModule,
     ParticlesModule,
+    NgxMaterialTimepickerModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
