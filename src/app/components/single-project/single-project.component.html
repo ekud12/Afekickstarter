@@ -1,17 +1,22 @@
 <div [hidden]="hide">
-  <mat-card fxLayout="column" fxLayoutAlign="space-between center center" class="mat-elevation-z8 preview-container">
+  <mat-card fxLayout="column" fxLayoutAlign="space-between center center" class="mat-elevation-z8" [ngClass]="!project.completed ? 'preview-container':'preview-container-completed'">
     <mat-card-header class="header" [hidden]="hide" fxFlex="15">
       <mat-card-title class="header-title"> - {{project.name}} -</mat-card-title>
     </mat-card-header>
     <img mat-card-image [src]="project.thumbnail.url" (load)="markAsLoaded()" [hidden]="hide" fxFlex="45" />
+    <div fxFlex>
+      {{ project.oneLiner}}
+    </div>
     <mat-card-actions fxLayout="column" fxLayoutAlign="stretch stretch" fxFlex="40" fxLayoutGap="10px">
+
+
       <div fxFlex>
         <button mat-raised-button color="primary" (click)="projectDetails()">
-          Learn more about this Project!
+          {{ project.completed? 'Read about this project': 'Learn more about this Project!'}}
         </button>
       </div>
 
-      <div fxFlex="70" fxLayout="row" fxLayoutAlign="space-between stretch stretch">
+      <div fxFlex="70" fxLayout="row" fxLayoutAlign="space-between stretch stretch" *ngIf="!project.completed">
         <div class="preview-info" [style.backgroundColor]="'#EB974E'" fxFlex fxLayout="column" fxLayoutAlign="space-evenly center center">
           <div class="preview-info-data">
             {{daysLeft}}
@@ -28,7 +33,7 @@
             raised
           </div>
         </div>
-        <div class="preview-info" [style.backgroundColor]="'#E9D460'" fxFlex fxLayout="column" fxLayoutAlign="space-evenly center center">
+        <div class="preview-info" [style.backgroundColor]="'#F89406'" fxFlex fxLayout="column" fxLayoutAlign="space-evenly center center">
           <div class="preview-info-data">
             {{this.project.totInvestors}}
           </div>
@@ -36,6 +41,17 @@
             invested
           </div>
         </div>
+        <div class="preview-info" [style.backgroundColor]="'#F4B350'" fxFlex fxLayout="column" fxLayoutAlign="space-evenly center center">
+          <div class="preview-info-data">
+            {{this.project.views}}
+          </div>
+          <div>
+            views
+          </div>
+        </div>
+      </div>
+      <div fxFlex *ngIf="project.completed">
+        Project Funded Successfully.
       </div>
     </mat-card-actions>
   </mat-card>

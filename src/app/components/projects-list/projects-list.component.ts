@@ -42,7 +42,7 @@ export class ProjectsListComponent implements OnInit, OnDestroy {
             this.projectsCompletedQuery += project.completed ? 1 : 0;
           });
           this._projectsToshow = projects.filter(
-            project => !project.completed && !project.expired && project.endDate < Date.now()
+            project => !project.completed
           );
           this.projectsLive = this._projectsToshow.length ? this._projectsToshow.length : 0;
         },

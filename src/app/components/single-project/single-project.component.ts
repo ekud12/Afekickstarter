@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Project } from './../../models/project.model';
 
@@ -12,7 +12,7 @@ export class SingleProjectCardComponent implements OnInit {
   hide = true;
   percentageCompleted: string;
   daysLeft: number;
-  @Output() loaded: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   constructor(private router: Router) {}
 
   ngOnInit() {
@@ -25,9 +25,11 @@ export class SingleProjectCardComponent implements OnInit {
     const difference_ms = date2 - date1;
     return Math.round(difference_ms / one_day);
   }
+
   markAsLoaded() {
     this.hide = false;
   }
+
   projectDetails() {
     this.router.navigate(['/home/details', this.project.uid]);
   }

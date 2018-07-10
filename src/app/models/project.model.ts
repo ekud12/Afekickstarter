@@ -2,6 +2,7 @@ export class Project {
   uid?: string;
   name?: string;
   info?: string;
+  oneLiner?: string;
   totMoneyNeeded?: number;
   totMoneyRaised?: number;
   totInvestors?: number;

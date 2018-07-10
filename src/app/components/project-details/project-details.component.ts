@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +16,7 @@ import { DonationBoxComponent } from './../donation-box/donation-box.component';
   templateUrl: './project-details.component.html',
   styleUrls: ['./project-details.component.css']
 })
-export class ProjectDetailsComponent implements OnInit {
+export class ProjectDetailsComponent implements OnInit, AfterViewInit {
   project: Project;
   user: Observable<User>;
   _allProject$: Observable<Project[]>;
@@ -25,6 +25,7 @@ export class ProjectDetailsComponent implements OnInit {
   userCanDonate = false;
   urlCache = new Map<string, SafeResourceUrl>();
 
+  updatedView = false;
   // Carousel Options
   urls = [];
   height = '400px';
@@ -68,22 +69,34 @@ export class ProjectDetailsComponent implements OnInit {
     return url;
   }
 
+  ngAfterViewInit() {}
+
   ngOnInit() {
     this._allProject$ = this.projectsService.projects$;
     this.user = this.userService.user$;
     this.user.pipe(filter(user => user !== null)).subscribe(user => {
-      this.userCanDonate = this.userService.canInvest(user) && (this.currentProject.owner !== user.uid);
+      this.userCanDonate = this.userService.canInvest(user) && this.currentProject.owner !== user.uid;
     });
     this.route.params.subscribe(params => {
       this.projectsService.getProject(params['uid']).subscribe(data => {
         this.currentProject = data;
+        if (!this.updatedView) {
+          this.projectsService.updateProjectViews(data);
+          this.updatedView = true;
+        }
         this.currentProject.pics.map((pic, index) => {
           if (index < 3 && pic.url !== '' && pic.url !== null) {
             this.urls.push(pic.url);
           }
         });
         this.tiles = [
-          { text: `Money Needed `, data: `{ ${this.currentProject.totMoneyNeeded}$}`, cols: 2, rows: 1, color: '#ffda79' },
+          {
+            text: `Money Needed `,
+            data: `{ ${this.numberWithCommas(this.currentProject.totMoneyNeeded)}$}`,
+            cols: 2,
+            rows: 1,
+            color: '#ffda79'
+          },
           { text: `# of Investors `, data: `{  ${this.currentProject.totInvestors} }`, cols: 2, rows: 1, color: '#cc8e35' },
           {
             text: `Campaign started on `,
@@ -99,14 +112,16 @@ export class ProjectDetailsComponent implements OnInit {
             rows: 1,
             color: '#ffda79'
           },
-          { text: `Money raised so Far`, data: ` { ${this.currentProject.totMoneyRaised}$ }`, cols: 4, rows: 1, color: '#ccae62' }
+          {
+            text: `Money raised so Far`,
+            data: ` { ${this.numberWithCommas(this.currentProject.totMoneyRaised)}$ }`,
+            cols: 4,
+            rows: 1,
+            color: '#ccae62'
+          }
         ];
       });
     });
-  }
-
-  deleteImage() {
-    this.projectsService.deleteImage(0);
   }
 
   openDonationBox() {
@@ -120,5 +135,11 @@ export class ProjectDetailsComponent implements OnInit {
       } else {
       }
     });
+  }
+
+  numberWithCommas(x) {
+    const parts = x.toString().split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return parts.join('.');
   }
 }

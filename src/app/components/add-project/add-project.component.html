@@ -21,21 +21,25 @@
       <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
         <mat-form-field appearance="outline" color="primary">
           <mat-label class="placeholder">Youtube's Video ID</mat-label>
-          <input matInput placeholder="videoLink" [(ngModel)]="request.videoLink" name="video" required />
+          <input matInput [(ngModel)]="request.videoLink" name="video" required />
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
+        <mat-form-field appearance="outline" color="primary">
+          <mat-label class="placeholder">Oneliner for preview</mat-label>
+          <input matInput [(ngModel)]="request.oneLiner" name="oneliner" required />
         </mat-form-field>
       </div>
       <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
         <mat-form-field appearance="outline" color="primary">
           <mat-label class="placeholder">Project's Information</mat-label>
-          <textarea matInput minRows="10" placeholder="info" minLength="300" matAutosizeMinRows="30" [(ngModel)]="request.info" name="info"
-            required></textarea>
+          <textarea matInput minRows="10" minLength="300" matAutosizeMinRows="30" [(ngModel)]="request.info" name="info" required></textarea>
         </mat-form-field>
       </div>
       <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
         <mat-form-field appearance="outline" color="primary">
           <mat-label class="placeholder">Funding Needed ($)</mat-label>
-          <input matInput placeholder="money needed" [(ngModel)]="request.totMoneyNeeded" type="number" name="totMoneyNeeded" required
-          />
+          <input matInput [(ngModel)]="request.totMoneyNeeded" type="number" name="totMoneyNeeded" required />
         </mat-form-field>
       </div>
       <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">

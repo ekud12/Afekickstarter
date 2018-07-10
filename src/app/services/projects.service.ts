@@ -25,8 +25,16 @@ export class ProjectsService implements OnInit {
   }
 
   ngOnInit() {}
+
   getProjects() {
     this.projectsCollection = this.afs.collection<Project>('projects');
+    this.projectsCollection.valueChanges().subscribe(projects => {
+      projects.map(project => {
+        if (project.endDate <= Date.now()) {
+          this.markProjectAsExpired(project);
+        }
+      });
+    });
     return (this.projects$ = this.projectsCollection.valueChanges());
   }
 
@@ -39,6 +47,7 @@ export class ProjectsService implements OnInit {
         info: newProject.info,
         totMoneyRaised: 0,
         totInvestors: 0,
+        oneLiner: newProject.oneLiner,
         totMoneyNeeded: newProject.totMoneyNeeded,
         startDate: newProject.startDate,
         endDate: newProject.endDate,
@@ -70,22 +79,13 @@ export class ProjectsService implements OnInit {
     return this.afs.doc<Project>(`projects/${uid}`).valueChanges();
   }
 
-  getAllProjects(): Observable<Project[]> {
-    return this.projects$;
-  }
-
-  deleteProject() {}
-
-  updateProject() {}
-
-  closeProject() {}
-
   updateDonation(amount: number, project: Project): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/${project.uid}`);
       project.totMoneyRaised = project.totMoneyRaised + amount;
       if (project.totMoneyNeeded <= project.totMoneyRaised) {
         project.completed = true;
+        project.expired = false;
       }
       project.totInvestors++;
       this.user$.pipe(take(1)).subscribe(user => {
@@ -106,7 +106,35 @@ export class ProjectsService implements OnInit {
     });
   }
 
-  deleteImage(index: number) {
-    // this.fileService.deleteImage(0);
+  updateProjectViews(project: Project): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/${project.uid}`);
+      project.views++;
+      projectRef
+        .set(project, { merge: true })
+        .then(() => {
+          resolve(true);
+        })
+        .catch(() => {
+          reject(false);
+        });
+    });
+  }
+
+  markProjectAsExpired(project: Project): Promise<any> {
+    console.log('checking');
+    return new Promise<any>((resolve, reject) => {
+      const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/${project.uid}`);
+      project.expired = true;
+      project.completed = true;
+      projectRef
+        .set(project, { merge: true })
+        .then(() => {
+          resolve(true);
+        })
+        .catch(() => {
+          reject(false);
+        });
+    });
   }
 }

@@ -3,14 +3,14 @@
     [style.backgroundSize]="'cover'">
     <div fxLayout="row" fxLayoutAlign="space-between center center" style="padding: 10px;">
       <div class="header-item" [style.backgroundColor]="'black'">
-        // Detailed Prospect
+        // Detailed Prospect {{ currentProject.completed ? '(Funded Successfully)' : ''}}
       </div>
     </div>
     <div class="header-item">
       <h1>{{currentProject.name}}</h1>
     </div>
   </div>
-  <div fxLayout="row" fxLayoutAlign="space-evenly center center">
+  <div fxLayout="row" fxLayoutAlign="space-evenly center center" *ngIf="!currentProject.completed">
     <div class="header-item" *ngIf="userCanDonate">
       <button mat-raised-button color="warn" (click)="openDonationBox()" style="border:2px solid white;">
         <mat-icon>attach_money</mat-icon>Donate Project
