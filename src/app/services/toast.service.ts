@@ -9,7 +9,7 @@ export class ToastService {
     this.snackBar.dismiss();
     this.snackBar.open(message, null, {
       duration: 7000,
-      verticalPosition: 'bottom',
+      verticalPosition: 'top',
       direction: 'ltr',
       panelClass: ['snack']
     });

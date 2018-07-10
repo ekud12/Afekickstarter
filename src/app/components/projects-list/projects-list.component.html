@@ -4,7 +4,7 @@
       <div class="header-item">
         // Projects
       </div>
-      <div fxLayout="row" fxLayoutAlign="space-evenly center center" class="header-item">
+      <div fxFlex fxLayout="row" fxLayoutAlign="space-evenly center center" class="header-item">
         <div style="font-size: 16px;padding:0px 8px;">
           [ Live Projects: {{ (projectsLive)}} ]
         </div>
@@ -23,7 +23,7 @@
   </div>
 
   <div [@listAnimation]="_projects ? _projects.length: 0" [fxLayout]="'row wrap'" class="previews-wrapper">
-    <div *ngFor=" let proj of _projects " [hidden]="!_projects " class="col ">
+    <div *ngFor=" let proj of _projects " [hidden]="!_projects" class="col">
       <app-single-project [project]="proj "></app-single-project>
     </div>
   </div>

@@ -43,6 +43,20 @@ export class UserService implements OnDestroy {
     return of(this.errorsData);
   }
 
+  updateUserName(user: User) {
+    return new Promise<any>((resolve, reject) => {
+      const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+      userRef
+        .set(user, { merge: true })
+        .then(() => {
+          this.toaster.openSnackBar('Updated The users name.');
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
   deleteUser(user: User) {
     // return new Promise<any>((resolve, reject) => {
     //   const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/${newProject.uid}`);

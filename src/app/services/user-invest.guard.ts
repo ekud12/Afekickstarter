@@ -18,7 +18,7 @@ export class UserInvestGuard implements CanActivate {
         if (!canView) {
           // Get project id and check if we are not the owner
           console.error('Access denied. Must have permission to view content');
-          this.router.navigate(['/home']);
+          this.router.navigate(['/home/projects']);
         } else {
         }
       })

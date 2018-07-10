@@ -1,5 +1,16 @@
-.container-panel-item {
+.container-panel-item-admin {
   width: 500px;
+  border-left: 6px solid rgb(0, 0, 0);
+}
+
+.container-panel-item-owner {
+  width: 500px;
+  border-left: 6px solid rgb(255, 30, 0);
+}
+
+.container-panel-item-investor {
+  width: 500px;
+  border-left: 6px solid rgb(47, 0, 255);
 }
 
 .trash-btn {
@@ -9,4 +20,8 @@
 .paramater-info {
   font-weight: bold;
   margin-right: 7px;
+}
+
+.actionable{
+cursor: pointer;
 }

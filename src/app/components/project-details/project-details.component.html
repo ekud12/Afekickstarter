@@ -17,8 +17,8 @@
         <mat-icon>attach_money</mat-icon>Donate Project
       </button>
     </div>
-    <div class="header-item" *ngIf="(user|async)?.roles.projectOwner">
-      <button mat-raised-button color="warn" routerLink="/home/edit" style="border:2px solid white;">
+    <div class="header-item" *ngIf="userCanEdit">
+      <button mat-raised-button color="warn" (click)="goEditProject()" style="border:2px solid white;">
         <mat-icon>edit</mat-icon>Edit Project
       </button>
     </div>

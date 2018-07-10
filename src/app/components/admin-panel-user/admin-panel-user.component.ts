@@ -10,6 +10,11 @@ import { UserService } from './../../services/user.service';
 export class AdminPanelUserComponent implements OnInit {
   @Input() user: User;
   type: string;
+  adminAvatar = '../../../assets/admin.png';
+  investorAvatar = '../../../assets/investor.png';
+  ownerAvatar = '../../../assets/owner.png';
+  url: string;
+  readonly = true;
   constructor(private userService: UserService) {}
 
   ngOnInit() {
@@ -20,9 +25,29 @@ export class AdminPanelUserComponent implements OnInit {
         : this.user.roles.investor
           ? 'Potential Investor'
           : 'no Type';
+    switch (this.type) {
+      case 'Administrator':
+        this.url = this.adminAvatar;
+        break;
+      case 'Project Owner':
+        this.url = this.ownerAvatar;
+        break;
+      case 'Potential Investor':
+        this.url = this.investorAvatar;
+        break;
+    }
   }
 
   deleteUser() {
     this.userService.deleteUser(this.user);
+  }
+
+  editName() {
+    this.readonly = false;
+  }
+
+  saveNewName() {
+    this.readonly = true;
+    this.userService.updateUserName(this.user);
   }
 }

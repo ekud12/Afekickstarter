@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { Project } from '../../models/project.model';
@@ -24,8 +24,8 @@ export class ProjectDetailsComponent implements OnInit, AfterViewInit {
   currentProject: Project;
   userCanDonate = false;
   urlCache = new Map<string, SafeResourceUrl>();
-
   updatedView = false;
+  userCanEdit = false;
   // Carousel Options
   urls = [];
   height = '400px';
@@ -55,7 +55,8 @@ export class ProjectDetailsComponent implements OnInit, AfterViewInit {
     private userService: UserService,
     private filesService: FilesService,
     private sanitizer: DomSanitizer,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) {}
 
   getVideoUrl(videoId: string) {
@@ -76,6 +77,7 @@ export class ProjectDetailsComponent implements OnInit, AfterViewInit {
     this.user = this.userService.user$;
     this.user.pipe(filter(user => user !== null)).subscribe(user => {
       this.userCanDonate = this.userService.canInvest(user) && this.currentProject.owner !== user.uid;
+      this.userCanEdit = this.userService.canEdit(user) && this.currentProject.owner === user.uid;
     });
     this.route.params.subscribe(params => {
       this.projectsService.getProject(params['uid']).subscribe(data => {
@@ -144,5 +146,9 @@ export class ProjectDetailsComponent implements OnInit, AfterViewInit {
     const parts = x.toString().split('.');
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return parts.join('.');
+  }
+
+  goEditProject() {
+    this.router.navigate(['/home/edit', this.currentProject.uid]);
   }
 }

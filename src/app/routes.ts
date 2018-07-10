@@ -12,7 +12,7 @@ import { AdminGuard } from './services/admin.guard';
 import { UserEditGuard } from './services/user-edit.guard';
 
 export const rootRoutes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/home/projects', pathMatch: 'full' },
   {
     path: 'login',
     component: LoginComponent
@@ -40,7 +40,7 @@ export const rootRoutes: Routes = [
         component: ProjectDetailsComponent
       },
       {
-        path: 'edit',
+        path: 'edit/:uid',
         component: EditProjectComponent,
         canActivate: [UserEditGuard]
       },
