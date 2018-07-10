@@ -20,6 +20,7 @@ img {
   padding-top: 0px;
   border-radius: 5px;
   margin-top: 40px;
+  margin-bottom: 50px;
   width: 70vw;
   height: auto;
   background-color: rgb(224, 224, 183);
@@ -49,6 +50,7 @@ img {
   font-weight: bold;
   height: 30vh;
   align-self: center;
+  padding-top:80px;
 }
 
 .spinner {

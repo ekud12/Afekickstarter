@@ -26,6 +26,8 @@ export class AddProjectComponent implements OnInit {
   submitLocked = true;
   request = new Project();
   status = 'waiting';
+  minDate = new Date(Date.now());
+
   constructor(
     private filesService: FilesService,
     private router: Router,
@@ -66,7 +68,7 @@ export class AddProjectComponent implements OnInit {
           this.status = 'done';
           setTimeout(() => {
             this.router.navigate(['/home/projects']);
-          }, 3000);
+          }, 1500);
         })
         .catch(error => {
           console.log(error);

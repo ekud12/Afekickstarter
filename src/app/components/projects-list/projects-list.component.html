@@ -3,10 +3,11 @@
     <div fxLayout="row" fxLayoutAlign="space-between center center" style="padding: 10px;">
       <div class="header-item">
         // Projects
+
       </div>
       <div fxLayout="row" fxLayoutAlign="space-evenly center center" class="header-item">
         <div style="font-size: 16px;padding:0px 8px;">
-          [ Live Projects: {{ (this.projects$|async)?.length}} ]
+          [ Live Projects: {{ (_projectsToshow.length)}} ]
         </div>
         <div style="font-size: 16px;padding:0px 8px">
           [ kicked so far: {{ projectsCompletedQuery}}]
@@ -14,21 +15,25 @@
         <div style="font-size: 16px;padding:0px 8px">
           [ Total Money Raised: {{projectsAmountFundedQuery}}$ ]
         </div>
+        <div *ngIf="!_projectsToshow">
+          <mat-spinner color="accent" [diameter]="22"></mat-spinner>
+        </div>
       </div>
+
     </div>
   </div>
 
-  <div [@listAnimation]="_projects ? _projects.length: 0" [fxLayout]="'row wrap'" class="previews-wrapper">
-    <div *ngFor=" let proj of _projects " [hidden]="!_projects " class="col ">
+  <div [@listAnimation]="_projectsToshow ? _projectsToshow.length: 0" [fxLayout]="'row wrap'" class="previews-wrapper">
+    <div *ngFor=" let proj of _projectsToshow " [hidden]="!_projectsToshow " class="col ">
       <app-single-project [project]="proj "></app-single-project>
     </div>
   </div>
 
-  <div *ngIf="!_projects " class="spinner ">
+  <div *ngIf="!_projectsToshow " class="spinner ">
     <mat-spinner></mat-spinner>
   </div>
 
-  <div *ngIf="_projects && _projects.length === 0" class="no-data">
+  <div *ngIf="_projectsToshow && _projectsToshow.length === 0" class="no-data">
     No Projects exist... Add a new Idea of your Own!
   </div>
 </div>

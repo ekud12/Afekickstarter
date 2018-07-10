@@ -1,13 +1,42 @@
-<div [hidden]="hide && !project">
+<div [hidden]="hide">
   <mat-card fxLayout="column" fxLayoutAlign="space-between center center" class="mat-elevation-z8 preview-container">
-    <mat-card-header class="header" [hidden]="hide">
+    <mat-card-header class="header" [hidden]="hide" fxFlex="15">
       <mat-card-title class="header-title"> - {{project.name}} -</mat-card-title>
     </mat-card-header>
-    <img mat-card-image [src]="project.thumbnail.url" (load)="markAsLoaded()" [hidden]="hide" />
-    <mat-card-actions fxLayout="column" fxLayoutAlign="stretch stretch">
-      <div> {{daysLeft}}</div>
-      <div> {{percentageCompleted}}%</div>
-      <button mat-raised-button color="accent" (click)="projectDetails()">Learn more about this Project!</button>
+    <img mat-card-image [src]="project.thumbnail.url" (load)="markAsLoaded()" [hidden]="hide" fxFlex="45" />
+    <mat-card-actions fxLayout="column" fxLayoutAlign="stretch stretch" fxFlex="40" fxLayoutGap="10px">
+      <div fxFlex>
+        <button mat-raised-button color="primary" (click)="projectDetails()">
+          Learn more about this Project!
+        </button>
+      </div>
+
+      <div fxFlex="70" fxLayout="row" fxLayoutAlign="space-between stretch stretch">
+        <div class="preview-info" [style.backgroundColor]="'#EB974E'" fxFlex fxLayout="column" fxLayoutAlign="space-evenly center center">
+          <div class="preview-info-data">
+            {{daysLeft}}
+          </div>
+          <div>
+            Days left
+          </div>
+        </div>
+        <div class="preview-info" [style.backgroundColor]="'#F2784B'" fxFlex fxLayout="column" fxLayoutAlign="space-evenly center center">
+          <div class="preview-info-data">
+            {{percentageCompleted}}%
+          </div>
+          <div>
+            raised
+          </div>
+        </div>
+        <div class="preview-info" [style.backgroundColor]="'#E9D460'" fxFlex fxLayout="column" fxLayoutAlign="space-evenly center center">
+          <div class="preview-info-data">
+            {{this.project.totInvestors}}
+          </div>
+          <div>
+            invested
+          </div>
+        </div>
+      </div>
     </mat-card-actions>
   </mat-card>
 </div>

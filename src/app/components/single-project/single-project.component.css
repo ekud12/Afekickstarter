@@ -18,3 +18,13 @@
   border-bottom: 5px solid orange;
   border-radius: 5px;
 }
+
+.preview-info {
+  background: rgb(0, 124, 240);
+  color: white;
+  font-size: 12px;
+  font-weight: bolder;
+}
+.preview-info-data{
+  font-size:18px;
+}

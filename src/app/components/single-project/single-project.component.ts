@@ -10,13 +10,13 @@ import { Project } from './../../models/project.model';
 export class SingleProjectCardComponent implements OnInit {
   @Input() project: Project;
   hide = true;
-  percentageCompleted: number;
+  percentageCompleted: string;
   daysLeft: number;
   @Output() loaded: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.percentageCompleted = ((this.project.totMoneyRaised / this.project.totMoneyNeeded) * 100);
+    this.percentageCompleted = ((this.project.totMoneyRaised / this.project.totMoneyNeeded) * 100).toFixed(0);
     this.daysLeft = this.getDays(this.project.endDate, this.project.startDate);
   }
 

@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Project } from '../models/project.model';
 import { User } from './../models/user.model';
@@ -24,8 +24,7 @@ export class ProjectsService implements OnInit {
     this.user$ = this.userService.user$;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   getProjects() {
     this.projectsCollection = this.afs.collection<Project>('projects');
     return (this.projects$ = this.projectsCollection.valueChanges());
@@ -84,7 +83,10 @@ export class ProjectsService implements OnInit {
   updateDonation(amount: number, project: Project): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/${project.uid}`);
-      project.totMoneyRaised = project.totInvestors + amount;
+      project.totMoneyRaised = project.totMoneyRaised + amount;
+      if (project.totMoneyNeeded <= project.totMoneyRaised) {
+        project.completed = true;
+      }
       project.totInvestors++;
       this.user$.pipe(take(1)).subscribe(user => {
         project.investors.push({
