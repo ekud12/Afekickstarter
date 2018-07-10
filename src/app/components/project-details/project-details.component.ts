@@ -101,32 +101,41 @@ export class ProjectDetailsComponent implements OnInit, AfterViewInit {
               rows: 1,
               color: '#ffda79'
             },
-            { text: `# of Investors `, data: `{  ${this.currentProject.totInvestors} }`, cols: 2, rows: 1, color: '#cc8e35' },
+            {
+              text: `Money raised so Far`,
+              data: ` { ${this.numberWithCommas(this.currentProject.totMoneyRaised)}$ }`,
+              cols: 2,
+              rows: 1,
+              color: '#cc8e35'
+            },
+            { text: `# of investments `, data: `{  ${this.currentProject.totInvestors} }`, cols: 2, rows: 1, color: '#cc8e35' },
+            {
+              text: `# of Unique Investors`,
+              data: `{  ${new Set(this.currentProject.investors.map(i => i.investorId)).size} }`,
+              cols: 2,
+              rows: 1,
+              color: '#ffda79'
+            },
             {
               text: `Campaign started on `,
               data: `{ ${new Date(this.currentProject.startDate).toUTCString()} }`,
               cols: 2,
               rows: 1,
-              color: '#cc8e35'
+              color: '#ffda79'
             },
             {
               text: `Deadline `,
               data: `{ ${new Date(this.currentProject.endDate).toUTCString()} }`,
               cols: 2,
               rows: 1,
-              color: '#ffda79'
-            },
-            {
-              text: `Money raised so Far`,
-              data: ` { ${this.numberWithCommas(this.currentProject.totMoneyRaised)}$ }`,
-              cols: 4,
-              rows: 1,
-              color: '#ccae62'
+              color: '#cc8e35'
             }
+
           ];
         }
       });
     });
+
   }
 
   openDonationBox() {

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ProjectsService } from '../../services/projects.service';
 import { Project } from './../../models/project.model';
@@ -6,7 +6,8 @@ import { Project } from './../../models/project.model';
 @Component({
   selector: 'app-donation-box',
   templateUrl: './donation-box.component.html',
-  styleUrls: ['./donation-box.component.css']
+  styleUrls: ['./donation-box.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DonationBoxComponent implements OnInit {
   donationAmount = 0;

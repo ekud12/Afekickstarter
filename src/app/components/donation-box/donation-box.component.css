@@ -5,3 +5,15 @@
 .padded {
   padding: 30px 30px;
 }
+
+/* Border */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgb(68, 68, 68);
+}
+/* Font color */
+input.mat-input-element {
+  color: rgb(68, 68, 68);
+}
+.placeholder {
+  color: rgb(68, 68, 68);
+}
