@@ -13,10 +13,9 @@ export class UserInvestGuard implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.auth.user$.pipe(
       take(1),
-      map(user => (user && this.auth.canInvest(user) ? true : false)), // <-- important line
+      map(user => (user && this.auth.canInvest(user) ? true : false)),
       tap(canView => {
         if (!canView) {
-          // Get project id and check if we are not the owner
           console.error('Access denied. Must have permission to view content');
           this.router.navigate(['/home/projects']);
         } else {

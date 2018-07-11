@@ -38,9 +38,6 @@ export class AdminPanelUserComponent implements OnInit {
     }
   }
 
-  deleteUser() {
-    this.userService.deleteUser(this.user);
-  }
 
   editName() {
     this.readonly = false;

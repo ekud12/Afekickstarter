@@ -14,7 +14,7 @@ export class UserEditGuard implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.auth.user$.pipe(
       take(1),
-      map(user => (user && this.auth.canEdit(user) ? true : false)), // <-- important line
+      map(user => (user && this.auth.canEdit(user) ? true : false)),
       tap(canEdit => {
         if (!canEdit) {
           this.toaster.openSnackBar('Access denied. Must have permission to view content');

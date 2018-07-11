@@ -14,23 +14,26 @@ export class SingleProjectCardComponent implements OnInit {
   daysLeft: number;
 
   constructor(private router: Router) {}
-
+  /**
+   * Documentation:
+   *
+   */
   ngOnInit() {
     this.percentageCompleted = ((this.project.totMoneyRaised / this.project.totMoneyNeeded) * 100).toFixed(0);
     this.daysLeft = this.getDays(this.project.endDate, this.project.startDate);
   }
 
-  getDays(date2, date1) {
+  getDays(date2, date1): number {
     const one_day = 1000 * 60 * 60 * 24;
     const difference_ms = date2 - date1;
     return Math.round(difference_ms / one_day);
   }
 
-  onImageLoaded() {
+  onImageLoaded(): void {
     this.hide = false;
   }
 
-  projectDetails() {
+  redirectToDetailsView(): void {
     this.router.navigate(['/home/details', this.project.uid]);
   }
 }

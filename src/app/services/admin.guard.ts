@@ -14,7 +14,7 @@ export class AdminGuard implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.auth.user$.pipe(
       take(1),
-      map(user => (user && this.auth.isAdmin(user) ? true : false)), // <-- important line
+      map(user => (user && this.auth.isAdmin(user) ? true : false)),
       tap(isAdmin => {
         if (!isAdmin) {
           this.toaster.openSnackBar('Access denied, Admin permissions required.');

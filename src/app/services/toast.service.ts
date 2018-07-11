@@ -8,7 +8,7 @@ export class ToastService {
   public openSnackBar(message: string, action?: string) {
     this.snackBar.dismiss();
     this.snackBar.open(message, null, {
-      duration: 7000,
+      duration: 4000,
       verticalPosition: 'top',
       direction: 'ltr',
       panelClass: ['snack']

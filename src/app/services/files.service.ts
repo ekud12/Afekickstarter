@@ -7,7 +7,6 @@ import { FileUpload } from '../models/file.model';
 import { Pic, Project } from '../models/project.model';
 @Injectable()
 export class FilesService {
-  private basePath = '/uploads';
   ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
   uploadProgress: Observable<number>;

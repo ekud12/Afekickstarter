@@ -57,41 +57,6 @@ export class UserService implements OnDestroy {
     });
   }
 
-  deleteUser(user: User) {
-    // return new Promise<any>((resolve, reject) => {
-    //   const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/${newProject.uid}`);
-    //   const createdProject: Project = {
-    //     uid: newProject.uid,
-    //     name: newProject.name,
-    //     info: newProject.info,
-    //     totMoneyRaised: 0,
-    //     totInvestors: 0,
-    //     oneLiner: newProject.oneLiner,
-    //     totMoneyNeeded: newProject.totMoneyNeeded,
-    //     startDate: newProject.startDate,
-    //     endDate: newProject.endDate,
-    //     pics: JSON.parse(JSON.stringify(newProject.pics)),
-    //     videoLink: newProject.videoLink,
-    //     thumbnail: JSON.parse(JSON.stringify(newProject.thumbnail)),
-    //     owner: null,
-    //     investors: [],
-    //     views: 0,
-    //     completed: false,
-    //     expired: false
-    //   };
-    //   this.user$.pipe(take(1)).subscribe(user => {
-    //     createdProject.owner = user.uid;
-    //     projectRef
-    //       .set(createdProject, { merge: true })
-    //       .then(() => {
-    //         resolve(createdProject.uid);
-    //       })
-    //       .catch(() => {
-    //         reject();
-    //       });
-    //   });
-    // });
-  }
 
   emailSignUp(request: RegisterRequest) {
     return this.afAuth.auth
