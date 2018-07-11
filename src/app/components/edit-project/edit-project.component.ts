@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { FileUpload } from '../../models/file.model';
 import { Pic, Project } from '../../models/project.model';
 import { User } from '../../models/user.model';
@@ -13,22 +14,19 @@ import { ProjectsService } from './../../services/projects.service';
   templateUrl: './edit-project.component.html',
   styleUrls: ['./edit-project.component.css']
 })
-export class EditProjectComponent implements OnInit {
+export class EditProjectComponent implements OnInit, OnDestroy {
   @ViewChild('editForm') myForm;
+  private onDestroy$ = new Subject<any>();
+
   user: User;
-  selectedFiles: FileList;
   currentFileUpload: FileUpload;
-  uploadProgress: Observable<number>;
-  downloadURL: string;
+  currentProject: Project;
   files = new Array<File>(4);
-  counter$: Observable<number>;
-  submitLocked = true;
-  request = new Project();
+
   status = 'waiting';
   minDate = new Date(Date.now());
   time: string;
   date: Date;
-  currentProject: Project;
 
   constructor(
     private filesService: FilesService,
@@ -39,9 +37,7 @@ export class EditProjectComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
-    this.counter$ = this.filesService.counter$;
-    this.userService.user$.subscribe(val => {
+    this.userService.user$.pipe(takeUntil(this.onDestroy$)).subscribe(val => {
       this.user = val;
     });
     this.route.params.subscribe(params => {
@@ -49,10 +45,6 @@ export class EditProjectComponent implements OnInit {
         this.currentProject = data;
       });
     });
-  }
-
-  selectFile(event) {
-    this.selectedFiles = event.target.files;
   }
 
   updateFile(event, picnum) {
@@ -90,16 +82,21 @@ export class EditProjectComponent implements OnInit {
       setTimeout(() => {
         this.projectService
           .editProject(this.currentProject)
-          .then(res => {
+          .then(() => {
             this.status = 'done';
             setTimeout(() => {
               this.router.navigate(['/home/projects']);
-            }, 1500);
+            }, 1000);
           })
           .catch(error => {
             console.log(error);
           });
       }, 1500);
     });
+  }
+
+  ngOnDestroy() {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
   }
 }

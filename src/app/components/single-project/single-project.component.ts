@@ -26,7 +26,7 @@ export class SingleProjectCardComponent implements OnInit {
     return Math.round(difference_ms / one_day);
   }
 
-  markAsLoaded() {
+  onImageLoaded() {
     this.hide = false;
   }
 

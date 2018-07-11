@@ -1,11 +1,10 @@
 <div [hidden]="hide">
-  <mat-card fxLayout="column" fxLayoutAlign="space-between center center" class="mat-elevation-z8"
-  [ngClass]="{'preview-container' :!project.completed ,'preview-container-completed': project.completed && !project.expired,
+  <mat-card fxLayout="column" fxLayoutAlign="space-between center center" class="mat-elevation-z8" [ngClass]="{'preview-container' :!project.completed ,'preview-container-completed': project.completed && !project.expired,
   'preview-container-expired': project.expired}">
     <mat-card-header class="header" [hidden]="hide" fxFlex="10">
       <mat-card-title class="header-title"> - {{project.name}} -</mat-card-title>
     </mat-card-header>
-    <img mat-card-image [src]="project.thumbnail.url" (load)="markAsLoaded()" [hidden]="hide" fxFlex="50" />
+    <img mat-card-image [src]="project.thumbnail.url" (load)="onImageLoaded()" [hidden]="hide" fxFlex="50" />
     <div fxFlex="10">
       {{ project.oneLiner}}
     </div>
@@ -40,7 +39,7 @@
             {{this.project.totInvestors}}
           </div>
           <div>
-           <mat-icon>accessibility_new</mat-icon>
+            <mat-icon>accessibility_new</mat-icon>
           </div>
         </div>
         <div class="preview-info" [style.backgroundColor]="'#F4B350'" fxFlex fxLayout="column" fxLayoutAlign="space-evenly center center">
@@ -48,7 +47,7 @@
             {{this.project.views}}
           </div>
           <div>
-          <mat-icon>remove_red_eye</mat-icon>
+            <mat-icon>remove_red_eye</mat-icon>
           </div>
         </div>
       </div>

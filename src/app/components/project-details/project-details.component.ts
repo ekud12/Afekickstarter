@@ -1,12 +1,11 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 import { Project } from '../../models/project.model';
 import { User } from '../../models/user.model';
-import { FilesService } from '../../services/files.service';
 import { ProjectsService } from '../../services/projects.service';
 import { UserService } from '../../services/user.service';
 import { DonationBoxComponent } from './../donation-box/donation-box.component';
@@ -16,16 +15,17 @@ import { DonationBoxComponent } from './../donation-box/donation-box.component';
   templateUrl: './project-details.component.html',
   styleUrls: ['./project-details.component.css']
 })
-export class ProjectDetailsComponent implements OnInit, AfterViewInit {
-  project: Project;
+export class ProjectDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   user: Observable<User>;
   _allProject$: Observable<Project[]>;
   player: YT.Player;
   currentProject: Project;
-  userCanDonate = false;
+
   urlCache = new Map<string, SafeResourceUrl>();
   updatedView = false;
   userCanEdit = false;
+  userCanDonate = false;
+
   // Carousel Options
   urls = [];
   height = '400px';
@@ -47,13 +47,13 @@ export class ProjectDetailsComponent implements OnInit, AfterViewInit {
   captionBackground = 'rgba(0, 0, 0, .35)';
   lazyLoad = false;
   width = '70vw';
+  private onDestroy$ = new Subject<void>();
 
   tiles: any[] = [];
   constructor(
     private route: ActivatedRoute,
     private projectsService: ProjectsService,
     private userService: UserService,
-    private filesService: FilesService,
     private sanitizer: DomSanitizer,
     public dialog: MatDialog,
     private router: Router
@@ -75,10 +75,15 @@ export class ProjectDetailsComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this._allProject$ = this.projectsService.projects$;
     this.user = this.userService.user$;
-    this.user.pipe(filter(user => user !== null)).subscribe(user => {
-      this.userCanDonate = this.userService.canInvest(user) && this.currentProject.owner !== user.uid;
-      this.userCanEdit = this.userService.canEdit(user) && this.currentProject.owner === user.uid;
-    });
+    this.user
+      .pipe(
+        filter(user => user !== null),
+        takeUntil(this.onDestroy$)
+      )
+      .subscribe(user => {
+        this.userCanDonate = this.userService.canInvest(user) && this.currentProject.owner !== user.uid;
+        this.userCanEdit = this.userService.canEdit(user) && this.currentProject.owner === user.uid;
+      });
     this.route.params.subscribe(params => {
       this.projectsService.getProject(params['uid']).subscribe(data => {
         this.currentProject = data;
@@ -130,12 +135,10 @@ export class ProjectDetailsComponent implements OnInit, AfterViewInit {
               rows: 1,
               color: '#cc8e35'
             }
-
           ];
         }
       });
     });
-
   }
 
   openDonationBox() {
@@ -159,5 +162,10 @@ export class ProjectDetailsComponent implements OnInit, AfterViewInit {
 
   goEditProject() {
     this.router.navigate(['/home/edit', this.currentProject.uid]);
+  }
+
+  ngOnDestroy() {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
   }
 }

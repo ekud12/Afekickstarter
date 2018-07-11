@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { filter, tap } from 'rxjs/operators';
+import { filter, takeUntil, tap } from 'rxjs/operators';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 import { fadeAnimation } from './../../animations/animations';
@@ -13,7 +13,7 @@ import { ProjectsService } from './../../services/projects.service';
   styleUrls: ['./container.component.css'],
   animations: [fadeAnimation]
 })
-export class ContainerComponent implements OnInit {
+export class ContainerComponent implements OnInit, OnDestroy {
   _user: Observable<User>;
   userProjectsCount = 0;
   loading = true;
@@ -27,12 +27,16 @@ export class ContainerComponent implements OnInit {
         tap(() => {
           this.loading = false;
         }),
-        filter(user => user !== null && user !== undefined)
+        filter(user => user !== null && user !== undefined),
+        takeUntil(this.onDestroy$)
       )
       .subscribe(user => {
         this.projectService
           .getProjects()
-          .pipe(filter(projects => projects !== null && projects !== undefined))
+          .pipe(
+            filter(projects => projects !== null && projects !== undefined),
+            takeUntil(this.onDestroy$)
+          )
           .subscribe(values => {
             this.userProjectsCount = values.filter(item => item.owner === user.uid).length;
           });
@@ -47,4 +51,8 @@ export class ContainerComponent implements OnInit {
     this.router.navigate(['add']);
   }
 
+  ngOnDestroy() {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
+  }
 }

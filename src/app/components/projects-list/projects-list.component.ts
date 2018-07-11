@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, filter, takeWhile, takeUntil } from 'rxjs/operators';
 import { staggerList } from '../../animations';
 import { Project } from './../../models/project.model';
 import { ProjectsService } from './../../services/projects.service';
@@ -32,7 +32,8 @@ export class ProjectsListComponent implements OnInit, OnDestroy {
           this.projectsAmountFundedQuery = 0;
           this.projectsCompletedQuery = 0;
           this.projectsLive = 0;
-        })
+        }),
+        takeUntil(this.onDestroy$)
       )
       .subscribe(
         projects => {
