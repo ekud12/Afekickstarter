@@ -7,86 +7,91 @@
     </div>
   </div>
   <div [ngSwitch]="status">
+    <div *ngIf="currentProject">
 
-    <form #addProjForm="ngForm" *ngSwitchCase="'waiting'" fxLayout="column" fxLayoutAlign="space-between center center" novalidate>
-      <h2>
-        Make your desired changes and save at the end...
-      </h2>
-      <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
-        <mat-form-field appearance="outline" color="primary">
-          <mat-label class="placeholder">Project's Name</mat-label>
-          <input matInput [(ngModel)]="currentProject.name" name="name" required/>
-        </mat-form-field>
-      </div>
-      <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
-        <mat-form-field appearance="outline" color="primary">
-          <mat-label class="placeholder">Youtube's Video ID</mat-label>
-          <input matInput [(ngModel)]="currentProject.videoLink" name="video" required />
-        </mat-form-field>
-      </div>
-      <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
-        <mat-form-field appearance="outline" color="primary">
-          <mat-label class="placeholder">Oneliner for preview (30 chars)</mat-label>
-          <input matInput [(ngModel)]="currentProject.oneLiner" name="oneliner" maxlength="30" required />
-        </mat-form-field>
-      </div>
-      <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
-        <mat-form-field appearance="outline" color="primary">
-          <mat-label class="placeholder">Project's Information</mat-label>
-          <textarea matInput minRows="10" minLength="300" matAutosizeMinRows="30" [(ngModel)]="currentProject.info" name="info" required></textarea>
-        </mat-form-field>
-      </div>
-      <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
-        <mat-form-field appearance="outline" color="primary">
-          <mat-label class="placeholder">Funding Needed ($)</mat-label>
-          <input matInput [(ngModel)]="currentProject.totMoneyNeeded" type="number" name="totMoneyNeeded" required />
-        </mat-form-field>
-      </div>
-      <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
-        <mat-form-field appearance="outline" color="primary">
-          <mat-label class="placeholder">Deadline Date</mat-label>
-          <input required matInput [min]="minDate" [matDatepicker]="picker" [(ngModel)]="date" name="endDate">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker startView="month"></mat-datepicker>
-        </mat-form-field>
-      </div>
-      <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
-        <mat-form-field appearance="outline" color="primary">
-          <mat-label class="placeholder">Deadline timepicker</mat-label>
-          <input matInput [ngxTimepicker]="timepicker" [format]="12" required [(ngModel)]="time" name="time">
-          <ngx-material-timepicker #timepicker></ngx-material-timepicker>
-        </mat-form-field>
-      </div>
-      <div style="width: 400px;" fxLayout="row" fxLayoutAlign="space-between center center">
-        <div class="upload-btn-wrapper">
-          <button [ngClass]="files[0] ? 'btnGood': 'btn'"> {{ files[0] ? files[0].name: 'Poster pic (HQ)'}}</button>
-          <input type="file" id="thumbnail" (change)="updateFile($event,0)" required>
+      <form #editForm="ngForm" *ngSwitchCase="'waiting'" fxLayout="column" fxLayoutAlign="space-between center center" novalidate>
+        <h2>
+          Make your desired changes and save at the end...
+        </h2>
+        <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label class="placeholder">Project's Name</mat-label>
+            <input matInput [(ngModel)]="currentProject.name" name="name" required/>
+          </mat-form-field>
         </div>
-      </div>
-      <div style="width: 400px;" fxLayout="row" fxLayoutAlign="space-between center center">
-        <div class="upload-btn-wrapper">
-          <button [ngClass]="files[1] ? 'btnGood': 'btn'"> {{ files[1] ? files[1].name: 'Choose one picture at least (HQ)'}}</button>
-          <input type="file" id="thumbnail" (change)="updateFile($event,1)" required>
+        <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label class="placeholder">Youtube's Video ID</mat-label>
+            <input matInput [(ngModel)]="currentProject.videoLink" name="video" required />
+          </mat-form-field>
         </div>
-      </div>
-      <div style="width: 400px;" fxLayout="row" fxLayoutAlign="space-between center center">
-        <div class="upload-btn-wrapper">
-          <button [ngClass]="files[2] ? 'btnGood': 'btn'">{{ files[2] ? files[2].name: 'Another Optional Picture (HQ)'}}</button>
-          <input type="file" id="thumbnail" (change)="updateFile($event,2)" required>
+        <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label class="placeholder">Oneliner for preview (30 chars)</mat-label>
+            <input matInput [(ngModel)]="currentProject.oneLiner" name="oneliner" maxlength="30" required />
+          </mat-form-field>
         </div>
-      </div>
-      <div style="width: 400px;" fxLayout="row" fxLayoutAlign="space-between center center">
-        <div class="upload-btn-wrapper">
-          <button [ngClass]="files[3] ? 'btnGood': 'btn'">{{ files[3] ? files[3].name: 'Thumbnail (Choose one that will stand out!) (HQ)'}}</button>
-          <input type="file" id="thumbnail" (change)="updateFile($event,3)" required>
+        <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label class="placeholder">Project's Information</mat-label>
+            <textarea matInput minRows="10" minLength="300" matAutosizeMinRows="30" [(ngModel)]="currentProject.info" name="info" required></textarea>
+          </mat-form-field>
         </div>
-      </div>
-      <div class="create-btn">
-        <button mat-raised-button color="primary" (click)="addProject()" [disabled]="!addProjForm.form.valid || files[0] === undefined|| files[1] === undefined || files[3] === undefined">
-          Save Changes
-        </button>
-      </div>
-    </form>
+        <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label class="placeholder">Funding Needed ($)</mat-label>
+            <input matInput [(ngModel)]="currentProject.totMoneyNeeded" type="number" name="totMoneyNeeded" required />
+          </mat-form-field>
+        </div>
+        <h4> Projects Deadline is permenant. If you wish to extend the time you must buy premium membership.</h4>
+        <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label class="placeholder">Deadline Date</mat-label>
+            <input matInput [min]="minDate" [matDatepicker]="picker" disabled="true" [(ngModel)]="date" name="endDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker startView="month"></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="space-between stretch center" style="width: 400px;">
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label class="placeholder">Deadline timepicker</mat-label>
+            <input matInput [ngxTimepicker]="timepicker" [format]="12" disabled="true" [(ngModel)]="time" name="time">
+            <ngx-material-timepicker #timepicker></ngx-material-timepicker>
+          </mat-form-field>
+        </div>
+        <h4>Optional: Change the pictures you uploaded:</h4>
+        <div style="width: 400px;" fxLayout="row" fxLayoutAlign="space-between center center">
+          <div class="upload-btn-wrapper">
+            <button [ngClass]="files[0] ? 'btnGood': 'btn'"> {{ files[0] ? files[0].name: 'Poster pic (HQ)'}}</button>
+            <input type="file" id="thumbnail" (change)="updateFile($event,0)">
+          </div>
+        </div>
+        <div style="width: 400px;" fxLayout="row" fxLayoutAlign="space-between center center">
+          <div class="upload-btn-wrapper">
+            <button [ngClass]="files[1] ? 'btnGood': 'btn'"> {{ files[1] ? files[1].name: 'Choose one picture at least (HQ)'}}</button>
+            <input type="file" id="thumbnail" (change)="updateFile($event,1)">
+          </div>
+        </div>
+        <div style="width: 400px;" fxLayout="row" fxLayoutAlign="space-between center center">
+          <div class="upload-btn-wrapper">
+            <button [ngClass]="files[2] ? 'btnGood': 'btn'">{{ files[2] ? files[2].name: 'Another Optional Picture (HQ)'}}</button>
+            <input type="file" id="thumbnail" (change)="updateFile($event,2)">
+          </div>
+        </div>
+        <div style="width: 400px;" fxLayout="row" fxLayoutAlign="space-between center center">
+          <div class="upload-btn-wrapper">
+            <button [ngClass]="files[3] ? 'btnGood': 'btn'">{{ files[3] ? files[3].name: 'Thumbnail (Choose one that will stand out!) (HQ)'}}</button>
+            <input type="file" id="thumbnail" (change)="updateFile($event,3)">
+          </div>
+        </div>
+        <div class="create-btn">
+          <button mat-raised-button color="primary" (click)="saveChanges()" [disabled]="!editForm.form.valid">
+            Save Changes
+          </button>
+        </div>
+      </form>
+    </div>
+
 
     <div *ngSwitchCase="'creating'" class="working" fxLayout="column" fxLayoutAlign="space-around center center">
       Please wait while we update your project...

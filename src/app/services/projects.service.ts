@@ -74,6 +74,39 @@ export class ProjectsService implements OnInit {
     });
   }
 
+  editProject(editedProject: Project): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/${editedProject.uid}`);
+      const projObj: Project = {
+        uid: editedProject.uid,
+        name: editedProject.name,
+        info: editedProject.info,
+        totMoneyRaised: editedProject.totMoneyRaised,
+        totInvestors: editedProject.totInvestors,
+        oneLiner: editedProject.oneLiner,
+        totMoneyNeeded: editedProject.totMoneyNeeded,
+        startDate: editedProject.startDate,
+        endDate: editedProject.endDate,
+        pics: JSON.parse(JSON.stringify(editedProject.pics)),
+        videoLink: editedProject.videoLink,
+        thumbnail: JSON.parse(JSON.stringify(editedProject.thumbnail)),
+        owner: editedProject.owner,
+        investors: editedProject.investors,
+        views: editedProject.views,
+        completed: editedProject.completed,
+        expired: editedProject.expired
+      };
+      projectRef
+        .set(projObj, { merge: true })
+        .then(() => {
+          resolve(projObj.uid);
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
   getProject(uid: string) {
     return this.afs.doc<Project>(`projects/${uid}`).valueChanges();
   }
