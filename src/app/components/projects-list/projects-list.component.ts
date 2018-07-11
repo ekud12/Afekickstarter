@@ -41,15 +41,19 @@ export class ProjectsListComponent implements OnInit, OnDestroy {
             this.projectsAmountFundedQuery += project.totMoneyRaised;
             this.projectsCompletedQuery += project.completed && !project.expired ? 1 : 0;
           });
-          this._projectsToshow = projects.filter(
-            project => !project.completed
-          );
+          this._projectsToshow = projects.filter(project => !project.completed);
           this.projectsLive = this._projectsToshow.length ? this._projectsToshow.length : 0;
         },
         error => {
           console.log(error);
         }
       );
+  }
+
+  numberWithCommas(x) {
+    const parts = x.toString().split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return parts.join('.');
   }
 
   ngOnDestroy() {

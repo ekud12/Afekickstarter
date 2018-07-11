@@ -12,7 +12,7 @@
           [ kicked so far: {{ projectsCompletedQuery}}]
         </div>
         <div style="font-size: 16px;padding:0px 8px">
-          [ Total Money Raised: {{projectsAmountFundedQuery}}$ ]
+          [ Total Money Raised: {{numberWithCommas(projectsAmountFundedQuery)}}$ ]
         </div>
         <div *ngIf="!_projects">
           <mat-spinner color="accent" [diameter]="22"></mat-spinner>
