@@ -77,14 +77,7 @@ export class UserService implements OnDestroy {
 
   signIn(req: LoginRequest) {
     return this.afAuth.auth
-      .signInWithEmailAndPassword(req.email, req.password)
-      .then(value => {
-        this.router.navigate(['home']);
-      })
-      .catch(error => {
-        this.errorsData.next(error.message);
-        this.toaster.openSnackBar(error.message);
-      });
+      .signInWithEmailAndPassword(req.email, req.password);
   }
 
   private updateUserData(user, customData: RegisterRequest) {

@@ -25,3 +25,7 @@ input.mat-input-element {
 .placeholder {
   color: white;
 }
+
+.padded {
+  padding: 7px 0px;
+}
