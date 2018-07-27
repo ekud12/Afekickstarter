@@ -10,6 +10,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "author": {
+    "name": "Liel Kaysari, Gil Blaier"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^6.0.0-rc.1",
