@@ -78,7 +78,7 @@ export class AddProjectComponent implements OnInit {
     this.request.uid = Math.random()
       .toString(36)
       .substring(2);
-    this.filesService.uploadFile(this.request.uid, this.files).then(pics => {
+    this.filesService.uploadFiles(this.request.uid, this.files).then(pics => {
       this.request.thumbnail = pics[3];
       this.request.pics = pics;
       this.projectService

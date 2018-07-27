@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from 'angularfire2/storage';
-import { Observable, of } from 'rxjs';
+import { AngularFireStorage } from 'angularfire2/storage';
+import { of } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { FileUpload } from '../models/file.model';
 import { Pic, Project } from '../models/project.model';
 @Injectable()
 export class FilesService {
-  ref: AngularFireStorageReference;
-  task: AngularFireUploadTask;
-  uploadProgress: Observable<number>;
   filesToUpload: Array<Pic> = new Array<Pic>(4);
   count = 0;
   counter$ = of(this.count);
@@ -19,7 +16,7 @@ export class FilesService {
     this.filesToUpload = [{ url: '', key: '' }, { url: '', key: '' }, { url: '', key: '' }, { url: '', key: '' }];
   }
 
-  uploadFile(key: string, files: Array<File>): Promise<any> {
+  uploadFiles(key: string, files: Array<File>): Promise<any> {
     this.count = 0;
     files.map((item, index) => {
       this.tasks.push(

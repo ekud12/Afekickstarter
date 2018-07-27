@@ -1,7 +1,3 @@
-.dialog{
-
-}
-
 .padded {
   padding: 30px 30px;
 }
@@ -14,6 +10,7 @@
 input.mat-input-element {
   color: rgb(68, 68, 68);
 }
+
 .placeholder {
   color: rgb(68, 68, 68);
 }

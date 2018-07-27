@@ -29,14 +29,15 @@
       </mat-icon>
     </button>
   </div>
-  <div *ngIf="!loading && !userService.isLogged(_user|async)" class="actionable">
+  <div *ngIf="!isLoading && !userService.isLogged(_user|async)" class="actionable">
     <button mat-raised-button routerLink="/login" *ngIf="!(_user|async) " class="nav-btn">Login</button>
     <button mat-raised-button routerLink="/register" *ngIf="!(_user|async) " class="nav-btn">Register</button>
   </div>
-  <div *ngIf="loading">
+  <div *ngIf="isLoading">
     <mat-spinner color="accent" [diameter]="22"></mat-spinner>
   </div>
 </mat-toolbar>
+
 <mat-toolbar color="accent" class="extra">
 </mat-toolbar>
 

@@ -1,6 +1,5 @@
 <mat-card fxLayout="row" fxLayoutAlign="space-evenly stretch stretch" [ngClass]="{'container-panel-item-admin': user.roles.admin, 'container-panel-item-owner': user.roles.projectOwner,
 'container-panel-item-investor': user.roles.investor}">
-
   <img [src]="url" style="width:90px;height:90px;">
   <div>
     <div fxLayout="column" fxLayoutAlign="space-evenly start center">
@@ -9,19 +8,19 @@
           Name:
         </span>
         <mat-form-field>
-            <input matInput [(ngModel)]="user.name" [readonly]="readonly">
-          </mat-form-field>
-          <span class="actionable">
-            <mat-icon (click)="editName()">edit</mat-icon>
-          </span>
-          <span class="actionable" *ngIf="!readonly">
-            <mat-icon (click)="saveNewName()">save</mat-icon>
-          </span>
+          <input matInput [(ngModel)]="user.name" [readonly]="readonly">
+        </mat-form-field>
+        <span class="actionable">
+          <mat-icon (click)="enableEdit()">edit</mat-icon>
+        </span>
+        <span class="actionable" *ngIf="!readonly">
+          <mat-icon (click)="save()">save</mat-icon>
+        </span>
       </div>
       <div>
         <span class="paramater-info">
           Email: </span>
-          {{user.email}}
+        {{user.email}}
       </div>
       <div>
         <span class="paramater-info">
@@ -29,7 +28,7 @@
       </div>
       <div>
         <span class="paramater-info">
-          Permission: </span>{{type}}
+          Permission: </span>{{currentUserRole}}
       </div>
     </div>
 

@@ -17,12 +17,9 @@ import { ProjectsService } from './../../services/projects.service';
 export class EditProjectComponent implements OnInit, OnDestroy {
   @ViewChild('editForm') myForm;
   private onDestroy$ = new Subject<any>();
-
   user: User;
-  currentFileUpload: FileUpload;
   currentProject: Project;
-  files = new Array<File>(4);
-
+  userSelectedFiles = new Array<File>(4);
   status = 'waiting';
   minDate = new Date(Date.now());
   time: string;
@@ -33,7 +30,7 @@ export class EditProjectComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
-    private projectService: ProjectsService
+    private projectsService: ProjectsService
   ) {}
 
   ngOnInit() {
@@ -41,14 +38,14 @@ export class EditProjectComponent implements OnInit, OnDestroy {
       this.user = val;
     });
     this.route.params.subscribe(params => {
-      this.projectService.getProject(params['uid']).subscribe(data => {
+      this.projectsService.getProject(params['uid']).subscribe(data => {
         this.currentProject = data;
       });
     });
   }
 
   updateFile(event, picnum) {
-    this.files[picnum] = event.target.files[0];
+    this.userSelectedFiles[picnum] = event.target.files[0];
   }
 
   updateTime() {
@@ -70,7 +67,7 @@ export class EditProjectComponent implements OnInit, OnDestroy {
 
   saveChanges() {
     this.status = 'creating';
-    this.filesService.uploadFile(this.currentProject.uid, this.files).then((pics: Array<Pic>) => {
+    this.filesService.uploadFiles(this.currentProject.uid, this.userSelectedFiles).then((pics: Array<Pic>) => {
       pics.map((pic, index) => {
         if (this.currentProject.pics[index].key !== pic.key && pic.key !== '') {
           this.currentProject.pics[index] = pic;
@@ -80,7 +77,7 @@ export class EditProjectComponent implements OnInit, OnDestroy {
         this.currentProject.thumbnail = pics[3];
       }
       setTimeout(() => {
-        this.projectService
+        this.projectsService
           .editProject(this.currentProject)
           .then(() => {
             this.status = 'done';

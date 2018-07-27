@@ -16,7 +16,7 @@ import { ProjectsService } from './../../services/projects.service';
 export class ContainerComponent implements OnInit, OnDestroy {
   _user: Observable<User>;
   userProjectsCount = 0;
-  loading = true;
+  isLoading = true;
   private onDestroy$ = new Subject<void>();
   constructor(public userService: UserService, private router: Router, private projectService: ProjectsService) {}
 
@@ -25,7 +25,7 @@ export class ContainerComponent implements OnInit, OnDestroy {
     this._user
       .pipe(
         tap(() => {
-          this.loading = false;
+          this.isLoading = false;
         }),
         filter(user => user !== null && user !== undefined),
         takeUntil(this.onDestroy$)

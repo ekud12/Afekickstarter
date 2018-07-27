@@ -1,32 +1,36 @@
-.container {
-  padding: 0px 20px;
-  padding-top: 20px;
-}
-
-.footer {
-  border-top: 1px solid black;
-  z-index: 50;
-  position: relative;
-  background: red;
-}
-
 .actionable {
   cursor: pointer;
   outline: none;
+}
+
+.actionable .nav-btn {
+  margin: 0px 5px;
+}
+
+.actionable .logo {
+  width: 30px;
+  -webkit-animation: rotation 10s infinite;
 }
 
 .navbar {
   position: relative;
 }
 
-.total-projects {
-  font-weight: bold;
-  color: white;
+.section {
+  margin: 0px 7px;
+  padding-left: 7px;
+  border-left: 5px dotted white;
 }
 
-.logo {
-  width: 30px;
-  -webkit-animation: rotation 10s infinite;
+.extra {
+  position: absolute;
+  height: 200px;
+  padding-top: 0px;
+  z-index: -50;
+}
+
+.router {
+  padding: 20px 20px;
 }
 
 @-webkit-keyframes rotation {
@@ -59,24 +63,4 @@
   100% {
     -webkit-transform: rotate(359deg);
   }
-}
-
-.section {
-  margin: 0px 7px;
-  padding-left: 7px;
-  border-left: 5px dotted white;
-}
-
-.extra {
-  position: absolute;
-  height: 200px;
-  padding-top: 0px;
-  z-index: -50;
-}
-.router {
-  padding: 20px 20px;
-}
-
-.nav-btn{
-margin: 0px 5px;
 }

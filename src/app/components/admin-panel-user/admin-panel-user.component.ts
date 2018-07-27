@@ -9,7 +9,7 @@ import { UserService } from './../../services/user.service';
 })
 export class AdminPanelUserComponent implements OnInit {
   @Input() user: User;
-  type: string;
+  currentUserRole: string;
   adminAvatar = '../../../assets/admin.png';
   investorAvatar = '../../../assets/investor.png';
   ownerAvatar = '../../../assets/owner.png';
@@ -18,14 +18,14 @@ export class AdminPanelUserComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit() {
-    this.type = this.user.roles.admin
+    this.currentUserRole = this.user.roles.admin
       ? 'Administrator'
       : this.user.roles.projectOwner
         ? 'Project Owner'
         : this.user.roles.investor
           ? 'Potential Investor'
           : 'no Type';
-    switch (this.type) {
+    switch (this.currentUserRole) {
       case 'Administrator':
         this.url = this.adminAvatar;
         break;
@@ -38,12 +38,11 @@ export class AdminPanelUserComponent implements OnInit {
     }
   }
 
-
-  editName() {
+  enableEdit() {
     this.readonly = false;
   }
 
-  saveNewName() {
+  save() {
     this.readonly = true;
     this.userService.updateUserName(this.user);
   }
