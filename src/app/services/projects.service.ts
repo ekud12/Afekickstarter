@@ -25,7 +25,7 @@ export class ProjectsService implements OnInit {
   }
 
   ngOnInit() {}
-
+//
   getProjects() {
     this.projectsCollection = this.afs.collection<Project>('projects');
     this.projectsCollection.valueChanges().subscribe(projects => {

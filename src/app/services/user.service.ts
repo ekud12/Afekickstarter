@@ -7,7 +7,7 @@ import { switchMap } from 'rxjs/operators';
 import { Permissions } from './../models/permissions.model';
 import { LoginRequest, RegisterRequest, User } from './../models/user.model';
 import { ToastService } from './toast.service';
-
+//
 @Injectable({
   providedIn: 'root'
 })
