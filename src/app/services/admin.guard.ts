@@ -8,6 +8,8 @@ import { UserService } from './user.service';
 @Injectable({
   providedIn: 'root'
 })
+
+//prevents unauthorized access
 export class AdminGuard implements CanActivate {
   constructor(private auth: UserService, private router: Router, private toaster: ToastService) {}
 
