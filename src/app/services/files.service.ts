@@ -19,7 +19,7 @@ export class FilesService {
   uploadFiles(key: string, files: Array<File>): Promise<any> {
     this.count = 0;
     // map runs a for each loop and gets item and its index, and perform the function
-    // in the block
+    // in the block.
     files.map((item, index) => {
       // create a tasks array, pushes new promise for every file upload
       // so that we can wait for all of them to finish
