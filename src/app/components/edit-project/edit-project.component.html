@@ -62,25 +62,25 @@
         <h4>Optional: Change the pictures you uploaded:</h4>
         <div style="width: 400px;" fxLayout="row" fxLayoutAlign="space-between center center">
           <div class="upload-btn-wrapper">
-            <button [ngClass]="files[0] ? 'btnGood': 'btn'"> {{ files[0] ? files[0].name: 'Poster pic (HQ)'}}</button>
+            <button [ngClass]="userSelectedFiles[0] ? 'btnGood': 'btn'"> {{ userSelectedFiles[0] ? userSelectedFiles[0].name: 'Poster pic (HQ)'}}</button>
             <input type="file" id="thumbnail" (change)="updateFile($event,0)">
           </div>
         </div>
         <div style="width: 400px;" fxLayout="row" fxLayoutAlign="space-between center center">
           <div class="upload-btn-wrapper">
-            <button [ngClass]="files[1] ? 'btnGood': 'btn'"> {{ files[1] ? files[1].name: 'Choose one picture at least (HQ)'}}</button>
+            <button [ngClass]="userSelectedFiles[1] ? 'btnGood': 'btn'"> {{ userSelectedFiles[1] ? userSelectedFiles[1].name: 'Choose one picture at least (HQ)'}}</button>
             <input type="file" id="thumbnail" (change)="updateFile($event,1)">
           </div>
         </div>
         <div style="width: 400px;" fxLayout="row" fxLayoutAlign="space-between center center">
           <div class="upload-btn-wrapper">
-            <button [ngClass]="files[2] ? 'btnGood': 'btn'">{{ files[2] ? files[2].name: 'Another Optional Picture (HQ)'}}</button>
+            <button [ngClass]="userSelectedFiles[2] ? 'btnGood': 'btn'">{{ userSelectedFiles[2] ? userSelectedFiles[2].name: 'Another Optional Picture (HQ)'}}</button>
             <input type="file" id="thumbnail" (change)="updateFile($event,2)">
           </div>
         </div>
         <div style="width: 400px;" fxLayout="row" fxLayoutAlign="space-between center center">
           <div class="upload-btn-wrapper">
-            <button [ngClass]="files[3] ? 'btnGood': 'btn'">{{ files[3] ? files[3].name: 'Thumbnail (Choose one that will stand out!) (HQ)'}}</button>
+            <button [ngClass]="userSelectedFiles[3] ? 'btnGood': 'btn'">{{ userSelectedFiles[3] ? userSelectedFiles[3].name: 'Thumbnail (Choose one that will stand out!) (HQ)'}}</button>
             <input type="file" id="thumbnail" (change)="updateFile($event,3)">
           </div>
         </div>

@@ -5,6 +5,14 @@
       <span style="color:rgb(255, 0, 55);">xyz</span>
     </h1>
   </div>
+  <!-- *ngIf:
+    its a directive that applies to the specific tag (button, div whatever)
+    if the condition inside the "" is true, show the div, otherwise hide it.
+    (user|async):
+    this means get the user from the service(aka firebase), and use the async (to get the actual data)
+    and check whatever you want (roles, etc)
+    the async works on every variable of type Observables.
+  -->
   <div *ngIf=" (_user|async) " fxLayout="row " fxLayoutAlign="start center">
     <div name="projectOwnerActions " *ngIf="(_user|async)?.roles.projectOwner" class="section" style="border-left:none;">
       <button matTooltip="Add a new Project!" mat-icon-button routerLink="/home/add" *ngIf="(_user|async)?.roles.projectOwner ">

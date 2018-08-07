@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 import { Project } from '../models/project.model';
 import { User } from './../models/user.model';
 import { FilesService } from './files.service';
@@ -120,21 +120,26 @@ export class ProjectsService implements OnInit {
         project.expired = false;
       }
       project.totInvestors++;
-      this.user$.pipe(take(1)).subscribe(user => {
-        project.investors.push({
-          investorId: user.uid,
-          amount: amount,
-          date: Date.now()
-        });
-        projectRef
-          .set(project, { merge: true })
-          .then(() => {
-            resolve(true);
-          })
-          .catch(() => {
-            reject(false);
+      this.user$
+        .pipe(
+          take(1),
+          tap(user => console.log(user))
+        )
+        .subscribe(user => {
+          project.investors.push({
+            investorId: user.name,
+            amount: amount,
+            date: Date.now()
           });
-      });
+          projectRef
+            .set(project, { merge: true })
+            .then(() => {
+              resolve(true);
+            })
+            .catch(() => {
+              reject(false);
+            });
+        });
     });
   }
 

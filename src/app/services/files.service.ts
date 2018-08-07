@@ -18,7 +18,11 @@ export class FilesService {
 
   uploadFiles(key: string, files: Array<File>): Promise<any> {
     this.count = 0;
+    // map runs a for each loop and gets item and its index, and perform the function
+    // in the block
     files.map((item, index) => {
+      // create a tasks array, pushes new promise for every file upload
+      // so that we can wait for all of them to finish
       this.tasks.push(
         new Promise((resolve, reject) => {
           const file = new FileUpload(item);
@@ -47,6 +51,9 @@ export class FilesService {
         })
       );
     });
+    // after we added all the tasks for uploading the images, we wait for
+    // all of the uploads to finish, and when it does, we resolve with an array
+    // containing the urls of the new uploaded images on firebase
     return new Promise((resolve, rejected) => {
       Promise.all(this.tasks)
         .then(() => {
@@ -59,13 +66,17 @@ export class FilesService {
     });
   }
 
+  // update the newly uploaded images in the relative projects
   saveFileData(newPics: Array<Pic>, p_id: string): Promise<any> {
     return new Promise((resolve, rejected) => {
       const projectRef: AngularFirestoreDocument<Project> = this.afs.doc(`projects/${p_id}`);
+      // we create a project object, and change only the images references.
       const newproj: Project = {
         pics: newPics
       };
+      // merge: true => this will make sure we only update what we want in the firebase object
       projectRef
+        // Object.assign => create a new object by merging all the variables from right to left.
         .set(Object.assign({}, newproj), { merge: true })
         .then(() => resolve())
         .catch(e => rejected(e));
@@ -80,6 +91,7 @@ export class FilesService {
       .catch(error => console.log(error));
   }
 
+  // delete a reference to file on a project document
   private deleteFileDatabase(project: Project) {
     const projectRef: AngularFirestoreDocument<Project> = this.afs.doc(`projects/${project.uid}`);
     return projectRef.ref.get().then(doc => {
@@ -92,6 +104,7 @@ export class FilesService {
     });
   }
 
+  // delete the file itself from the firebase storage
   private deleteFileStorage(fileKey: string) {
     const storageRef = this.afstorage.ref(fileKey);
     storageRef.delete();
