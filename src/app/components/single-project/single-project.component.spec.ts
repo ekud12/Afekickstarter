@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SingleProjectComponent } from './single-project.component';
+import { SingleProjectCardComponent } from './single-project.component';
 
-describe('SingleProjectComponent', () => {
-  let component: SingleProjectComponent;
-  let fixture: ComponentFixture<SingleProjectComponent>;
+describe('SingleProjectCardComponent', () => {
+  let component: SingleProjectCardComponent;
+  let fixture: ComponentFixture<SingleProjectCardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SingleProjectComponent ]
+      declarations: [ SingleProjectCardComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SingleProjectComponent);
+    fixture = TestBed.createComponent(SingleProjectCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
